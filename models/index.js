@@ -1,9 +1,9 @@
-import User from './user';
-import Job from './job';
+const User = require('./user');
+const Job = require('./job');
 
 const db = {
     User, 
     Job
 };
 
-export default db;
+module.exports = db;

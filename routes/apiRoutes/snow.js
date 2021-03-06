@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const Snow = require('../../models/snow.js')
+const db = require('../../models');
 
-
+console.log(db);
 
 
 
