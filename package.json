@@ -1,0 +1,24 @@
+{
+  "name": "sno-more",
+  "version": "1.0.0",
+  "description": "find someone to shovel your snow",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sno-More/SnoMore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sno-More/SnoMore/issues"
+  },
+  "homepage": "https://github.com/Sno-More/SnoMore#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.19"
+  }
+}
