@@ -5,6 +5,12 @@ const PORT = process.env.PORT || 3001;
 const environment = process.env.NODE_ENV || 'development';
 const mongoose = require("mongoose");
 
+//Deprication warnings
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
