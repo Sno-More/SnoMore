@@ -30,13 +30,15 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
+        color: 'white'
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    input: {
+        color: 'white'
+    }
 }));
-
-
 
 
 export default function SignUp() {
@@ -45,7 +47,7 @@ export default function SignUp() {
     const classes = useStyles();
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" className='signupForm'>
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -53,11 +55,11 @@ export default function SignUp() {
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
-        </Typography>
+                    </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <TextField
+                            <TextField className={classes.input}
                                 autoComplete="fname"
                                 name="firstName"
                                 variant="outlined"
@@ -106,15 +108,15 @@ export default function SignUp() {
 
                         <FormControl component="fieldset">
                             <RadioGroup row aria-label="role" name="role" >
-                                <FormControlLabel
+                                <FormControlLabel style={{color:'black'}}
                                     value="Shoveler"
                                     control={<Radio color="primary" />}
-                                    checked={role === 'Shoveler'} 
+                                    checked={role === 'Shoveler'}
                                     label="Shoveler"
                                     labelPlacement="start"
                                     onClick={() => setRole('Shoveler')}
                                 />
-                                <FormControlLabel
+                                <FormControlLabel style={{color:'black'}}
                                     value="User"
                                     control={<Radio color="primary" />}
                                     checked={role === 'User'}
@@ -145,7 +147,7 @@ export default function SignUp() {
           </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/LogIn" variant="body2">
                                 Already have an account? Sign in
               </Link>
                         </Grid>
