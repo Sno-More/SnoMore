@@ -45,6 +45,9 @@ export default function SignUp() {
     const classes = useStyles();
 
     return (
+        <div style={{ margin: "200px 300px", backgroundColor: "#ffffff", border: "1px solid black" }}>
+
+     
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
@@ -126,11 +129,7 @@ export default function SignUp() {
 
                         </FormControl>
 
-                        {/* <Form.Group inline>
-                            <label></label>
-                            <Form.Radio label="Shoveler" checked={role === 'Shoveler'} value="Shoveler" onClick={() => setRole('Shoveler')} />
-                            <Form.Radio label="User" checked={role === 'User'} value="User" onClick={() => setRole('User')} />
-                        </Form.Group> */}
+      
 
 
                     </Grid>
@@ -156,5 +155,6 @@ export default function SignUp() {
 
             </Box>
         </Container>
+        </div>
     );
 }
