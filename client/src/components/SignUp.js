@@ -48,115 +48,117 @@ export default function SignUp() {
 
     return (
         <Container component="main" maxWidth="xs" className='signupForm'>
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
+            <div className='signUpForm'>
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
 
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
                     </Typography>
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField className={classes.input}
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="First Name"
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                        </Grid>
-
-
-                        <FormControl component="fieldset">
-                            <RadioGroup row aria-label="role" name="role" >
-                                <FormControlLabel style={{color:'black'}}
-                                    value="Shoveler"
-                                    control={<Radio color="primary" />}
-                                    checked={role === 'Shoveler'}
-                                    label="Shoveler"
-                                    labelPlacement="start"
-                                    onClick={() => setRole('Shoveler')}
+                    <form className={classes.form} noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField className={classes.input}
+                                    autoComplete="fname"
+                                    name="firstName"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="firstName"
+                                    label="First Name"
+                                    autoFocus
                                 />
-                                <FormControlLabel style={{color:'black'}}
-                                    value="User"
-                                    control={<Radio color="primary" />}
-                                    checked={role === 'User'}
-                                    label="User"
-                                    labelPlacement="start"
-                                    onClick={() => setRole('User')}
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="lastName"
+                                    label="Last Name"
+                                    name="lastName"
+                                    autoComplete="lname"
                                 />
-                            </RadioGroup>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                />
+                            </Grid>
 
-                        </FormControl>
 
-                        {/* <Form.Group inline>
+                            <FormControl component="fieldset">
+                                <RadioGroup row aria-label="role" name="role" >
+                                    <FormControlLabel style={{ color: 'black' }}
+                                        value="Shoveler"
+                                        control={<Radio color="primary" />}
+                                        checked={role === 'Shoveler'}
+                                        label="Shoveler"
+                                        labelPlacement="start"
+                                        onClick={() => setRole('Shoveler')}
+                                    />
+                                    <FormControlLabel style={{ color: 'black' }}
+                                        value="User"
+                                        control={<Radio color="primary" />}
+                                        checked={role === 'User'}
+                                        label="User"
+                                        labelPlacement="start"
+                                        onClick={() => setRole('User')}
+                                    />
+                                </RadioGroup>
+
+                            </FormControl>
+
+                            {/* <Form.Group inline>
                             <label></label>
                             <Form.Radio label="Shoveler" checked={role === 'Shoveler'} value="Shoveler" onClick={() => setRole('Shoveler')} />
                             <Form.Radio label="User" checked={role === 'User'} value="User" onClick={() => setRole('User')} />
                         </Form.Group> */}
 
 
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign Up
-          </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/LogIn" variant="body2">
-                                Already have an account? Sign in
-              </Link>
                         </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={5}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign Up
+                        </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="/LogIn" variant="body2">
+                                    Already have an account? Sign in
+              </Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+                <Box mt={5}>
 
-            </Box>
+                </Box>
+            </div>
         </Container>
     );
 }

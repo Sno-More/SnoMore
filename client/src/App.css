@@ -4,7 +4,6 @@
   color: purple;
   font-size: larger;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  /* margin: 30px 50px 0px 50px; */
   font-style: italic;
   display: flex;
   width: 99%
@@ -23,6 +22,11 @@ body {
 }
 
 .signupForm {
-  background-color: rgba(255,255,255, 0.5) !important;
+  background-color: rgba(27, 26, 26, .3) !important;
+  width: 100% !important;
   /* color: white !important; */
+}
+
+.signUpForm{
+  background-color: rgba(255,255,255, 0.5) !important;
 }
