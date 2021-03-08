@@ -10,15 +10,15 @@ const users = [{
     location: 'Lakeview East, IL',
     role: 'poster'
 }, {
-    username: 'carlschr',
+    username: 'gabagool',
     password: 'password1',
-    email: 'cjcarlson136@gmail.com',
+    email: 'something@gmail.com',
     location: 'somewhere, nebraska',
     role: 'shoveler'
 }];
 
-//db.User.deleteMany({}, () => {
-    db.User.insertMany(users, () => {
-        mongoose.disconnect();
+db.User.deleteMany({}, () => {
+    db.User.insertMany(users, (err) => {
+        console.log(err);
     });
-//});
+});
