@@ -42,6 +42,7 @@ export default function CarJob({ carJob }) {
             </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                     {/* {carJob.rate} */}{bull}rate here
+                    {/* {carJob.height} */}height here
             </Typography>
                 <Typography variant="body2" component="p">
                     {/* {carJob.details} */}{bull}details here
