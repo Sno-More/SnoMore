@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import API from "../utils/API";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -37,6 +38,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LogIn() {
+
+  const [auth, setAuth] = useState({})
+
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    console.log("click")
+    console.log(auth)
+    
+    API.checkUser({
+        username: auth.email,
+        password: auth.password
+    })
+    .then(response => {
+        console.log('login response: ')
+        console.log(response)
+        if (response.status === 200) {
+            // update App.js state
+            // this.props.updateUser({
+            //     loggedIn: true,
+            //     username: response.data.username
+            // })
+            // update the state to redirect to home
+            // this.setState({
+            //     redirectTo: '/'
+            // })
+            console.log("Signed in!")
+        }
+    }).catch(error => {
+        console.log('login error: ')
+        console.log(error);
+        
+    })
+  }
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setAuth({...auth, [name]: value})
+}
+   
+
+
+
   const classes = useStyles();
 
   return (
@@ -58,7 +102,9 @@ export default function LogIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name= "email"
+            value={auth.email}
+            onChange={handleInput}
             autoComplete="email"
             autoFocus
           />
@@ -71,6 +117,9 @@ export default function LogIn() {
             label="Password"
             type="password"
             id="password"
+          
+            value={auth.password}
+            onChange={handleInput}
             autoComplete="current-password"
           />
           
@@ -79,6 +128,7 @@ export default function LogIn() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick={handleClick}
             className={classes.submit}
           >
             Sign In
