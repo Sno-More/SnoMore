@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 router.get('/jobs', (req, res) => {
     console.log('getting jobs');
 
-    Job.findAll({}, (err, jobs) => {
+    Job.find({}, (err, jobs) => {
         if (err) {
             console.error(err);
             return;
@@ -18,17 +18,16 @@ router.get('/jobs', (req, res) => {
 
 //Gets one job by id
 router.get('/jobs/:jobid', (req, res) => {
-    console.log('getting one job by job id');
+    console.log('getting one job by job id', typeof req.params.jobid);
 
     Job.findOne({
-        where: {
-            _id: mongoose.Types.ObjectId(req.params.jobid)
-        }
+        _id: mongoose.Types.ObjectId(req.params.jobid)
     }, (err, job) => {
         if (err) {
             console.error(err);
             return;
         };
+        console.log(job);
         res.json(job);
     });
 });
@@ -38,9 +37,7 @@ router.get('/user/jobs', (req, res) => {
     console.log('getting jobs by user');
 
     User.findOne({
-        where: {
-            _id: mongoose.Types.ObjectId(req.user._id)
-        }
+        _id: mongoose.Types.ObjectId(req.user._id)
     }).populate('jobs')
     .then(user => {
         res.json(user);
@@ -60,15 +57,27 @@ router.post('/jobs', (req, res) => {
             return;
         };
         res.json(response);
+        console.log(response);
+        User.findOneAndUpdate({
+            _id: mongoose.Types.ObjectId(req.user._id)
+        }, {
+            $push: {
+                jobs: response._id
+            }
+        }, {new: true}, (e, r) => {
+            if (e) {
+                console.error(e);
+                return;
+            };
+            console.log(r);
+        });
     });
 });
 
 //Updates one job with any field(s)
 router.put('/jobs/:id', (req, res) => {
     Job.findOneAndUpdate({
-        where: {
-            _id: mongoose.Types.ObjectId(req.params.id)
-        }
+        _id: mongoose.Types.ObjectId(req.params.id)
     }, req.body, {new: true})
     .then(response => {
         res.json(response);
@@ -80,17 +89,13 @@ router.put('/jobs/:id', (req, res) => {
 //adds user id to shoveler field in job
 router.put('/user/jobs/add/:jobid', (req, res) => {
     Job.findOneAndUpdate({
-        where: {
-            _id: mongoose.Types.ObjectId(req.params.jobid)
-        }
+        _id: mongoose.Types.ObjectId(req.params.jobid)
     }, {
         shoveler: req.user._id
     }, { new: true })
     .then(job => {
         User.findOneAndUpdate({
-            where: {
-                _id: mongoose.Types.ObjectId(req.user._id)
-            }
+            _id: mongoose.Types.ObjectId(req.user._id)
         }, {
             $push: {
                 jobs: job._id
