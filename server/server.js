@@ -13,11 +13,11 @@ const user = require('./routes/user')
 // MIDDLEWARE
 app.use(morgan('dev'))
 app.use(
-	bodyParser.urlencoded({
+	express.urlencoded({
 		extended: false
 	})
 )
-app.use(bodyParser.json())
+app.use(express.json())
 
 // Sessions
 app.use(
