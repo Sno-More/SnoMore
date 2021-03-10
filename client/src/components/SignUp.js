@@ -118,7 +118,23 @@ export default function SignUp() {
                                     labelPlacement="start"
                                     onClick={() => setRole('Shoveler')}
                                 />
-
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign Up
+                        </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="/LogIn" variant="body2">
+                                    Already have an account? Sign in
+                                </Link>
+                            </Grid>
+                        </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         variant="outlined"
