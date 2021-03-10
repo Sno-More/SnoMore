@@ -12,13 +12,15 @@ import SignUp from './components/SignUp'
 import JobPostForm from './components/JobPostForm'
 import ShovelerNewsFeed from './components/ShovelerNewsFeed'
 import CarJob from './components/CarJob'
+import ShovelerProfile from "./components/ShovelerProfile"
+import UserProfile from "./components/UserProfile"
 
 
 export default function SnowApp() {
   return (
     <Router>
     <div className="app">
-      
+        
           <Header />
         <Switch>
           <Route path="/login">
@@ -38,6 +40,12 @@ export default function SnowApp() {
           </Route>
           <Route exact path="/">
             <LogIn />
+          </Route>
+          <Route exact path="/shovelerprofile">
+            <ShovelerProfile />
+          </Route>
+          <Route exact path="/userprofile">
+            <UserProfile />
           </Route>
         </Switch>
     </div>
