@@ -16,8 +16,9 @@ import CarJob from './components/CarJob'
 
 export default function SnowApp() {
   return (
+    <Router>
     <div className="app">
-      <Router>
+      
           <Header />
         <Switch>
           <Route path="/login">
@@ -39,7 +40,7 @@ export default function SnowApp() {
             <LogIn />
           </Route>
         </Switch>
-      </Router>
     </div>
+    </Router>
   );
 }
