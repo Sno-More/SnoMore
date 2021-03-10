@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         minWidth: 275,
         maxWidth: 1000,
         margin: '50px 50px 50px 200px',
-        
+
     },
     bullet: {
         display: 'inline-block',
@@ -27,45 +27,62 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CarJob({ carJob }) {
-    console.log('carjob', carJob)
+export default function Job({ job, jobListings, setJobListings }) {
+    console.log('job', job)
+
+    // const [jobs, setJobs] = useState()
+
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
-    const handleAcceptJob = () => {
+    const handleAcceptJob = (id) => {
         console.log('handleacceptjob')
+
+        /* this isn't working
+        //find all != to id and set
+        const updatedJobListings = jobListings.filter(job => job.id != id)
+        console.log('updated', updatedJobListings)
+        //set jobs to all not equal to as our new array
+        setJobListings(updatedJobListings)
+        */
+
         /*
-        axios.put(`/api/?????/${id}`, {
-            shoveler: {shoveler.id}
-        })
+        maybe need a put route to update job listing as 'taken' and then a get to display all jobs not 'taken
+        */
+
+        // modal to confirm job is taken?
+        
+        axios.put(`/api/user/jobs/add/${id}`)
         .then(response => {
             console.log(response)
         })
-        .catch (e => {
+        .catch(e => {
             console.log(e)
         })
-        */
     }
-
+    console.log('joblistings', jobListings)
+    
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {/* {carJob.title} */}{bull}title here
+                    {job.title}{bull}title here
             </Typography>
                 <Typography variant="h5" component="h2">
-                    {/* {carJob.address} */}{bull}address here
+                    {job.address}{bull}address here
             </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {/* {carJob.rate} */}{bull}rate here
-                    {/* {carJob.height} */}height here
+                    {/* {job.pay} */}{bull}rate here
             </Typography>
                 <Typography variant="body2" component="p">
-                    {/* {carJob.details} */}{bull}details here
+                    {/* {job.description} */}{bull}details here
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{border:'solid black'}} onClick={handleAcceptJob}>Accept Job</Button>
+                <Button size="small" style={{ border: 'solid black' }} onClick={() => handleAcceptJob(job.id)}>Accept Job</Button>
+            </CardActions>
+            <CardActions>
+                <Button size="small" style={{ border: 'solid black' }} href='/shovelerfeed'>Back to Job Listings</Button>
             </CardActions>
         </Card>
     );
