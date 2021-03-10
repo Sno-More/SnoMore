@@ -35,16 +35,12 @@ mongoose.promise = Promise
 const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
+ 
     password: {
         type: String,
         required: true
     },
-    email: {
+    username: {
         type: String,
         required: true,
         unique: true,
@@ -64,7 +60,7 @@ const UserSchema = new Schema({
         required: true,
         validate: {
             validator: function (str) {
-                return str === 'shoveler' || str === 'poster'
+                return str === 'Shoveler' || str === 'Poster'
            },
            message: 'User must be a shoveler or a poster.'
         }
