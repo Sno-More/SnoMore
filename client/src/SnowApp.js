@@ -14,7 +14,8 @@ import ShovelerNewsFeed from './components/ShovelerNewsFeed'
 import Job from './components/Job'
 import axios from 'axios'
 import {jobData} from './data/jobdata'
-
+import ShovelerProfile from "./components/ShovelerProfile"
+import UserProfile from "./components/UserProfile"
 
 export default function SnowApp() {
 
@@ -76,6 +77,12 @@ export default function SnowApp() {
           </Route>
           <Route exact path="/">
             <LogIn />
+          </Route>
+          <Route exact path="/shovelerprofile">
+            <ShovelerProfile />
+          </Route>
+          <Route exact path="/userprofile">
+            <UserProfile />
           </Route>
         </Switch>
       </div>

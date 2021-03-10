@@ -12,12 +12,10 @@ const UserSchema = new Schema({
     firstName: {
         type: String,
         required: true,
-        // unique: true
     },
     lastName: {
         type: String,
         required: true,
-        // unique: true
     },
  
     password: {
@@ -49,10 +47,10 @@ const UserSchema = new Schema({
            message: 'User must be a shoveler or a poster.'
         }
     },
-    jobs: {
-        type: Array,
-        required: false
-    }
+    jobs: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Job'
+    }]
 });
 
 UserSchema.plugin(uniqueValidator);

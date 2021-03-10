@@ -9,15 +9,17 @@ const app = express()
 const PORT = 3001
 // Route requires
 const user = require('./routes/user')
+const job = require('./routes/job')
+
 
 // MIDDLEWARE
 app.use(morgan('dev'))
 app.use(
-	bodyParser.urlencoded({
+	express.urlencoded({
 		extended: false
 	})
 )
-app.use(bodyParser.json())
+app.use(express.json())
 
 // Sessions
 app.use(
@@ -36,6 +38,7 @@ app.use(passport.session()) // calls the deserializeUser
 
 // Routes
 app.use('/user', user)
+app.use('/api', job)
 
 // Starting Server 
 app.listen(PORT, () => {
