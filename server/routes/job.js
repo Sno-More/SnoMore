@@ -53,6 +53,7 @@ router.get('/user/jobs', (req, res) => {
 //Creates a new job
 router.post('/jobs', (req, res) => {
     let newJob = req.body;
+    newJob.poster = req.user._id;
     Job.create(newJob, (err, response) => {
         if (err) {
             console.error(err);
@@ -106,3 +107,5 @@ router.put('/user/jobs/add/:jobid', (req, res) => {
 });
 
 //Delete section for the future
+
+module.exports = router;
