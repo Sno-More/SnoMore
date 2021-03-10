@@ -4,23 +4,24 @@ import axios from 'axios'
 
 export default function DrivewayPostForm () {
 
-    const [driveway, setDriveway] = useState({ drivewayTitle: "", drivewayAddress: "", drivewayHeight: "", drivewayRate: "", drivewayDetails: "" })
+    const [driveway, setDriveway] = useState({ title: "", location: "", pay: "", description: "", date: "", complete: "", type: "driveway" })
 
     const handleDrivewayTitle = (event) => {
-      setDriveway({ ...driveway, drivewayTitle: event.target.value })
+      setDriveway({ ...driveway, title: event.target.value })
     }
     const handleDrivewayAddress = (event) => {
-      setDriveway({ ...driveway, drivewayAddress: event.target.value })
-    }
-    const handleDrivewayHeight = (event) => {
-      setDriveway({ ...driveway, drivewayHeight: event.target.value })
+      setDriveway({ ...driveway, location: event.target.value })
     }
     const handleDrivewayRate = (event) => {
-      setDriveway({ ...driveway, drivewayRate: event.target.value })
+      setDriveway({ ...driveway, pay: event.target.value })
     }
-    const handleDrivewayDetails = (event) => {
-      setDriveway({ ...driveway, drivewayDetails: event.target.value })
+    const handleDrivewayDescription = (event) => {
+      setDriveway({ ...driveway, description: event.target.value })
     }
+    const handleDrivewayDate = (event) => {
+      setDriveway({ ...driveway, date: event.target.value })
+    }
+  
   
     useEffect(() => console.log('driveway', driveway))
   
@@ -37,34 +38,34 @@ export default function DrivewayPostForm () {
         <h3>DRIVEWAY SHOVEL</h3>
         <form onSubmit={handleDrivewaySubmit}>
         <input
-            type="text"
-            value={driveway.drivewayTitle}
-            onChange={handleDrivewayTitle}
-            placeholder='Title' /><br/>
-            <input
-            type="text"
-            value={driveway.drivewayAddress}
-            onChange={handleDrivewayAddress}
-            placeholder='Address' /><br/>
-            <input
-            type="text"
-            value={driveway.drivewayHeight}
-            onChange={handleDrivewayHeight}
-            placeholder='Approximate height of snow' /><br/>
-            <input
-            type="text"
-            value={driveway.drivewayRate}
-            onChange={handleDrivewayRate}
-            placeholder='Rate'/><br/>
-            <input
-            type="text"
-            value={driveway.drivewayDetails}
-            onChange={handleDrivewayDetails}
-            placeholder='Details'/><br/>
-            <input
-            type="submit"
-            value="Submit" />
-        </form>
+          type="text"
+          value={driveway.drivewayTitle}
+          onChange={handleDrivewayTitle}
+          placeholder='Title' /><br />
+        <input
+          type="text"
+          value={driveway.drivewayAddress}
+          onChange={handleDrivewayAddress}
+          placeholder='Address' /><br />
+        <input
+          type="text"
+          value={driveway.drivewayRate}
+          onChange={handleDrivewayRate}
+          placeholder='Rate' /><br />
+        <input
+          type="text"
+          value={driveway.drivewayDetails}
+          onChange={handleDrivewayDescription}
+          placeholder='Details' /><br />
+        <input
+          type="text"
+          value={driveway.drivewayComplete}
+          onChange={handleDrivewayDate}
+          placeholder='Date must be completed by' /><br />
+        <input
+          type="submit"
+          value="Submit" />
+      </form>
         </>
     )
 }

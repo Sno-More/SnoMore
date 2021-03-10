@@ -11,17 +11,44 @@ import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
 import JobPostForm from './components/JobPostForm'
 import ShovelerNewsFeed from './components/ShovelerNewsFeed'
-import CarJob from './components/CarJob'
+import Job from './components/Job'
+import axios from 'axios'
+import {jobData} from './data/jobdata'
 import ShovelerProfile from "./components/ShovelerProfile"
 import UserProfile from "./components/UserProfile"
 
-
 export default function SnowApp() {
+
+  const [jobListings, setJobListings] = useState(jobData)
+  const [job, setJob] = useState({})
+
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const response = await axios('/api/jobs')
+        console.log('response', response.data)
+        setJobListings(response.data)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchJobs()
+  }, [])
+
+  function handleSeeMore(id) {
+    //find car in db with matching id
+    const foundPost = jobListings.find(job => job.id === id)
+    console.log('found post', foundPost)
+    //send that job to corresponding route
+    setJob(foundPost)
+
+
+}
+
   return (
     <Router>
-    <div className="app">
-        
-          <Header />
+      <div className="app">
+        <Header />
         <Switch>
           <Route path="/login">
             <LogIn />
@@ -33,10 +60,20 @@ export default function SnowApp() {
             <JobPostForm />
           </Route>
           <Route path="/shovelerfeed/">
-            <ShovelerNewsFeed />
+            <ShovelerNewsFeed
+              jobListings={jobListings}
+              setJobListings={setJobListings}
+              job={job}
+              setJob={setJob}
+              handleSeeMore = {handleSeeMore}
+            />
           </Route>
-          <Route path="/carjob">
-            <CarJob />
+          <Route path="/job">
+            <Job
+            job={job}
+            jobListings={jobListings}
+            setJobListings = {setJobListings}
+            />
           </Route>
           <Route exact path="/">
             <LogIn />
@@ -48,7 +85,7 @@ export default function SnowApp() {
             <UserProfile />
           </Route>
         </Switch>
-    </div>
+      </div>
     </Router>
   );
 }

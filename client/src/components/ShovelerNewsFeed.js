@@ -10,7 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import CarJob from './CarJob'
+import Job from './Job'
 import axios from 'axios'
 
 const useStyles = makeStyles({
@@ -19,50 +19,10 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ShovelerNewsFeed() {
+export default function ShovelerNewsFeed({ jobListings, setJobListings, job, setJob, handleSeeMore }) {
     const classes = useStyles();
 
-    const [carPosts, setCarPosts] = useState([])
-    const [carJob, setCarJob] = useState({"title": "job"})
-
-    useEffect(() => {
-        async function fetchCarJobs() {
-            try{
-                const response = await axios('/api/carjobs')
-                console.log('response', response.data)
-                setCarPosts(response.data)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        fetchCarJobs()
-    }, [])
-
-    function handleSeeMoreCar(id) {
-        //find car in db with matching id
-        const foundCar = carPosts.find(job => job.id === id)
-        console.log('found car', foundCar)
-        //send that job to corresponding route
-        setCarJob(foundCar)
-        return(
-            <CarJob
-            carJob={carJob} />
-        )
-    }
-
-    // fetch to get job posts
-    // useEffect(() => {
-    //     async function fetchJobPosts() {
-    //         try {
-    //             const response = await axios('/api/jobposts')
-    //             console.log('response', response.data)
-    //             setJobPosts(response.data)
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     }
-    //     fetchJobPosts()
-    // }, [])
+    console.log('job', jobListings)
 
     return (
         <TableContainer component={Paper}>
@@ -77,16 +37,15 @@ export default function ShovelerNewsFeed() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {carPosts.map((job) => (
+                    {jobListings.map((job) => (
                         <TableRow key={job.id}>
                             <TableCell align="center">{job.title}</TableCell>
                             <TableCell align="center">{job.address}</TableCell>
                             <TableCell align="center">{job.details}</TableCell>
                             <TableCell align="center">{job.rate}</TableCell>
                             <TableCell align="center">
-                                <Link to={`/carjob/${job.id}`}>
-                                    <button onClick={() => handleSeeMoreCar()}>See more</button>
-                                    {/* <button onClick={() => handleSeeMore(job.id)}>See more</button> */}
+                                <Link to={`/job/${job.id}`}>
+                                    <button onClick={() => handleSeeMore(job.id)}>See more</button>
                                 </Link>
                             </TableCell>
                         </TableRow>
