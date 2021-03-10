@@ -52,6 +52,10 @@ const JobSchema = new Schema({
         type: Date,
         required: true,
     },
+    pending: {
+        type: Boolean,
+        default: false
+    },
     complete: {
         type: Boolean,
         default: false

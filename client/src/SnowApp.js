@@ -18,14 +18,16 @@ import ShovelerProfile from "./components/ShovelerProfile"
 import UserProfile from "./components/UserProfile"
 
 export default function SnowApp() {
-
+  //all jobs listed
   const [jobListings, setJobListings] = useState(jobData)
+  //selected job
   const [job, setJob] = useState({})
 
+  //Gets all incomplete jobs
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await axios('/api/jobs')
+        const response = await axios('/api/jobs/incomplete')
         console.log('response', response.data)
         setJobListings(response.data)
       } catch (e) {
@@ -35,6 +37,7 @@ export default function SnowApp() {
     fetchJobs()
   }, [])
 
+  //see more button on shoveler newsfeed
   function handleSeeMore(id) {
     //find car in db with matching id
     const foundPost = jobListings.find(job => job.id === id)
