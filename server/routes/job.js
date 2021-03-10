@@ -4,7 +4,7 @@ const {Job, User} = require('../database/models')
 const mongoose = require('mongoose');
 
 //Gets all jobs in database
-router.get('/api/jobs', (req, res) => {
+router.get('/jobs', (req, res) => {
     console.log('getting jobs');
 
     Job.findAll({}, (err, jobs) => {
@@ -17,7 +17,7 @@ router.get('/api/jobs', (req, res) => {
 });
 
 //Gets one job by id
-router.get('/api/jobs/:jobid', (req, res) => {
+router.get('/jobs/:jobid', (req, res) => {
     console.log('getting one job by job id');
 
     Job.findOne({
@@ -34,7 +34,7 @@ router.get('/api/jobs/:jobid', (req, res) => {
 });
 
 //Gets all jobs by user id
-router.get('/api/user/jobs', (req, res) => {
+router.get('/user/jobs', (req, res) => {
     console.log('getting jobs by user');
 
     User.findOne({
@@ -51,7 +51,7 @@ router.get('/api/user/jobs', (req, res) => {
 });
 
 //Creates a new job
-router.post('/api/jobs', (req, res) => {
+router.post('/jobs', (req, res) => {
     let newJob = req.body;
     Job.create(newJob, (err, response) => {
         if (err) {
@@ -63,7 +63,7 @@ router.post('/api/jobs', (req, res) => {
 });
 
 //Updates one job with any field(s)
-router.put('/api/jobs/:id', (req, res) => {
+router.put('/jobs/:id', (req, res) => {
     Job.findOneAndUpdate({
         where: {
             _id: mongoose.Types.ObjectId(req.params.id)
@@ -77,7 +77,7 @@ router.put('/api/jobs/:id', (req, res) => {
 
 //Pushes accepted job to user jobs array and 
 //adds user id to shoveler field in job
-router.put('/api/user/jobs/add/:jobid', (req, res) => {
+router.put('/user/jobs/add/:jobid', (req, res) => {
     Job.findOneAndUpdate({
         where: {
             _id: mongoose.Types.ObjectId(req.params.jobid)
