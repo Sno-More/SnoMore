@@ -24,7 +24,7 @@ export default function Header() {
     return (
         <div className="header">
             <h1>SNO' MORE</h1>
-            <div className={classes.root}>
+            <div className={classes.root} >
                 <Avatar className={classes.purple}>User</Avatar>
             </div>
         </div>
