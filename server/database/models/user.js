@@ -3,38 +3,22 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs');
 mongoose.promise = Promise
 
-// Define userSchema
-// const userSchema = new Schema({
 
-// 	firstName: {
-//         type: String,
-//         required: true,
-//         // unique: true
-//     },
-//     lastName: {
-//         type: String,
-//         required: true,
-//         // unique: true
-//     },
-// 	role: {
-//         type: String,
-//         // required: true,
-//         validate: {
-//             validator: function (str) {
-//                 return str === 'Shoveler' || str === 'User'
-//            },
-//            message: 'User must be a shoveler or a poster.'
-//         }
-//     },
-
-// 	username: { type: String, unique: false, required: false },
-// 	password: { type: String, unique: false, required: false }
-
-// })
 
 const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new Schema({
+
+    firstName: {
+        type: String,
+        required: true,
+        // unique: true
+    },
+    lastName: {
+        type: String,
+        required: true,
+        // unique: true
+    },
  
     password: {
         type: String,
