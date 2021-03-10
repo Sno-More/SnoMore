@@ -75,7 +75,7 @@ UserSchema.plugin(uniqueValidator);
 
 
 // Define schema methods
-userSchema.methods = {
+UserSchema.methods = {
 	checkPassword: function (inputPassword) {
 		return bcrypt.compareSync(inputPassword, this.password)
 	},
@@ -85,7 +85,7 @@ userSchema.methods = {
 }
 
 // Define hooks for pre-saving
-userSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
 	if (!this.password) {
 		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
 		next()
@@ -97,5 +97,5 @@ userSchema.pre('save', function (next) {
 	}
 })
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', UserSchema)
 module.exports = User
