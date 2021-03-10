@@ -23,7 +23,7 @@ export default function ShovelerNewsFeed() {
     const classes = useStyles();
 
     const [carPosts, setCarPosts] = useState([])
-    const [carJob, setCarJob] = useState({})
+    const [carJob, setCarJob] = useState({"title": "job"})
 
     useEffect(() => {
         async function fetchCarJobs() {

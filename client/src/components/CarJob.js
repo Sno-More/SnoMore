@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios'
 
 const useStyles = makeStyles({
     root: {
@@ -31,8 +32,23 @@ export default function CarJob({ carJob }) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
+    const handleAcceptJob = () => {
+        console.log('handleacceptjob')
+        /*
+        axios.put(`/api/?????/${id}`, {
+            shoveler: {shoveler.id}
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch (e => {
+            console.log(e)
+        })
+        */
+    }
+
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                     {/* {carJob.title} */}{bull}title here
@@ -49,7 +65,7 @@ export default function CarJob({ carJob }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{border:'solid black'}}>Accept Job</Button>
+                <Button size="small" style={{border:'solid black'}} onClick={handleAcceptJob}>Accept Job</Button>
             </CardActions>
         </Card>
     );
