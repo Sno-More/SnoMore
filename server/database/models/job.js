@@ -28,9 +28,25 @@ const JobSchema = new Schema({
            message: 'Post type must be car or driveway.'
         }
     },
+    title: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (str) {
+                return str.length <= 30
+           },
+           message: 'Job title cannot be more than 30 characters.'
+        }
+    },
     description: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: function (str) {
+                return str.length >= 30
+           },
+           message: 'Job description must be at least 30 characters.'
+        }
     },
     date: {
         type: Date,
@@ -42,6 +58,6 @@ const JobSchema = new Schema({
     }
 });
 
-const Job = mongoose.model('job', JobSchema);
+const Job = mongoose.model('Job', JobSchema);
 
 module.exports = Job;
