@@ -64,33 +64,48 @@ router.get('/user/jobs', (req, res) => {
         });
 });
 
+//creates a new job elan test
+router.post('/jobs', function ({ body }, res) {
+    Job.create({
+        title: body.title,
+        location: body.location,
+        pay: body.pay,
+        type: body.type,
+        description: body.description,
+        date: body.date,
+    })
+        .then((job) => {
+            console.log(job);
+            res.send(job);
+        });
+});
 
 //Creates a new job
-router.post('/jobs', (req, res) => {
-    let newJob = req.body;
-    newJob.poster = req.user._id;
-    Job.create(newJob, (err, response) => {
-        if (err) {
-            console.error(err);
-            return;
-        };
-        res.json(response);
-        console.log(response);
-        User.findOneAndUpdate({
-            _id: mongoose.Types.ObjectId(req.user._id)
-        }, {
-            $push: {
-                jobs: response._id
-            }
-        }, { new: true }, (e, r) => {
-            if (e) {
-                console.error(e);
-                return;
-            };
-            console.log(r);
-        });
-    });
-});
+// router.post('/jobs', (req, res) => {
+//     let newJob = req.body;
+//     newJob.poster = req.user._id;
+//     Job.create(newJob, (err, response) => {
+//         if (err) {
+//             console.error(err);
+//             return;
+//         };
+//         res.json(response);
+//         console.log(response);
+//         User.findOneAndUpdate({
+//             _id: mongoose.Types.ObjectId(req.user._id)
+//         }, {
+//             $push: {
+//                 jobs: response._id
+//             }
+//         }, { new: true }, (e, r) => {
+//             if (e) {
+//                 console.error(e);
+//                 return;
+//             };
+//             console.log(r);
+//         });
+//     });
+// });
 
 //Updates one job with any field(s)
 router.put('/jobs/:id', (req, res) => {
@@ -104,16 +119,16 @@ router.put('/jobs/:id', (req, res) => {
 });
 
 //Updates pending to true
-router.put('/jobs/accepted/:id', (req, res) => {
-    Job.findOneAndUpdate({
-        _id: mongoose.Types.ObjectId(req.params.id),
-        pending: true
-    }, req.body, { new: true })
-        .then(response => {
-            res.json(response)
-        })
-        .catch(e => console.log(e));
-});
+// router.put('/jobs/accepted/:id', (req, res) => {
+//     Job.findOneAndUpdate({
+//         _id: mongoose.Types.ObjectId(req.params.id),
+//         pending: true
+//     }, req.body, { new: true })
+//         .then(response => {
+//             res.json(response)
+//         })
+//         .catch(e => console.log(e));
+// });
 
 //Pushes accepted job to user jobs array and 
 //adds user id to shoveler field in job

@@ -10,7 +10,7 @@ const PORT = 3001
 // Route requires
 const user = require('./routes/user')
 const job = require('./routes/job')
-
+const mongoose = require("mongoose");
 
 // MIDDLEWARE
 app.use(morgan('dev'))
@@ -30,6 +30,11 @@ app.use(
 		saveUninitialized: false //required
 	})
 )
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/snomore1", {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
 
 // Passport
 app.use(passport.initialize())

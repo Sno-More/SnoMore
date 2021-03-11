@@ -39,15 +39,15 @@ export default function Job({ job, jobListings, setJobListings }) {
 
 
         // put route changes pending to true
-        axios.put(`/api/jobs/accepted/${job.id}`)
+        axios.put(`/api/jobs/${job.id}`, {
+                pending: true
+        })
             .then(response => {
                 console.log(response)
             })
             .catch(e => {
                 console.log(e)
             })
-
-
 
 
         //  get route to get new listings
