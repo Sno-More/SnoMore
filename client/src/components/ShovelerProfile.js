@@ -16,12 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
-
-
-
-
 function ShovelerProfile() {
     const classes = useStyles();
     const handleSaveCity = (event) => {
@@ -50,6 +44,7 @@ function ShovelerProfile() {
 
                     </form>
                 </Container>
+
 
                 {/* google maps api here */}
             </Grid>

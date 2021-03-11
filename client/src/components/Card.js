@@ -28,7 +28,7 @@ export default function SimpleCard() {
     <Card className={classes.root} style={{backgroundColor:"lightgrey", marginTop: "20px"}}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Your Jobs
+          Your Job
         </Typography>
         <Typography variant="body2" component="p">
           Description of job
