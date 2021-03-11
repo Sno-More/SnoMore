@@ -28,7 +28,7 @@ function ShovelerProfile() {
     return (
 
         <>
-
+        
             <Grid md={5}>
                 {/* {{marginTop:"360px"}} */}
                 <Container style={{backgroundColor:"white", marginLeft:"20px"}}>
