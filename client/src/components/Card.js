@@ -25,7 +25,7 @@ export default function SimpleCard() {
 
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} style={{backgroundColor:"lightgrey", marginTop: "20px"}}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           Your Jobs
