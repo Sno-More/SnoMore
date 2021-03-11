@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
     const classes = useStyles();
     return (
-        <div className="header">
+        <div className="header" style={{color: "#6E61C0"}}>
             <h1>SNO' MORE</h1>
             <div className={classes.root} >
-                <Avatar className={classes.purple}>User</Avatar>
+                <Avatar className={classes.purple} >User</Avatar>
             </div>
         </div>
     )

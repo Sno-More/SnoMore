@@ -32,7 +32,7 @@ function ShovelerProfile() {
             <Grid md={5}>
                 {/* {{marginTop:"360px"}} */}
                 <Container style={{backgroundColor:"white", marginLeft:"20px"}}>
-                    <h1 style={{ textAlign: "center" }}>Find Jobs</h1>
+                    <h1 style={{ textAlign: "center" , color: "#6E61C0"}}>Find Jobs</h1>
                     <form onSubmit={handleSaveCity}>
    
                         <form className={classes.root} noValidate autoComplete="off" style={{ color: "white" }}>
@@ -51,7 +51,7 @@ function ShovelerProfile() {
 
             <Grid md={6} style={{ textAlign: "center", marginLeft: "700px", marginTop: "-184.5px" }}>
                 <Container style={{backgroundColor:"white"}}>
-                <h1>Upcoming Jobs</h1>
+                <h1 style={{color: "#6E61C0"}}>Upcoming Jobs</h1>
                 {/* lists the shoveler's upcoming jobs  */}
                 <Card></Card>
                 <Card></Card>
