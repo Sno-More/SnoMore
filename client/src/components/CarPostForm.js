@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default function CarPostForm() {
 
-  const [car, setCar] = useState({ title: "", location: "", pay: "", description: "", date: "", complete: "", type: "car" })
+  const [car, setCar] = useState({ title: "", location: "", pay: "", description: "", date: "", type: "car" })
 
   const handleCarTitle = (event) => {
     setCar({ ...car, title: event.target.value })
