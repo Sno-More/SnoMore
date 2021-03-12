@@ -37,9 +37,9 @@ export default function Job({ job, jobListings, setJobListings }) {
 
     //shoveler accept job button
     const handleAcceptJob = (id) => {
-        console.log('handleacceptjob')
+        //     console.log('handleacceptjob')
 
-        //adds shoveler id to job and job to shoveler job array
+        //     //adds shoveler id to job and job to shoveler job array
         axios.put(`/api/user/jobs/add/${id}`)
             .then(
                 response => {
@@ -47,42 +47,44 @@ export default function Job({ job, jobListings, setJobListings }) {
                         .then(function (res) {
                             setJobListings(res.data)
                         })
-                    console.log(response)
+                    console.log('response', response.data)
                 })
             .catch(e => {
                 console.log(e)
-            })
-        //  get route to get new listings
-        //  and set as variable
-
-        // modal to confirm job is taken?
-
-        console.log('joblistings', jobListings)
-
-        return (
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {bull}{job.title}
-            </Typography>
-                    <Typography variant="h5" component="h2">
-                        {bull}{job.location}
-            </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {bull}{job.pay}
-            </Typography>
-                    <Typography variant="body2" component="p">
-                        {bull}{job.description}
-                </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small" style={{ border: 'solid black' }} onClick={() => handleAcceptJob(job.id)}>Accept Job</Button>
-                </CardActions>
-                <CardActions>
-                    <Button size="small" style={{ border: 'solid black' }} href='/shovelerfeed'>Back to Job Listings</Button>
-                </CardActions>
-            </Card>
-        );
-
+            }
+            )
     }
+    //  get route to get new listings
+    //  and set as variable
+
+    // modal to confirm job is taken?
+
+    console.log('joblistings', jobListings)
+
+    return (
+        <Card className={classes.root} variant="outlined">
+            <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    {bull}{job.title}
+                </Typography>
+                <Typography variant="h5" component="h2">
+                    {bull}{job.location}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                    {bull}{job.pay}
+                </Typography>
+                <Typography variant="body2" component="p">
+                    {bull}{job.description}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small" style={{ border: 'solid black' }} onClick={() => handleAcceptJob(job._id)}>Accept Job</Button>
+            </CardActions>
+            <CardActions>
+                <Button size="small" style={{ border: 'solid black' }} href='/shovelerfeed'>Back to Job Listings</Button>
+            </CardActions>
+        </Card>
+    );
+
+    // }
 }

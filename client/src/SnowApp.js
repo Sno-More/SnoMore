@@ -24,7 +24,7 @@ export default function SnowApp() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await axios('/api/jobs')
+        const response = await axios('/api/jobs/available')
         console.log('response', response.data)
         setJobListings(response.data)
       } catch (e) {
@@ -65,7 +65,7 @@ export default function SnowApp() {
               handleSeeMore = {handleSeeMore}
             />
           </Route>
-          <Route path="/job">
+          <Route path="/job/:id">
             <Job
             job={job}
             jobListings={jobListings}
