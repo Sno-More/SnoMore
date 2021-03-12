@@ -17,12 +17,14 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": " npm run start:dev",
+    "start:dev": "concurrently \"cd server && node server.js\" \"npm run client\"",
+    "client": "cd client && npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "api": "nodemon ./server/server.js",
-    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\""
+    "api": "nodemon ./server/server.js"
+    
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
