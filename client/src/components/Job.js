@@ -63,16 +63,16 @@ export default function Job({ job, jobListings, setJobListings }) {
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {job.title}{bull}title here
+                        {bull}{job.title}
             </Typography>
                     <Typography variant="h5" component="h2">
-                        {job.address}{bull}address here
+                        {bull}{job.location}
             </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        {/* {job.pay} */}{bull}rate here
+                        {bull}{job.pay}
             </Typography>
                     <Typography variant="body2" component="p">
-                        {/* {job.description} */}{bull}details here
+                        {bull}{job.description}
                 </Typography>
                 </CardContent>
                 <CardActions>
