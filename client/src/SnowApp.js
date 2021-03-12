@@ -10,7 +10,7 @@ import Header from './components/Header'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
 import JobPostForm from './components/JobPostForm'
-import ShovelerNewsFeed from './components/ShovelerNewsFeed'
+import ShovelerFeed from './components/ShovelerFeed'
 import Job from './components/Job'
 import axios from 'axios'
 import ShovelerDashboard from "./components/ShovelerDashboard"
@@ -87,7 +87,7 @@ export default function SnowApp() {
             <JobPostForm />
           </Route>
           <Route path="/shovelerfeed/">
-            <ShovelerNewsFeed
+            <ShovelerFeed
               jobListings={jobListings}
               setJobListings={setJobListings}
               job={job}

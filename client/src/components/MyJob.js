@@ -36,10 +36,10 @@ export default function MyJob({ currentJob, myJobs, setMyJobs }) {
 
     //complete job - change complete to true, get new list of incomplete jobs
     const handleCompleteJob = (id) => {
-        axios.put(`api/job/${id}`, { complete: true })
+        axios.put(`api/job/${id}`)
             .then(
                 response => {
-                    axios.get(`/api/user/jobs/`)
+                    axios.get('/api/user/jobs/')
                     setMyJobs(response.data.jobs)
                 })
             .catch(e => {

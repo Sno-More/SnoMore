@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ShovelerNewsFeed({ jobListings, setJobListings, job, setJob, handleSeeMore }) {
+export default function ShovelerFeed({ jobListings, setJobListings, job, setJob, handleSeeMore }) {
     const classes = useStyles();
 
     console.log('job', jobListings)
