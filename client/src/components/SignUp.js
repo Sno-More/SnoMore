@@ -17,6 +17,7 @@ import API from "../utils/API";
 
 
 
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -184,9 +185,10 @@ export default function SignUp() {
           </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/login" variant="body2">
                                 Already have an account? Sign in
               </Link>
+              
                         </Grid>
                     </Grid>
                 </form>
