@@ -88,6 +88,17 @@ router.put('/job/:id', (req, res) => {
     .catch(e => console.error(e));
 });
 
+//Updates my job to complete
+// router.put('/myjob/job/:id', (req, res) => {
+//     Job.findOneAndUpdate({
+//         _id: mongoose.Types.ObjectId(req.params.id)
+//     }, req.body, {new: true})
+//     .then(response => {
+//         res.json(response);
+//     })
+//     .catch(e => console.error(e));
+// });
+
 //Pushes accepted job to user jobs array and 
 //adds user id to shoveler field in job
 router.put('/user/jobs/add/:id', (req, res) => {

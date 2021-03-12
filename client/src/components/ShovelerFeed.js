@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Job from './Job'
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
     table: {
@@ -45,7 +46,7 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                             <TableCell align="center">{job.pay}</TableCell>
                             <TableCell align="center">
                                 <Link to={`/job/${job._id}`}>
-                                    <button onClick={() => handleSeeMore(job._id)}>See more</button>
+                                    <Button onClick={() => handleSeeMore(job._id)} style={{border:'solid black'}}>See more</Button>
                                 </Link>
                             </TableCell>
                         </TableRow>

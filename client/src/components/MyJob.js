@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -27,48 +27,66 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MyJob({ currentJob, myJobs, setMyJobs }) {
+export default function MyJob({ myJob, myJobs, setMyJobs }) {
+    console.log('myJob', myJob)
 
-    console.log('currentjob', currentJob)
+    // const [jobs, setJobs] = useState()
 
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
-    //complete job - change complete to true, get new list of incomplete jobs
+    //shoveler complete job button
     const handleCompleteJob = (id) => {
-        axios.put(`api/job/${id}`)
+
+        //     //completes job
+        axios.put(`/api/job/${id}`, { complete: true })
             .then(
                 response => {
-                    axios.get('/api/user/jobs/')
-                    setMyJobs(response.data.jobs)
+                    axios.get('/api/user/jobs')
+                        .then(function (res) {
+                            const jobsArray = res.data.jobs
+                            const updatedMyJobs = jobsArray.find(incomplete => incomplete._id === id)
+                            setMyJobs(updatedMyJobs)
+
+                        })
+                    // console.log('response', response.data)
                 })
             .catch(e => {
                 console.log(e)
             }
             )
     }
+    //  get route to get new listings
+    //  and set as variable
+
+    // modal to confirm job is taken?
+
+    console.log('myjobs', myJobs)
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {bull}{currentJob.title}
+                    {bull}{myJob.title}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                    {bull}{currentJob.location}
+                    {bull}{myJob.location}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {bull}{currentJob.pay}
+                    {bull}{myJob.pay}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    {bull}{currentJob.description}
+                    {bull}{myJob.description}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{ border: 'solid black' }} onClick={() => handleCompleteJob(currentJob._id)}>Complete Job</Button>
+                <Button size="small" style={{ border: 'solid black' }} onClick={() => handleCompleteJob(myJob._id)}>Complete Job</Button>
             </CardActions>
             <CardActions>
                 <Button size="small" style={{ border: 'solid black' }} href='/shovelerdashboard'>Back to Dashboard</Button>
             </CardActions>
         </Card>
-    )
+    );
+
+    // }
 }

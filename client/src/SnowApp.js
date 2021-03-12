@@ -23,8 +23,8 @@ export default function SnowApp() {
   const [jobListings, setJobListings] = useState([])
   const [job, setJob] = useState({})
 
+  const [myJob, setMyJob] = useState([])
   const [myJobs, setMyJobs] = useState([])
-  const [currentJob, setCurrentJob] = useState([])
 
   //fetch available jobs
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function SnowApp() {
   function handleSeeMoreMyJob(id) {
     const foundMyJob = myJobs.find(job => job._id === id)
     console.log('foundmyjob', foundMyJob)
-    setCurrentJob(foundMyJob)
+    setMyJob(foundMyJob)
   }
 
   return (
@@ -102,21 +102,21 @@ export default function SnowApp() {
               setJobListings={setJobListings}
             />
           </Route>
-          <Route exact path="/shovelerdashboard">
+          <Route path="/shovelerdashboard">
             <ShovelerDashboard 
             myJobs={myJobs}
-            currentJob={currentJob}
+            myJob={myJob}
             handleSeeMoreMyJob={handleSeeMoreMyJob}
             />
           </Route>
-          <Route exact path="/userprofile">
+          <Route path="/userprofile">
             <UserProfile />
           </Route>
-          <Route exact path="/myjob/:id">
+          <Route path="/myjob/:id">
             <MyJob
             myJobs={myJobs}
             setMyJobs={setMyJobs}
-            currentJob={currentJob}
+            myJob={myJob}
             // setCurrentJob={setCurrentJob}
             // handleSeeMoreMyJob={handleSeeMoreMyJob}
             />
