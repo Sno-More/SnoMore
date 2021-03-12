@@ -4,10 +4,13 @@ const {Job, User} = require('../database/models')
 const mongoose = require('mongoose');
 
 //Gets all jobs in database
-router.get('/jobs', (req, res) => {
+router.get('/jobs/available', (req, res) => {
     console.log('getting jobs');
 
-    Job.find({}, (err, jobs) => {
+    Job.find({
+        complete: false,
+        pending: false
+    }, (err, jobs) => {
         if (err) {
             console.error(err);
             return;
@@ -17,11 +20,11 @@ router.get('/jobs', (req, res) => {
 });
 
 //Gets one job by id
-router.get('/jobs/:jobid', (req, res) => {
-    console.log('getting one job by job id', typeof req.params.jobid);
+router.get('/job/:id', (req, res) => {
+    console.log('getting one job by job id', req.params.id);
 
     Job.findOne({
-        _id: mongoose.Types.ObjectId(req.params.jobid)
+        _id: mongoose.Types.ObjectId(req.params.id)
     }, (err, job) => {
         if (err) {
             console.error(err);
@@ -75,7 +78,7 @@ router.post('/jobs', (req, res) => {
 });
 
 //Updates one job with any field(s)
-router.put('/jobs/:id', (req, res) => {
+router.put('/job/:id', (req, res) => {
     Job.findOneAndUpdate({
         _id: mongoose.Types.ObjectId(req.params.id)
     }, req.body, {new: true})
@@ -87,9 +90,9 @@ router.put('/jobs/:id', (req, res) => {
 
 //Pushes accepted job to user jobs array and 
 //adds user id to shoveler field in job
-router.put('/user/jobs/add/:jobid', (req, res) => {
+router.put('/user/jobs/add/:id', (req, res) => {
     Job.findOneAndUpdate({
-        _id: mongoose.Types.ObjectId(req.params.jobid)
+        _id: mongoose.Types.ObjectId(req.params.id)
     }, {
         shoveler: req.user._id,
         pending: true
