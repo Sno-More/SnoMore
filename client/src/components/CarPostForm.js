@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 export default function CarPostForm() {
 
@@ -62,9 +68,13 @@ export default function CarPostForm() {
           value={car.date}
           onChange={handleCarDate}
           placeholder='Date must be completed by' /><br />
-        <input
-          type="submit"
-          value="Submit" />
+
+        <Link to="/userprofile">
+          <input
+            type="submit"
+            value="Submit" />
+        </Link>
+
       </form>
     </>
   )
