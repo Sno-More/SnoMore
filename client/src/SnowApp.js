@@ -13,14 +13,17 @@ import JobPostForm from './components/JobPostForm'
 import ShovelerNewsFeed from './components/ShovelerNewsFeed'
 import Job from './components/Job'
 import axios from 'axios'
-import ShovelerProfile from "./components/ShovelerProfile"
+import ShovelerDashboard from "./components/ShovelerDashboard"
 import UserProfile from "./components/UserProfile"
+import MyJob from './components/MyJob'
+import { JobContext } from './JobContext'
 
 export default function SnowApp() {
 
   const [jobListings, setJobListings] = useState([])
   const [job, setJob] = useState({})
 
+  //fetch available jobs
   useEffect(() => {
     async function fetchJobs() {
       try {
@@ -34,13 +37,14 @@ export default function SnowApp() {
     fetchJobs()
   }, [])
 
+  //see more button on shoveler job feed
   function handleSeeMore(id) {
     //find car in db with matching id
     const foundPost = jobListings.find(job => job._id === id)
     console.log('found post', foundPost)
     //send that job to corresponding route
     setJob(foundPost)
-}
+  }
 
   return (
     <Router>
@@ -62,24 +66,32 @@ export default function SnowApp() {
               setJobListings={setJobListings}
               job={job}
               setJob={setJob}
-              handleSeeMore = {handleSeeMore}
             />
           </Route>
           <Route path="/job/:id">
             <Job
-            job={job}
-            jobListings={jobListings}
-            setJobListings = {setJobListings}
+              job={job}
+              jobListings={jobListings}
+              setJobListings={setJobListings}
             />
           </Route>
-          <Route exact path="/">
-            <LogIn />
-          </Route>
-          <Route exact path="/shovelerprofile">
-            <ShovelerProfile />
+          <Route exact path="/shovelerdashboard">
+            <ShovelerDashboard />
           </Route>
           <Route exact path="/userprofile">
             <UserProfile />
+          </Route>
+          <Route exact path="/myjob/:id">
+              <MyJob
+                // myJobs={myJobs}
+                // setMyJobs={setMyJobs}
+                // currentJob={currentJob}
+                // setCurrentJob={setCurrentJob}
+                // handleSeeMoreMyJob={handleSeeMoreMyJob}
+              />
+          </Route>
+          <Route exact path="/">
+            <LogIn />
           </Route>
         </Switch>
       </div>
