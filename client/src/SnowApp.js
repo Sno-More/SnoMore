@@ -37,7 +37,7 @@ export default function SnowApp() {
 
   function handleSeeMore(id) {
     //find car in db with matching id
-    const foundPost = jobListings.find(job => job.id === id)
+    const foundPost = jobListings.find(job => job._id === id)
     console.log('found post', foundPost)
     //send that job to corresponding route
     setJob(foundPost)

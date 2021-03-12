@@ -43,12 +43,7 @@ export default function Job({ job, jobListings, setJobListings }) {
         axios.put(`/api/user/jobs/add/${id}`)
             .then(
                 response => {
-                    axios.get('/api/jobs/incomplete', {
-                        params: {
-                            completed: false,
-                            pending: false
-                        }
-                    })
+                    axios.get('/api/jobs/available')
                         .then(function (res) {
                             setJobListings(res.data)
                         })

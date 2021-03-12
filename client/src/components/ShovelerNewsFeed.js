@@ -44,8 +44,8 @@ export default function ShovelerNewsFeed({ jobListings, setJobListings, job, set
                             <TableCell align="center">{job.description}</TableCell>
                             <TableCell align="center">{job.pay}</TableCell>
                             <TableCell align="center">
-                                <Link to={`/job/${job.id}`}>
-                                    <button onClick={() => handleSeeMore(job.id)}>See more</button>
+                                <Link to={`/job/${job._id}`}>
+                                    <button onClick={() => handleSeeMore(job._id)}>See more</button>
                                 </Link>
                             </TableCell>
                         </TableRow>
