@@ -13,13 +13,12 @@ import JobPostForm from './components/JobPostForm'
 import ShovelerNewsFeed from './components/ShovelerNewsFeed'
 import Job from './components/Job'
 import axios from 'axios'
-import {jobData} from './data/jobdata'
 import ShovelerProfile from "./components/ShovelerProfile"
 import UserProfile from "./components/UserProfile"
 
 export default function SnowApp() {
 
-  const [jobListings, setJobListings] = useState(jobData)
+  const [jobListings, setJobListings] = useState([])
   const [job, setJob] = useState({})
 
   useEffect(() => {
@@ -41,8 +40,6 @@ export default function SnowApp() {
     console.log('found post', foundPost)
     //send that job to corresponding route
     setJob(foundPost)
-
-
 }
 
   return (
