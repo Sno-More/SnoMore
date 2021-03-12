@@ -10,7 +10,9 @@ import {
 
 export default function DrivewayPostForm() {
 
-  const [driveway, setDriveway] = useState({ title: "", location: "", pay: "", description: "", date: "", complete: "", type: "driveway" })
+
+    const [driveway, setDriveway] = useState({ title: "", location: "", pay: "", description: "", date: "", type: "driveway" })
+
 
   const handleDrivewayTitle = (event) => {
     setDriveway({ ...driveway, title: event.target.value })

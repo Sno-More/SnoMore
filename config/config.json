@@ -2,7 +2,7 @@
     "development": {
       "username": "root",
       "password": "password",
-      "database": "snomore",
+      "database": "snomore1",
       "host": "127.0.0.1",
       "dialect": "mongo"
     },

@@ -91,7 +91,8 @@ router.put('/user/jobs/add/:jobid', (req, res) => {
     Job.findOneAndUpdate({
         _id: mongoose.Types.ObjectId(req.params.jobid)
     }, {
-        shoveler: req.user._id
+        shoveler: req.user._id,
+        pending: true
     }, { new: true })
     .then(job => {
         User.findOneAndUpdate({
