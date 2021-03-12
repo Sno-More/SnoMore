@@ -92,6 +92,7 @@ export default function SnowApp() {
               setJobListings={setJobListings}
               job={job}
               setJob={setJob}
+              handleSeeMore={handleSeeMore}
             />
           </Route>
           <Route path="/job/:id">
