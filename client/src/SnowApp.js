@@ -23,6 +23,9 @@ export default function SnowApp() {
   const [jobListings, setJobListings] = useState([])
   const [job, setJob] = useState({})
 
+  const [myJobs, setMyJobs] = useState([])
+  const [currentJob, setCurrentJob] = useState([])
+
   //fetch available jobs
   useEffect(() => {
     async function fetchJobs() {
@@ -44,6 +47,29 @@ export default function SnowApp() {
     console.log('found post', foundPost)
     //send that job to corresponding route
     setJob(foundPost)
+  }
+
+  //shoveler dashboard
+  useEffect(() => {
+    async function fetchMyJobs() {
+      try {
+        const response = await axios('/api/user/jobs')
+        setMyJobs(response.data.jobs)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchMyJobs()
+  }, [])
+
+  useEffect(() => {
+    console.log('my jobs', myJobs)
+  })
+
+  function handleSeeMoreMyJob(id) {
+    const foundMyJob = myJobs.find(job => job._id === id)
+    console.log('foundmyjob', foundMyJob)
+    setCurrentJob(foundMyJob)
   }
 
   return (
@@ -76,19 +102,23 @@ export default function SnowApp() {
             />
           </Route>
           <Route exact path="/shovelerdashboard">
-            <ShovelerDashboard />
+            <ShovelerDashboard 
+            myJobs={myJobs}
+            currentJob={currentJob}
+            handleSeeMoreMyJob={handleSeeMoreMyJob}
+            />
           </Route>
           <Route exact path="/userprofile">
             <UserProfile />
           </Route>
           <Route exact path="/myjob/:id">
-              <MyJob
-                // myJobs={myJobs}
-                // setMyJobs={setMyJobs}
-                // currentJob={currentJob}
-                // setCurrentJob={setCurrentJob}
-                // handleSeeMoreMyJob={handleSeeMoreMyJob}
-              />
+            <MyJob
+            myJobs={myJobs}
+            setMyJobs={setMyJobs}
+            currentJob={currentJob}
+            // setCurrentJob={setCurrentJob}
+            // handleSeeMoreMyJob={handleSeeMoreMyJob}
+            />
           </Route>
           <Route exact path="/">
             <LogIn />

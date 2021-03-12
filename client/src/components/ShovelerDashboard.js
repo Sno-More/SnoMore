@@ -33,34 +33,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ShovelerDashboard() {
+export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJob}) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
-    const [myJobs, setMyJobs] = useState([])
-    const [currentJob, setCurrentJob] = useState([])
 
-    useEffect(() => {
-        async function fetchMyJobs() {
-            try {
-                const response = await axios('/api/user/jobs')
-                setMyJobs(response.data.jobs)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        fetchMyJobs()
-    }, [])
 
-    useEffect(() => {
-        console.log('my jobs', myJobs)
-    })
-
-    function handleSeeMoreMyJob(id) {
-        const foundMyJob = myJobs.find(job => job._id === id)
-        console.log('foundmyjob', foundMyJob)
-        setCurrentJob(foundMyJob)
-    }
+    
 
     //TBD how to get city
     const handleSaveCity = (event) => {
