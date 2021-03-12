@@ -35,55 +35,59 @@ export default function Job({ job, jobListings, setJobListings }) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
+    //shoveler accept job button
     const handleAcceptJob = (id) => {
         console.log('handleacceptjob')
 
-        /* this isn't working
-        //find all != to id and set
-        const updatedJobListings = jobListings.filter(job => job.id != id)
-        console.log('updated', updatedJobListings)
-        //set jobs to all not equal to as our new array
-        setJobListings(updatedJobListings)
-        */
-
-        /*
-        maybe need a put route to update job listing as 'taken' and then a get to display all jobs not 'taken
-        */
+        //adds shoveler id to job and job to shoveler job array
+        axios.put(`/api/user/jobs/add/${id}`)
+            .then(
+                response => {
+                    axios.get('/api/jobs/incomplete', {
+                        params: {
+                            completed: false,
+                            pending: false
+                        }
+                    })
+                        .then(function (res) {
+                            setJobListings(res.data)
+                        })
+                    console.log(response)
+                })
+            .catch(e => {
+                console.log(e)
+            })
+        //  get route to get new listings
+        //  and set as variable
 
         // modal to confirm job is taken?
-        
-        axios.put(`/api/user/jobs/add/${id}`)
-        .then(response => {
-            console.log(response)
-        })
-        .catch(e => {
-            console.log(e)
-        })
-    }
-    console.log('joblistings', jobListings)
-    
-    return (
-        <Card className={classes.root} variant="outlined">
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {job.title}{bull}title here
+
+        console.log('joblistings', jobListings)
+
+        return (
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {job.title}{bull}title here
             </Typography>
-                <Typography variant="h5" component="h2">
-                    {job.address}{bull}address here
+                    <Typography variant="h5" component="h2">
+                        {job.address}{bull}address here
             </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    {/* {job.pay} */}{bull}rate here
+                    <Typography className={classes.pos} color="textSecondary">
+                        {/* {job.pay} */}{bull}rate here
             </Typography>
-                <Typography variant="body2" component="p">
-                    {/* {job.description} */}{bull}details here
+                    <Typography variant="body2" component="p">
+                        {/* {job.description} */}{bull}details here
                 </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small" style={{ border: 'solid black' }} onClick={() => handleAcceptJob(job.id)}>Accept Job</Button>
-            </CardActions>
-            <CardActions>
-                <Button size="small" style={{ border: 'solid black' }} href='/shovelerfeed'>Back to Job Listings</Button>
-            </CardActions>
-        </Card>
-    );
+                </CardContent>
+                <CardActions>
+                    <Button size="small" style={{ border: 'solid black' }} onClick={() => handleAcceptJob(job.id)}>Accept Job</Button>
+                </CardActions>
+                <CardActions>
+                    <Button size="small" style={{ border: 'solid black' }} href='/shovelerfeed'>Back to Job Listings</Button>
+                </CardActions>
+            </Card>
+        );
+
+    }
 }
