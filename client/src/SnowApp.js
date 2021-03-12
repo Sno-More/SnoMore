@@ -13,19 +13,18 @@ import JobPostForm from './components/JobPostForm'
 import ShovelerNewsFeed from './components/ShovelerNewsFeed'
 import Job from './components/Job'
 import axios from 'axios'
-import {jobData} from './data/jobdata'
 import ShovelerProfile from "./components/ShovelerProfile"
 import UserProfile from "./components/UserProfile"
 
 export default function SnowApp() {
 
-  const [jobListings, setJobListings] = useState(jobData)
+  const [jobListings, setJobListings] = useState([])
   const [job, setJob] = useState({})
 
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await axios('/api/jobs')
+        const response = await axios('/api/jobs/available')
         console.log('response', response.data)
         setJobListings(response.data)
       } catch (e) {
@@ -37,12 +36,10 @@ export default function SnowApp() {
 
   function handleSeeMore(id) {
     //find car in db with matching id
-    const foundPost = jobListings.find(job => job.id === id)
+    const foundPost = jobListings.find(job => job._id === id)
     console.log('found post', foundPost)
     //send that job to corresponding route
     setJob(foundPost)
-
-
 }
 
   return (
@@ -68,7 +65,7 @@ export default function SnowApp() {
               handleSeeMore = {handleSeeMore}
             />
           </Route>
-          <Route path="/job">
+          <Route path="/job/:id">
             <Job
             job={job}
             jobListings={jobListings}

@@ -40,12 +40,12 @@ export default function ShovelerNewsFeed({ jobListings, setJobListings, job, set
                     {jobListings.map((job) => (
                         <TableRow key={job.id}>
                             <TableCell align="center">{job.title}</TableCell>
-                            <TableCell align="center">{job.address}</TableCell>
-                            <TableCell align="center">{job.details}</TableCell>
-                            <TableCell align="center">{job.rate}</TableCell>
+                            <TableCell align="center">{job.location}</TableCell>
+                            <TableCell align="center">{job.description}</TableCell>
+                            <TableCell align="center">{job.pay}</TableCell>
                             <TableCell align="center">
-                                <Link to={`/job/${job.id}`}>
-                                    <button onClick={() => handleSeeMore(job.id)}>See more</button>
+                                <Link to={`/job/${job._id}`}>
+                                    <button onClick={() => handleSeeMore(job._id)}>See more</button>
                                 </Link>
                             </TableCell>
                         </TableRow>
