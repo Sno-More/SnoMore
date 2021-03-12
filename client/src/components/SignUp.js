@@ -145,7 +145,6 @@ export default function SignUp() {
                             />
                         </Grid>
 
-
                         <FormControl component="fieldset">
                             <RadioGroup row aria-label="role" name="role" >
                                 <FormControlLabel
