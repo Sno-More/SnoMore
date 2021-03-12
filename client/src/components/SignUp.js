@@ -159,10 +159,10 @@ export default function SignUp() {
                                 <FormControlLabel
                                     value="User"
                                     control={<Radio color="primary" />}
-                                    checked={role === 'User'}
-                                    label="User"
+                                    checked={role === 'Poster'}
+                                    label="Poster"
                                     labelPlacement="start"
-                                    onClick={() => setRole('User')}
+                                    onClick={() => setRole('Poster')}
                                 />
                             </RadioGroup>
 
