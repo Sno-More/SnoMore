@@ -38,14 +38,15 @@ export default function MyJob({ myJob, myJobs, setMyJobs }) {
     //shoveler complete job button
     const handleCompleteJob = (id) => {
 
-        //     //completes job
+        //completes job
         axios.put(`/api/job/${id}`, { complete: true })
             .then(
                 response => {
                     axios.get('/api/user/jobs')
                         .then(function (res) {
                             const jobsArray = res.data.jobs
-                            const updatedMyJobs = jobsArray.filter(incomplete => incomplete._id != id)
+                            const updatedMyJobs = jobsArray.filter(incomplete => {return incomplete.complete === false})
+                            console.log('updated', updatedMyJobs)
                             setMyJobs(updatedMyJobs)
                             console.log('my jobs', myJobs)
 
