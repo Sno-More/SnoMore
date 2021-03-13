@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJob}) {
+export default function ShovelerDashboard({ myJobs, myCompleteJobs, currentJob, handleSeeMoreMyJob }) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
     console.log(myJobs)
 
-    
+
 
     //TBD how to get city
     const handleSaveCity = (event) => {
@@ -81,7 +81,7 @@ export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJ
                         <Card className={classes.root} style={{ backgroundColor: "lightgray", marginTop: "20px" }}>
                             <CardContent>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Completed: {`${myJob.complete}`}
+                                    Completed: {`${myJob.complete}`}
                                 </Typography>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     {myJob.title}
@@ -110,7 +110,43 @@ export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJ
 
                 </Container>
             </Grid>
+            <Grid md={6} style={{ textAlign: "center", marginLeft: "700px", marginTop: "-184.5px" }}>
+                <Container style={{ backgroundColor: "white" }}>
+                    <h1>Completed Jobs</h1>
+                    {/* lists the shoveler's upcoming jobs  */}
+                    {myCompleteJobs.map((myCompleteJob) => (
+                        <Card className={classes.root} style={{ backgroundColor: "lightgray", marginTop: "20px" }}>
+                            <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    Completed: {`${myCompleteJob.complete}`}
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    {myCompleteJob.title}
+                                </Typography>
+                                <Typography variant="body2" component="p">
+                                    {myCompleteJob.description}
+                                </Typography>
+                                <Typography>
+                                    {myCompleteJob.location}
+                                </Typography>
+                                <Typography>
+                                    ${myCompleteJob.pay}
+                                </Typography>
+                                <Typography>
+                                    Done by: {myCompleteJob.date}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                {/* <Link to={`/mycompletejob/${myCompleteJob._id}`}>
+                                    <Button onClick={() => handleSeeMoremyCompleteJob(myCompleteJob._id)} size="small" style={{ border: "solid black" }}>See More</Button>
+                                </Link> */}
+                            </CardActions>
+                        </Card >
+                    ))
+                    }
 
+                </Container>
+            </Grid>
         </>
     )
 }

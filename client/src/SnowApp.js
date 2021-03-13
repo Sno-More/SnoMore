@@ -25,6 +25,7 @@ export default function SnowApp() {
 
   const [myJob, setMyJob] = useState([])
   const [myJobs, setMyJobs] = useState([])
+  const [myCompleteJobs, setMyCompleteJobs] = useState([])
 
   //fetch available jobs
   useEffect(() => {
@@ -54,11 +55,13 @@ export default function SnowApp() {
     async function fetchMyJobs() {
       try {
         const response = await axios('/api/user/jobs')
-        setMyJobs(response.data.jobs)
+        setMyJobs(response.data.jobs.filter(jobs => jobs.complete === false))
+        setMyCompleteJobs(response.data.jobs.filter(jobs => jobs.complete === true))
       } catch (e) {
         console.log(e)
       }
     }
+    // const getJobs = myJobs.length > 0 ? fetchMyJobs() : ""
     fetchMyJobs()
   }, [])
 
@@ -103,10 +106,11 @@ export default function SnowApp() {
             />
           </Route>
           <Route path="/shovelerdashboard">
-            <ShovelerDashboard 
-            myJobs={myJobs}
-            myJob={myJob}
-            handleSeeMoreMyJob={handleSeeMoreMyJob}
+            <ShovelerDashboard
+              myJobs={myJobs}
+              myCompleteJobs={myCompleteJobs}
+              myJob={myJob}
+              handleSeeMoreMyJob={handleSeeMoreMyJob}
             />
           </Route>
           <Route path="/userprofile">
@@ -114,9 +118,9 @@ export default function SnowApp() {
           </Route>
           <Route path="/myjob/:id">
             <MyJob
-            myJobs={myJobs}
-            setMyJobs={setMyJobs}
-            myJob={myJob}
+              myJobs={myJobs}
+              setMyJobs={setMyJobs}
+              myJob={myJob}
             // setCurrentJob={setCurrentJob}
             // handleSeeMoreMyJob={handleSeeMoreMyJob}
             />
