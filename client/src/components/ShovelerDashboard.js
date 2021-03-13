@@ -140,6 +140,9 @@ export default function ShovelerDashboard({ myJobs, myCompleteJobs, currentJob, 
                                 {/* <Link to={`/mycompletejob/${myCompleteJob._id}`}>
                                     <Button onClick={() => handleSeeMoremyCompleteJob(myCompleteJob._id)} size="small" style={{ border: "solid black" }}>See More</Button>
                                 </Link> */}
+                                 <Link to="/shovelerfeed" variant="body2">
+                                    Shoveler Feed
+                                </Link>
                             </CardActions>
                         </Card >
                     ))

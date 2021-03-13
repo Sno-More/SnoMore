@@ -51,6 +51,9 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                             </TableCell>
                         </TableRow>
                     ))}
+                                 <Link to="/shovelerdashboard" variant="body2">
+                                    Shoveler Dashboard
+                                </Link>
                 </TableBody>
             </Table>
         </TableContainer>
