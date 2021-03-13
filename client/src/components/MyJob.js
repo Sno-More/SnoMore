@@ -45,11 +45,11 @@ export default function MyJob({ myJob, myJobs, setMyJobs }) {
                     axios.get('/api/user/jobs')
                         .then(function (res) {
                             const jobsArray = res.data.jobs
-                            const updatedMyJobs = jobsArray.find(incomplete => incomplete._id === id)
+                            const updatedMyJobs = jobsArray.filter(incomplete => incomplete._id != id)
                             setMyJobs(updatedMyJobs)
+                            console.log('my jobs', myJobs)
 
                         })
-                    // console.log('response', response.data)
                 })
             .catch(e => {
                 console.log(e)
