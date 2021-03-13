@@ -27,7 +27,8 @@ router.post('/', (req, res) => {
             })
             newUser.save((err, savedUser) => {
                 if (err) return res.json(err)
-                res.json(savedUser)
+                console.log(savedUser);
+                res.redirect(307, '/user/login');
             })
         }
     })

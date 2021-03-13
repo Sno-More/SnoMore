@@ -59,6 +59,10 @@ const JobSchema = new Schema({
     pending: {
         type: Boolean,
         default: false
+    },
+    paid: {
+        type: Boolean,
+        default: false
     }
 });
 
