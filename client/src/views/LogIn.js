@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LogIn() {
+export default function LogIn({handleChangeView}) {
 
   const [auth, setAuth] = useState({})
   const [checkUser, setcheckUser] = useState({loggedIn: false})
@@ -57,7 +57,7 @@ export default function LogIn() {
         console.log(response)
         if (response.status === 200) {
           setcheckUser({loggedIn: true})
-          window.location.href = window.location.href + "shovelerdashboard"
+          window.location.href = window.location.href + "profile"
         }
     }).catch(error => {
         console.log('login error: ')
@@ -125,9 +125,9 @@ export default function LogIn() {
           <Grid container>
 
             <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <button onClick={handleChangeView}>
+                Don't have an account? <em>Sign up</em>
+              </button>
 
             </Grid>
           </Grid>

@@ -3,6 +3,15 @@ const router = express.Router()
 const User = require('../database/models/user')
 const passport = require('../passport')
 
+router.get('/info', (req, res) => {
+    User.find({
+        _id: req.user._id
+    }, (err, user) => {
+        if (err) console.error(err);
+        res.json(user);
+    })
+})
+
 router.post('/', (req, res) => {
     console.log('user signup');
 
