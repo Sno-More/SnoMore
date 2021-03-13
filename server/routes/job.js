@@ -3,7 +3,7 @@ const router = express.Router()
 const {Job, User} = require('../database/models')
 const mongoose = require('mongoose');
 
-//Gets all jobs in database
+//Gets all available jobs in database
 router.get('/jobs/available', (req, res) => {
     console.log('getting jobs');
 
