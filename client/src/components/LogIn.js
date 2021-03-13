@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import API from "../utils/API";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
 
   const [auth, setAuth] = useState({})
+  const [checkUser, setcheckUser] = useState({loggedIn: false})
 
 
   const handleClick = (e) => {
@@ -55,16 +56,8 @@ export default function LogIn() {
         console.log('login response: ')
         console.log(response)
         if (response.status === 200) {
-            // update App.js state
-            // this.props.updateUser({
-            //     loggedIn: true,
-            //     username: response.data.username
-            // })
-            // update the state to redirect to home
-            // this.setState({
-            //     redirectTo: '/'
-            // })
-            console.log("Signed in!")
+          setcheckUser({loggedIn: true})
+          window.location.href = window.location.href + "shovelerdashboard"
         }
     }).catch(error => {
         console.log('login error: ')
@@ -77,14 +70,10 @@ export default function LogIn() {
     const { name, value } = event.target;
     setAuth({...auth, [name]: value})
 }
-   
-
-
-
   const classes = useStyles();
 
   return (
-    <div style={{ margin: "200px 300px", backgroundColor: "#ffffff", border: "1px solid black" }}>
+    <div style={{ margin: "200px 300px", backgroundColor: "#ffffff", border: "1px solid black" }}>  
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
