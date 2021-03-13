@@ -4,19 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
-import Header from './components/Header'
-import LogIn from './components/LogIn'
-import SignUp from './components/SignUp'
-import JobPostForm from './components/JobPostForm'
-import ShovelerFeed from './components/ShovelerFeed'
-import Job from './components/Job'
+import Welcome from './pages/Welcome';
+import Profile from './pages/Profile';
 import axios from 'axios'
-import ShovelerDashboard from "./components/ShovelerDashboard"
-import UserProfile from "./components/UserProfile"
-import MyJob from './components/MyJob'
-import { JobContext } from './JobContext'
+
 
 export default function SnowApp() {
 
@@ -24,61 +16,59 @@ export default function SnowApp() {
   const [job, setJob] = useState({})
 
   const [myJob, setMyJob] = useState([])
-  const [myJobs, setMyJobs] = useState([])
-  const [myCompleteJobs, setMyCompleteJobs] = useState([])
 
-  //fetch available jobs
-  useEffect(() => {
-    async function fetchJobs() {
-      try {
-        const response = await axios('/api/jobs/available')
-        console.log('response', response.data)
-        setJobListings(response.data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    fetchJobs()
-  }, [])
+  // //fetch available jobs
+  // useEffect(() => {
+  //   async function fetchJobs() {
+  //     try {
+  //       const response = await axios('/api/jobs/available')
+  //       console.log('response', response.data)
+  //       setJobListings(response.data)
+  //     } catch (e) {
+  //       console.log(e)
+  //     }
+  //   }
+  //   fetchJobs()
+  // }, [])
 
-  //see more button on shoveler job feed
-  function handleSeeMore(id) {
-    //find car in db with matching id
-    const foundPost = jobListings.find(job => job._id === id)
-    console.log('found post', foundPost)
-    //send that job to corresponding route
-    setJob(foundPost)
-  }
+  // //see more button on shoveler job feed
+  // function handleSeeMore(id) {
+  //   //find car in db with matching id
+  //   const foundPost = jobListings.find(job => job._id === id)
+  //   console.log('found post', foundPost)
+  //   //send that job to corresponding route
+  //   setJob(foundPost)
+  // }
 
-  //shoveler dashboard
-  useEffect(() => {
-    async function fetchMyJobs() {
-      try {
-        const response = await axios('/api/user/jobs')
-        setMyJobs(response.data.jobs.filter(jobs => jobs.complete === false))
-        setMyCompleteJobs(response.data.jobs.filter(jobs => jobs.complete === true))
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    // const getJobs = myJobs.length > 0 ? fetchMyJobs() : ""
-    fetchMyJobs()
-  }, [])
+  // //shoveler dashboard
+  // useEffect(() => {
+  //   async function fetchMyJobs() {
+  //     try {
+  //       const response = await axios('/api/user/jobs')
+  //       setMyJobs(response.data.jobs.filter(jobs => jobs.complete === false))
+  //       setMyCompleteJobs(response.data.jobs.filter(jobs => jobs.complete === true))
+  //     } catch (e) {
+  //       console.log(e)
+  //     }
+  //   }
+  //   // const getJobs = myJobs.length > 0 ? fetchMyJobs() : ""
+  //   fetchMyJobs()
+  // }, [])
 
-  useEffect(() => {
-    console.log('my jobs', myJobs)
-  })
+  // useEffect(() => {
+  //   console.log('my jobs', myJobs)
+  // })
 
-  function handleSeeMoreMyJob(id) {
-    const foundMyJob = myJobs.find(job => job._id === id)
-    console.log('foundmyjob', foundMyJob)
-    setMyJob(foundMyJob)
-  }
+  // function handleSeeMoreMyJob(id) {
+  //   const foundMyJob = myJobs.find(job => job._id === id)
+  //   console.log('foundmyjob', foundMyJob)
+  //   setMyJob(foundMyJob)
+  // }
 
   return (
     <Router>
       <div className="app">
-        <Header />
+        {/* <Header />
         <Switch>
           <Route path="/login">
             <LogIn />
@@ -127,6 +117,14 @@ export default function SnowApp() {
           </Route>
           <Route exact path="/">
             <LogIn />
+          </Route>
+        </Switch> */}
+        <Switch>
+          <Route exact path='/'>
+            <Welcome />
+          </Route>
+          <Route path='/profile'>
+            <Profile />
           </Route>
         </Switch>
       </div>
