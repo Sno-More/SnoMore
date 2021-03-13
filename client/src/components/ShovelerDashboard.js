@@ -37,7 +37,7 @@ export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJ
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
-
+    console.log(myJobs)
 
     
 
@@ -75,11 +75,14 @@ export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJ
 
             <Grid md={6} style={{ textAlign: "center", marginLeft: "700px", marginTop: "-184.5px" }}>
                 <Container style={{ backgroundColor: "white" }}>
-                    <h1>Upcoming Jobs</h1>
+                    <h1>Current Jobs</h1>
                     {/* lists the shoveler's upcoming jobs  */}
                     {myJobs.map((myJob) => (
                         <Card className={classes.root} style={{ backgroundColor: "lightgray", marginTop: "20px" }}>
                             <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                Completed: {`${myJob.complete}`}
+                                </Typography>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                                     {myJob.title}
                                 </Typography>
@@ -91,6 +94,9 @@ export default function ShovelerDashboard({ myJobs, currentJob, handleSeeMoreMyJ
                                 </Typography>
                                 <Typography>
                                     ${myJob.pay}
+                                </Typography>
+                                <Typography>
+                                    Done by: {myJob.date}
                                 </Typography>
                             </CardContent>
                             <CardActions>
