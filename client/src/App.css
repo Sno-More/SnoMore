@@ -1,12 +1,14 @@
 .header{
-  background-color: rgba(255,255,255, 0.5);
-  padding: 20px;
+  background-color: rgba(204, 202, 202, 0.5);
+  padding-left: 10px;
   color: purple;
-  font-size: larger;
+  /* font-size: ; */
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-style: italic;
   display: flex;
-  width: 99%
+  width: 100%;
+  border-bottom: 4px solid black;
+  opacity: 1;
 
 }
 
@@ -31,3 +33,4 @@ body {
 .signUpForm{
   background-color: rgba(255,255,255, 0.5) !important;
 }
+
