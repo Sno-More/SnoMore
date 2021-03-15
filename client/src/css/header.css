@@ -1,0 +1,39 @@
+
+
+.button {
+    height: 3vh;
+    justify-content: baseline;
+    border-radius: 5px;
+    margin-left: 10px;
+    vertical-align: bottom;
+    margin-top:80%
+  
+}
+
+.title {
+    display: inline-block;
+    margin: 50px !important;
+    vertical-align: center;
+}
+
+.wrapper-div {
+    vertical-align: bottom
+  }
+
+  .logo {
+      width: 200px;
+      height: 100%
+  }
+
+  .weather {
+     justify-content: center;
+  }
+
+  .MuiAvatar-root {
+      margin-left: 100px !important;
+      margin-top: 40px !important;
+      height: 80px !important;
+      width: 80px !important;
+      text-align: right !important;
+   
+  }

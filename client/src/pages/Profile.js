@@ -2,6 +2,7 @@ import ShovelerDashboard from '../views/ShovelerDashboard';
 import UserProfile from '../views/UserProfile';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import Header from "../components/Header"
 
 const Profile = () => {
     const [myJobs, setMyJobs] = useState([])
@@ -32,6 +33,7 @@ const Profile = () => {
          : (<UserProfile myJobs={myJobs}/>)
     return (
         <>
+        <Header />
         {jsx}
         </>
     );
