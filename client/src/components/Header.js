@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import "../css/header.css"
-import logo from "../images/snomore2.png"
 import Weather from "./Weather"
 import React,{useEffect, useState} from 'react';
 import { withStyles } from '@material-ui/core/styles';

@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Job from './Job'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
+import ModalShoveler from './ModalShoveler'
 
 const useStyles = makeStyles({
     table: {
@@ -47,6 +48,8 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                             <TableCell align="center">
                                 <Link to={`/job/${job._id}`}>
                                     <Button onClick={() => handleSeeMore(job._id)} style={{border:'solid black'}}>See more</Button>
+                                    <ModalShoveler />
+
                                 </Link>
                             </TableCell>
                         </TableRow>
