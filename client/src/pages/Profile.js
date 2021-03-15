@@ -19,7 +19,14 @@ const Profile = () => {
             };
         };
         getRole();
-    }, [])
+    }, []);
+    useEffect(() => {
+        const fetchJobs = async () => {
+            const jobs = await axios.get('/api/user/jobs');
+            console.log(jobs);
+        };
+        fetchJobs();
+    }, []);
     const jsx = (view === '') ? (<div>Fetching profile...</div>)
          : (view === 'Shoveler') ? (<ShovelerDashboard myJobs={myJobs}/>) 
          : (<UserProfile myJobs={myJobs}/>)
