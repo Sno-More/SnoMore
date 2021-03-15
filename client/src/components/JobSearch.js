@@ -73,7 +73,7 @@ export default function JobSearch() {
             // setApiResponse(results.DataList)
             setZipCodeList(results.DataList.map(zip => zip.Code))
             try {
-                const response = await axios('/api/jobs/available')
+                const response = await axios('/api/jobs/available', zipCodeList)
                 console.log('response', response.data)
                 setJobListings(response.data)
             } catch (e) {
@@ -84,6 +84,7 @@ export default function JobSearch() {
         }
     }
     useEffect(() => {
+        console.log('jobs', jobListings)
         console.log('ziplist', zipCodeList)
     })
 
