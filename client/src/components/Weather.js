@@ -7,7 +7,9 @@ import moment from 'moment'
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+        minWidth: 125,
+        maxHeight: 200,
+
     },
     bullet: {
         display: 'inline-block',
@@ -58,7 +60,10 @@ export default function Weather() {
                                 </Typography>
                                 <Typography variant="h5" component="h2">
                                     <p>High temp: {daily.temp.max}°</p>
-                                    <p>{daily.weather[0].description}</p>
+                                    {daily.weather[0].description === 'snow' ?
+                                        <h3 style={{border:'solid red', borderRadius:'10px', padding: '0px 5px'}}>SNOW</h3>
+                                        : <p>{daily.weather[0].description}</p>
+                                    }
                                 </Typography>
                                 <Typography className={classes.pos} color="textSecondary">
                                     Humidity: {daily.humidity}%
