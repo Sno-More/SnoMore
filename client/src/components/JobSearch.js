@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -36,6 +36,7 @@ const useStyles = makeStyles({
 
 const options = [
     'Choose Range In',
+    '5',
     '10',
     '20',
     '30',
@@ -61,7 +62,7 @@ export default function JobSearch() {
     console.log('zipCode', zipCode)
 
     const handleZipSubmit = async (event) => {
-        //     event.preventDefault()
+        event.preventDefault()
         const apiKey = 'QYIPG6D4D5JL66A6D343'
         const apiCall = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=${zipCode}&minimumradius=0&maximumradius=${range}&country=ALL&key=${apiKey}`
 
@@ -69,9 +70,8 @@ export default function JobSearch() {
             const response = await fetch(apiCall)
             const results = await response.json()
             console.log('results', results.DataList)
-            setApiResponse(results.DataList)
-            const zipCodeArray = await apiResponse.map(zip => zip.Code)
-            setZipCodeList(zipCodeArray)
+            // setApiResponse(results.DataList)
+            setZipCodeList(results.DataList.map(zip => zip.Code))
             try {
                 const response = await axios('/api/jobs/available')
                 console.log('response', response.data)
@@ -83,6 +83,9 @@ export default function JobSearch() {
             console.log(err)
         }
     }
+    useEffect(() => {
+        console.log('ziplist', zipCodeList)
+    })
 
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -149,7 +152,7 @@ export default function JobSearch() {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{ border: 'solid black' }} onClick={handleZipSubmit}>Submit</Button>
+                <Button size="small" style={{ border: 'solid black', position: 'absolute', left: '18%', marginTop: '50px', padding: '5px 40px' }} onClick={handleZipSubmit}>Submit</Button>
             </CardActions>
         </Card>
     );
