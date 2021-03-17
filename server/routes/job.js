@@ -28,13 +28,14 @@ router.get('/job/:id', (req, res) => {
 
     Job.findOne({
         _id: mongoose.Types.ObjectId(req.params.id)
-    }, (err, job) => {
-        if (err) {
-            console.error(err);
-            return;
-        };
+    }).populate('poster')
+    .populate('shoveler')
+    .then(job => {
         console.log(job);
         res.json(job);
+    })
+    .catch(err => {
+        console.error(err);
     });
 });
 

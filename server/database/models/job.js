@@ -12,10 +12,12 @@ const JobSchema = new Schema({
     },
     poster: {
         type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     shoveler: {
         type: Schema.Types.ObjectId,
+        ref: 'User',
         required: false
     },
     pay: {
