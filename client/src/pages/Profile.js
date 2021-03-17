@@ -3,6 +3,7 @@ import UserProfile from '../views/UserProfile';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Header from "../components/Header"
+import SMSForm from '../components/SMSForm'
 
 const Profile = () => {
     const [myJobs, setMyJobs] = useState([])
@@ -35,6 +36,7 @@ const Profile = () => {
         <>
         <Header />
         {jsx}
+        <SMSForm />
         </>
     );
 }

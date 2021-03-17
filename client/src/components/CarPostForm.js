@@ -3,18 +3,21 @@ import axios from 'axios'
 import {
   Link
 } from "react-router-dom";
-import UserProfile from './UserProfile'
+// import UserProfile from './UserProfile'
 import Button from '@material-ui/core/Button';
 
 export default function CarPostForm() {
 
-  const [car, setCar] = useState({ title: "", location: "", pay: "", description: "", date: "", type: "car" })
+  const [car, setCar] = useState({ title: "", location: "", zipCode: "", pay: "", description: "", date: "", type: "car" })
 
   const handleCarTitle = (event) => {
     setCar({ ...car, title: event.target.value })
   }
   const handleCarAddress = (event) => {
     setCar({ ...car, location: event.target.value })
+  }
+  const handleCarZip = (event) => {
+    setCar({ ...car, zipCode: event.target.value })
   }
   const handleCarPay = (event) => {
     setCar({ ...car, pay: event.target.value })
@@ -52,6 +55,11 @@ export default function CarPostForm() {
           value={car.address}
           onChange={handleCarAddress}
           placeholder='Address' /><br />
+        <input
+          type="text"
+          value={car.zip}
+          onChange={handleCarZip}
+          placeholder='5-digit Zip Code' /><br />
         <input
           type="text"
           value={car.pay}
