@@ -21,14 +21,24 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
 
+  },
+  pay: {
+    fontSize: '2rem'
   }
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({job, handleSeeMore}) {
   const classes = useStyles();
 
   
   return (
-    <p>test</p>
+    <Card>
+      <CardContent>
+        <Typography variant='h4'>{job.title}</Typography>
+        <Typography variant='subtitle2'>{job.location}</Typography>
+        <div className={classes.pay}>{job.pay}</div>
+        <button onClick={() => handleSeeMore(job._id)}>See more</button>
+      </CardContent>
+    </Card>
   )
 }

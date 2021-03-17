@@ -1,36 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import Card from '@material-ui/core/Card';
+import React, { useState} from 'react'
+import JobSearch from '../components/JobSearch';
+import MyJobs from '../components/MyJobs';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import SimpleModal from '../components/Modal';
 import axios from 'axios'
-import {
-    Link
-} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        // '& > *': {
-        //     margin: theme.spacing(1),
-        //     width: '25ch',
-        // },
-        minWidth: 275,
-    },
+export default function ShovelerDashboard({myJobs}) {
+    const [currentJob, setCurrentJob] = useState({});
+    const [open, setOpen] = useState(false);
 
-    title: {
-        fontSize: 30,
-    },
-    pos: {
-        marginBottom: 12,
+    const handleSeeMore = (job_id) => {
+        const fetchJob = async () => {
+            const job = await axios('/api/job/' + job_id);
+            console.log(job);
+            setCurrentJob(job.data);
+            handleOpen();
+        };
+        fetchJob();
+    };
 
-    }
-}));
 
-export default function ShovelerDashboard() {
-    return <div>Hello</div>
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setCurrentJob({});
+    };
+
+    return (
+        <Grid container>
+            <Grid item xs={12} md={6}>
+                <JobSearch />
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />
+            </Grid>
+            <SimpleModal job={currentJob} 
+            open={open} 
+            methods={{handleClose, handleOpen}}
+            />
+        </Grid>
+    )
 }
