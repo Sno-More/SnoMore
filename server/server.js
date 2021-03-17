@@ -1,5 +1,4 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
 const dbConnection = require('./database')
@@ -10,12 +9,7 @@ const PORT = 3001
 // Route requires
 const user = require('./routes/user')
 const job = require('./routes/job')
-const twilio = require('./routes/twilio')
-const pino = require('express-pino-logger')();
-const client = require('twilio')(
-	process.env.TWILIO_ACCOUNT_SID,
-	process.env.TWILIO_AUTH_TOKEN
-);
+const send_sms = require('./routes/send_sms')
 
 
 // MIDDLEWARE
@@ -41,34 +35,10 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
 
-// Twilio
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(pino);
-
-require('dotenv').config();
-
-app.post('/api/messages', (req, res) => {
-	res.header('Content-Type', 'application/json');
-	client.messages
-		.create({
-			from: process.env.TWILIO_PHONE_NUMBER,
-			to: '+16145614936',
-			body: 'this is a test'
-		})
-		.then(() => {
-			res.send(JSON.stringify({ success: true }));
-		})
-		.catch(err => {
-			console.log(err);
-			res.send(JSON.stringify({ success: false }));
-		});
-});
-
 // Routes
 app.use('/user', user)
 app.use('/api', job)
-// app.use('/sms', twilio)
+app.use('/sms', send_sms)
 
 // Starting Server 
 app.listen(PORT, () => {
