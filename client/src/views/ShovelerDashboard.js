@@ -156,4 +156,5 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShovelerDashboard() {
     return <div>Hello</div>
+
 }

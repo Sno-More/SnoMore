@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Job from './Job'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
+import ModalShoveler from './ModalShoveler'
 
 const useStyles = makeStyles({
     table: {
@@ -24,7 +25,7 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
     const classes = useStyles();
 
     console.log('job', jobListings)
-
+    jobListings = []
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -39,6 +40,7 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                 </TableHead>
                 <TableBody>
                     {jobListings.map((job) => (
+                        
                         <TableRow key={job.id}>
                             <TableCell align="center">{job.title}</TableCell>
                             <TableCell align="center">{job.location}</TableCell>
@@ -47,13 +49,15 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                             <TableCell align="center">
                                 <Link to={`/job/${job._id}`}>
                                     <Button onClick={() => handleSeeMore(job._id)} style={{border:'solid black'}}>See more</Button>
+                                    <ModalShoveler />
+
                                 </Link>
                             </TableCell>
                         </TableRow>
                     ))}
-                                 <Link to="/shovelerdashboard" variant="body2">
-                                    Shoveler Dashboard
-                                </Link>
+                                {/* //  <Link to="/shovelerdashboard" variant="body2">
+                                //     Shoveler Dashboard
+                                // </Link> */}
                 </TableBody>
             </Table>
         </TableContainer>
