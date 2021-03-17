@@ -4,10 +4,13 @@ const { Job, User } = require('../database/models')
 const mongoose = require('mongoose');
 
 //Gets all available jobs in database
-router.get('/jobs/available', (req, res) => {
+router.get('/jobs/available/:zip', (req, res) => {
     console.log('getting jobs');
+    const zipCodeList = req.params.zip.split(',').map(zips => Number(zips))
+    console.log('zip list', zipCodeList);
 
     Job.find({
+        zipCode: { $in: zipCodeList },
         complete: false,
         pending: false
     }, (err, jobs) => {
@@ -20,18 +23,18 @@ router.get('/jobs/available', (req, res) => {
 });
 
 //Search by zip code
-router.get('/jobs/available', (req, res) => {
-    console.log('getting jobs');
+// router.get('/jobs/available', (req, res) => {
+//     console.log('getting jobs');
 
-    Job.find({ 'zipCode': { $in: zipCodeList } },
-    (err, jobs) => {
-        if (err) {
-            console.error(err);
-            return;
-        };
-        res.json(jobs);
-    });
-});
+//     Job.find({ 'zipCode': { $in: zipCodeList } },
+//     (err, jobs) => {
+//         if (err) {
+//             console.error(err);
+//             return;
+//         };
+//         res.json(jobs);
+//     });
+// });
 
 //Gets one job by id
 router.get('/job/:id', (req, res) => {

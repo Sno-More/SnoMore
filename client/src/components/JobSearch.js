@@ -45,13 +45,10 @@ const options = [
 
 export default function JobSearch() {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
     const [zipCode, setZipCode] = useState("")
-    const [zipCodeList, setZipCodeList] = useState([])
     const [range, setRange] = useState("Range In");
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [apiResponse, setApiResponse] = useState([])
     const [jobListings, setJobListings] = useState([])
 
     const handleZipChange = event => {
@@ -70,10 +67,10 @@ export default function JobSearch() {
             const response = await fetch(apiCall)
             const results = await response.json()
             console.log('results', results.DataList)
-            // setApiResponse(results.DataList)
-            setZipCodeList(results.DataList.map(zip => zip.Code))
+            const zips = results.DataList.map(zip => parseInt(zip.Code))
+            const zipString = zips.join(',')
             try {
-                const response = await axios('/api/jobs/available', zipCodeList)
+                const response = await axios(`/api/jobs/available/${zipString}`)
                 console.log('response', response.data)
                 setJobListings(response.data)
             } catch (e) {
@@ -83,10 +80,6 @@ export default function JobSearch() {
             console.log(err)
         }
     }
-    useEffect(() => {
-        console.log('jobs', jobListings)
-        console.log('ziplist', zipCodeList)
-    })
 
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
