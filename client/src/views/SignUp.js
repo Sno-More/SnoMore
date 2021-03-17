@@ -13,7 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import API from "../utils/API";
-
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input/input'
 
 
 
@@ -44,8 +45,8 @@ export default function SignUp({ handleChangeView }) {
 
     const [auth, setAuth] = useState({})
     const [role, setRole] = useState('');
-
-
+    const [value, setValue] = useState('')
+    console.log('value', value)
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -56,8 +57,8 @@ export default function SignUp({ handleChangeView }) {
             lastName: auth.lastName,
             username: auth.email,
             password: auth.password,
-            phone: auth.phone,
-            role: role
+            phone: value,
+            role: role,
         })
             .then()
             .catch(err => console.log(err));
@@ -131,17 +132,22 @@ export default function SignUp({ handleChangeView }) {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="phone"
-                                    label="Phone Number"
-                                    name="phone"
-                                    value={auth.phone}
-                                    onChange={handleInput}
-                                    autoComplete="phone number"
-                                />
+                                {/* <TextField> */}
+                                    <PhoneInput style={{height: '50px', fontFamily: 'Roboto', font: 'light gray', border: 'thin solid lightgray', borderRadius: '4px', fontSize: 'larger', font: 'lightgray'}}
+                                        placeholder="Phone Number *"
+                                        country="US"
+                                        value={value}
+                                        maxlength="14"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="phone"
+                                        label="Phone Number"
+                                        name="phone"
+                                        autoComplete="phone number"
+                                        onChange={setValue}
+                                    />
+                                {/* </TextField> */}
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField

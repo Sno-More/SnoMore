@@ -5,6 +5,8 @@ import {useEffect, useState} from 'react';
 import Header from "../components/Header"
 // import Weather from '../components/Weather';
 
+
+
 const Profile = () => {
     const [myJobs, setMyJobs] = useState([])
     const [view, setView] = useState('')
@@ -35,6 +37,9 @@ const Profile = () => {
     return (
         <>
         <Header />
+    
+      
+
         {jsx}
         {/* <Weather/> */}
         </>
