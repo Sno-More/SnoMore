@@ -13,12 +13,12 @@
 
 }
 
-body {
+html {
   background-image: url('./images/snowRoad.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  height: 100%;
 }
 
 .floatRight{

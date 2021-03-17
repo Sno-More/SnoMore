@@ -3,11 +3,8 @@ import UserProfile from '../views/UserProfile';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Header from "../components/Header"
+// import Weather from '../components/Weather';
 
-import ShovelerFeed from '../components/ShovelerFeed';
-import ModalShoveler from "../components/ModalShoveler"
-
-import SMSForm from '../components/SMSForm'
 
 
 const Profile = () => {
@@ -26,7 +23,14 @@ const Profile = () => {
             };
         };
         getRole();
-    }, [])
+    }, []);
+    useEffect(() => {
+        const fetchJobs = async () => {
+            const jobs = await axios.get('/api/user/jobs');
+            setMyJobs(jobs.data.jobs);
+        };
+        fetchJobs();
+    }, []);
     const jsx = (view === '') ? (<div>Fetching profile...</div>)
          : (view === 'Shoveler') ? (<ShovelerDashboard myJobs={myJobs}/>) 
          : (<UserProfile myJobs={myJobs}/>)
@@ -37,7 +41,7 @@ const Profile = () => {
       
 
         {jsx}
-        <SMSForm />
+        {/* <Weather/> */}
         </>
     );
 }

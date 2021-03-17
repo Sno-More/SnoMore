@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
     Link
 } from "react-router-dom";
@@ -10,8 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Job from './Job'
-import axios from 'axios'
+
 import Button from '@material-ui/core/Button';
 import ModalShoveler from './ModalShoveler'
 
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ShovelerFeed({ jobListings, setJobListings, job, setJob, handleSeeMore }) {
+export default function ShovelerFeed({ jobListings, handleSeeMore }) {
     const classes = useStyles();
 
     console.log('job', jobListings)

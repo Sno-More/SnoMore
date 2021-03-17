@@ -9,7 +9,7 @@ import "../css/header.css"
 const useStyles = makeStyles({
     root: {
         minWidth: 125,
-        maxHeight: 100,
+        maxHeight: 200,
         
     },
     bullet: {
@@ -61,11 +61,11 @@ export default function Weather() {
                                 </Typography>
                                 <Typography className={classes.title} variant="h5" component="h2">
                                     <p>High temp: {daily.temp.max}°</p>
-                                    {/* <p>{daily.weather[0].description}</p> */}
+                                    <p>{daily.weather[0].description}</p>
                                 </Typography>
-                                {/* <Typography className={classes.pos} color="textSecondary">
+                                <Typography className={classes.pos} color="textSecondary">
                                     Humidity: {daily.humidity}%
-                                 </Typography> */}
+                                 </Typography>
                             </CardContent>
                         </Card>
                         : ""}

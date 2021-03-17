@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import Container from '@material-ui/core/Container';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -14,12 +13,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios'
 
 const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-        maxWidth: '40%',
-        minHeight: 400,
-        margin: '0px 50px',
-        border: 'solid thick black'
+    h2: {
+        textAlign: 'center',
+        padding: '2rem'
+    },
+    container: {
+        background: 'white',
+        height: '60vmin',
+        width: '85%',
+        padding: '0',
+        margin: '4rem auto 2rem auto',
     },
     bullet: {
         display: 'inline-block',
@@ -95,11 +98,8 @@ export default function JobSearch() {
     };
 
     return (
-        <Card className={classes.root} variant="outlined">
-            <CardContent>
-                <Typography className={classes.title} variant="h5" component="h1" style={{ textAlign: 'center' }}>
-                    FIND JOBS
-                    </Typography><br />
+        <Container className={classes.container}>
+            <Typography className={classes.h2} variant='h2'>FIND A JOB</Typography>
                 <Typography style={{ display: 'flex' }}>
                     <TextField style={{ width: '70%' }}
                         // autoComplete="fname"
@@ -144,10 +144,9 @@ export default function JobSearch() {
                         ))}
                     </Menu>
                 </Typography>
-            </CardContent>
             <CardActions>
                 <Button size="small" style={{ border: 'solid black', position: 'absolute', left: '18%', marginTop: '50px', padding: '5px 40px' }} onClick={handleZipSubmit}>Submit</Button>
             </CardActions>
-        </Card>
+        </Container>
     );
 }
