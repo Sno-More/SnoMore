@@ -44,10 +44,21 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">job</h2>
-      <p id="simple-modal-description">
-        job description
-      </p>
+      {/* {jobListings.map((job) => (
+       
+
+      ))} */}
+      <h1 id="simple-modal-title">JOB</h1>
+        <p id="simple-modal-description">
+          description
+        </p>
+        <p id="simple-modal-description">
+         location
+        </p>
+        <p id="simple-modal-description">
+          pay
+        </p>
+        
       <SimpleModal />
     </div>
   );
@@ -69,18 +80,3 @@ export default function SimpleModal() {
   );
 }
 
-// import usePortal from "react-cool-portal";
-
-// const App = () => {
-//   const { Portal } = usePortal();
-
-//   return (
-//     <div>
-//       <Portal>
-//         <p>
-//           Wow! I am rendered outside the DOM hierarchy of my parent component.
-//         </p>
-//       </Portal>
-//     </div>
-//   );
-// };

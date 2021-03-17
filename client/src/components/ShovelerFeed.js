@@ -25,7 +25,7 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
     const classes = useStyles();
 
     console.log('job', jobListings)
-
+    jobListings = []
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -40,6 +40,7 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                 </TableHead>
                 <TableBody>
                     {jobListings.map((job) => (
+                        
                         <TableRow key={job.id}>
                             <TableCell align="center">{job.title}</TableCell>
                             <TableCell align="center">{job.location}</TableCell>
@@ -54,9 +55,9 @@ export default function ShovelerFeed({ jobListings, setJobListings, job, setJob,
                             </TableCell>
                         </TableRow>
                     ))}
-                                 <Link to="/shovelerdashboard" variant="body2">
-                                    Shoveler Dashboard
-                                </Link>
+                                {/* //  <Link to="/shovelerdashboard" variant="body2">
+                                //     Shoveler Dashboard
+                                // </Link> */}
                 </TableBody>
             </Table>
         </TableContainer>
