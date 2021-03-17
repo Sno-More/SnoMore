@@ -1,6 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -28,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(myJob) {
   const classes = useStyles();
 
   const [modalStyle] = React.useState(getModalStyle);
@@ -44,10 +51,23 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      {/* {jobListings.map((job) => (
-       
+              {/* <Card className={classes.root} variant="outlined">
+            <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    {myJob.title}
+                </Typography>
+                <Typography variant="h5" component="h2">
+                   {myJob.location}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                    {myJob.pay}
+                </Typography>
+                <Typography variant="body2" component="p">
+                    {myJob.description}
+                </Typography>
+            </CardContent>
+        </Card> */}
 
-      ))} */}
       <h1 id="simple-modal-title">JOB</h1>
         <p id="simple-modal-description">
           description
