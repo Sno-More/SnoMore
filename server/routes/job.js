@@ -3,7 +3,7 @@ const router = express.Router()
 const { Job, User } = require('../database/models')
 const mongoose = require('mongoose');
 
-//Gets all available jobs in database
+//Gets all available jobs in database by zip code
 router.get('/jobs/available/:zip', (req, res) => {
     console.log('getting jobs');
     const zipCodeList = req.params.zip.split(',').map(zips => Number(zips))
@@ -21,20 +21,6 @@ router.get('/jobs/available/:zip', (req, res) => {
         res.json(jobs);
     });
 });
-
-//Search by zip code
-// router.get('/jobs/available', (req, res) => {
-//     console.log('getting jobs');
-
-//     Job.find({ 'zipCode': { $in: zipCodeList } },
-//     (err, jobs) => {
-//         if (err) {
-//             console.error(err);
-//             return;
-//         };
-//         res.json(jobs);
-//     });
-// });
 
 //Gets one job by id
 router.get('/job/:id', (req, res) => {
