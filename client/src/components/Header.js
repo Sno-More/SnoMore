@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
         },
     },
-    purple: {
-        color: theme.palette.getContrastText(deepPurple[500]),
-        backgroundColor: deepPurple[500],
-    },
+    // purple: {
+    //     color: theme.palette.getContrastText(deepPurple[500]),
+    //     backgroundColor: deepPurple[500],
+    // },
 }));
 
 export default function Header() {
@@ -104,7 +104,7 @@ const StyledMenu = withStyles({
             
             
       <Avatar
-        className={classes.purple}
+        className="avatar"
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"

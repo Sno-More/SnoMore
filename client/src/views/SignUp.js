@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function SignUp({handleChangeView}) {
+export default function SignUp({ handleChangeView }) {
 
     const [auth, setAuth] = useState({})
     const [role, setRole] = useState('');
@@ -128,6 +128,19 @@ export default function SignUp({handleChangeView}) {
                                     value={auth.email}
                                     onChange={handleInput}
                                     autoComplete="email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="phone"
+                                    label="Phone Number"
+                                    name="phone"
+                                    value={auth.phone}
+                                    onChange={handleInput}
+                                    autoComplete="phone number"
                                 />
                             </Grid>
                             <Grid item xs={12}>

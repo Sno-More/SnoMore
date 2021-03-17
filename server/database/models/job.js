@@ -6,6 +6,10 @@ const JobSchema = new Schema({
         type: String,
         required: true
     },
+    zipCode: {
+        type: Number,
+        required: true
+    },
     poster: {
         type: Schema.Types.ObjectId,
         required: true

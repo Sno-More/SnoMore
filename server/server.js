@@ -1,8 +1,7 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
-const dbConnection = require('./database') 
+const dbConnection = require('./database')
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express()
@@ -10,6 +9,7 @@ const PORT = 3001
 // Route requires
 const user = require('./routes/user')
 const job = require('./routes/job')
+const send_sms = require('./routes/send_sms')
 
 
 // MIDDLEWARE
@@ -35,10 +35,10 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
 
-
 // Routes
 app.use('/user', user)
 app.use('/api', job)
+app.use('/sms', send_sms)
 
 // Starting Server 
 app.listen(PORT, () => {

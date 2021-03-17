@@ -12,8 +12,11 @@
 
 .title {
     display: inline-block;
-    margin: 50px !important;
-    vertical-align: center;
+    text-decoration: underline;
+    vertical-align: bottom ;
+    margin-right: 9vw;
+    margin-left: 9vw;
+
 }
 
 .wrapper-div {
@@ -25,15 +28,23 @@
       height: 100%
   }
 
-  .weather {
-     justify-content: center;
-  }
+
 
   .MuiAvatar-root {
       margin-left: 100px !important;
-      margin-top: 40px !important;
+      margin-top: 15px !important;
       height: 80px !important;
       width: 80px !important;
-      text-align: right !important;
+    
+      font-size: 4vh !important;
    
+  }
+
+  .MuiCardContent-root {
+      padding: 0px !important;
+      text-align: center !important;
+  }
+
+  .avatar {
+      background-color: purple !important;
   }
