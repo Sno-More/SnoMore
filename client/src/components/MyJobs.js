@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { useState } from 'react';
+import Card from './Card';
 
 const useStyles = makeStyles({
     h2: {
@@ -14,9 +15,9 @@ const useStyles = makeStyles({
     container: {
         background: 'white',
         height: '60vmin',
-        width: '40%',
+        width: '85%',
         padding: '0',
-        margin: '2rem 2rem 2rem auto',
+        margin: '4rem auto 2rem auto',
     },
     default: {
         textAlign: 'left',
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     }
 })
 
-const MyJobs = ({myJobs}) => {
+const MyJobs = ({myJobs, handleSeeMore}) => {
     const [tabValue, setTabValue] = useState(0);
     const handleChange = (event, newVal) => {
         setTabValue(newVal);
@@ -35,9 +36,13 @@ const MyJobs = ({myJobs}) => {
 
     const defaultText = (tabValue) ? 'You don\'t have any upcoming jobs. Search for jobs in the "job search" section.'
     : 'You don\'t have any completed jobs. Complete the jobs listed under “incomplete”.'
-    let filteredJobs = myJobs.filter(job => job.complete === !tabValue)
+    console.log('my jobs', myJobs);
+    let filteredJobs = myJobs.filter(job => job.complete === !tabValue).map(job => {
+        return <Card key={job._id} job={job} handleSeeMore={handleSeeMore}/>
+    })
+    console.log(myJobs);
     if (filteredJobs.length === 0) {
-        filteredJobs = [<Typography className={classes.default} variant='subtitle'>{defaultText}</Typography>]
+        filteredJobs = [<Typography className={classes.default} variant='subtitle2'>{defaultText}</Typography>]
     }
 
     return (

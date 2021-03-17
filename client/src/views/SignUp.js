@@ -87,7 +87,7 @@ export default function SignUp({ handleChangeView }) {
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
-        </Typography>
+                    </Typography>
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -195,7 +195,7 @@ export default function SignUp({ handleChangeView }) {
                             onClick={handleClick}
                         >
                             Sign Up
-                    </Button>
+                        </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
 

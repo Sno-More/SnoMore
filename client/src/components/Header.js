@@ -4,7 +4,7 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import "../css/header.css"
 import Weather from "./Weather"
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -12,48 +12,48 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        '& > *': {
-            margin: theme.spacing(1),
-        },
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
     },
-    // purple: {
-    //     color: theme.palette.getContrastText(deepPurple[500]),
-    //     backgroundColor: deepPurple[500],
-    // },
+  },
+  // purple: {
+  //     color: theme.palette.getContrastText(deepPurple[500]),
+  //     backgroundColor: deepPurple[500],
+  // },
 }));
 
 export default function Header() {
 
-const [user, setUser] = useState("")
-let name = user.charAt(0).toUpperCase()
+  const [user, setUser] = useState("")
+  let name = user.charAt(0).toUpperCase()
 
-useEffect(() => {
+  useEffect(() => {
     const getUser = async () => {
-        const user = await axios.get('/user/info');
-        console.log(user.data);
-        setUser(user.data[0].firstName)
+      const user = await axios.get('/user/info');
+      console.log(user.data);
+      setUser(user.data[0].firstName)
     };
     getUser();
-}, [])
-    const logout = (e) => {
-        e.preventDefault()
-        console.log("test1")
+  }, [])
+  const logout = (e) => {
+    e.preventDefault()
+    console.log("test1")
     axios.post("/user/logout")
-    .then(response => {
-        
+      .then(response => {
+
         if (response.status === 200) {
           console.log(response)
           window.location.href = "http://localhost:3000/"
         }
-    }).catch(error => {
+      }).catch(error => {
         console.log('login error: ')
         console.log(error);
-        
-    })
-}
-const StyledMenu = withStyles({
+
+      })
+  }
+  const StyledMenu = withStyles({
     paper: {
       border: '1px solid #d3d4d5',
     },
@@ -72,7 +72,7 @@ const StyledMenu = withStyles({
       {...props}
     />
   ));
-  
+
   const StyledMenuItem = withStyles((theme) => ({
     root: {
       '&:focus': {
@@ -83,51 +83,50 @@ const StyledMenu = withStyles({
       },
     },
   }))(MenuItem);
-  
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-  
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const classes = useStyles();
-    return (
-        <div className="header">
-            <h1 className="title">SNO MORE</h1>
-            {/* <img  className="logo" src={logo} /> */}
-           
-            <Weather />
-            
-            
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const classes = useStyles();
+  return (
+    <div className="header">
+      <h1 className="title">SNO MORE</h1>
+      {/* <img  className="logo" src={logo} /> */}
+
+
+
       <Avatar
         className="avatar"
         aria-controls="customized-menu"
         aria-haspopup="true"
-        variant="contained"
+        variant="circular"
         color="primary"
         onClick={handleClick}
       >
         {name}
       </Avatar>
       <StyledMenu
-     
+
         id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-      
+
         <StyledMenuItem>
           <ListItemText onClick={logout} primary="Log Out" />
         </StyledMenuItem>
       </StyledMenu>
     </div>
 
-        
-    )
+
+  )
 }
