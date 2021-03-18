@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.transparentWhite.main,
     border: '5px solid black',
     width: '100vmin',
-    maxHeight: '65vmin',
+    height: 'min-content',
     position: 'absolute',
     top: '0',
     bottom: '0',
