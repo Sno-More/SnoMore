@@ -9,20 +9,21 @@ const client = require('twilio')(
 );
 
 router.post('/messages', (req, res) => {
-	res.header('Content-Type', 'application/json');
-	client.messages
-		.create({
-			from: process.env.TWILIO_PHONE_NUMBER,
-			to: '+16145614936',
-			body: 'this is another test'
-		})
-		.then(() => {
-			res.send(JSON.stringify({ success: true }));
-		})
-		.catch(err => {
-			console.log(err);
-			res.send(JSON.stringify({ success: false }));
-		});
+  console.log('req body', req.body.sms)
+	// res.header('Content-Type', 'application/json');
+	// client.messages
+	// 	.create({
+	// 		from: process.env.TWILIO_PHONE_NUMBER,
+	// 		to: req.body.sms.messageTo,
+	// 		body: 'this is another test'
+	// 	})
+	// 	.then(() => {
+	// 		res.send(JSON.stringify({ success: true }));
+	// 	})
+	// 	.catch(err => {
+	// 		console.log(err);
+	// 		res.send(JSON.stringify({ success: false }));
+	// 	});
 });
 
 module.exports = router

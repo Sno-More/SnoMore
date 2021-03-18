@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import axios from 'axios'
 
 
 function rand() {
@@ -36,48 +36,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const handleConfirmJob = (event) => {
-//   event.preventDefault()
-//   //change pending value to true
-  
- 
-// }
+export default function SimpleModal({ job, open, methods, jobListings, setJobListings }) {
+  const [posterPhone, setPosterPhone] = useState('')
+  const [shovelerPhone, setShovelerPhone] = useState('')
+  const [sms, setSms] = useState(
+    {
+        messageTo: '',
+        messageBody: '',
+        submitting: false,
+        error: false
+    })
+  //shoveler accept job button
+  async function handleAcceptJob (id) {
+    //     console.log('handleacceptjob')
+    // console.log('phone', job.poster.phone)
+    setPosterPhone(job.poster.phone)
+    await axios.get('/user/info')
+    .then(
+      response => {
+        setShovelerPhone(response.data[0].phone)
+      }
+    )
+      // console.log(posterPhone)
+    // adds shoveler id to job and job to shoveler job array
+    await axios.put(`/api/user/jobs/add/${id}`)
+      .then(
+      //   response => {
+      //     axios.get('/api/jobs/available')
+      //       .then(function (res) {
+      //         setJobListings(res.data)
+      //       })
+      //     console.log('response', response.data)
+      //   })
+      // .catch(e => {
+      //   console.log(e)
+      // }
+      )
+      await setSms({ 
+        messageTo: {posterPhone},
+        messageBody: `Your job has been accepted`,
+        submitting: true });
+      await fetch('/sms/messages', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({sms})
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                setSms({
+                    error: false,
+                    submitting: false,
+                    messageTo: '',
+                    messageBody: ''
+
+                });
+            } else {
+                setSms({
+                    error: true,
+                    submitting: false
+                });
+            }
+        });
+  }
 
 
-const handleCompletedJob =(event)=> {
-  //pending value will still be true 
-  //change completed value to true
-  //relocate job to the completed tab
-  //send text notification to both parties that job has been completed
-}
+  const handleCompletedJob = (event) => {
+    //pending value will still be true 
+    //change completed value to true
+    //relocate job to the completed tab
+    //send text notification to both parties that job has been completed
+  }
 
-export default function SimpleModal({job, open, methods}) {
   const classes = useStyles();
 
   const [modalStyle] = React.useState(getModalStyle);
-  
+
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-        <Card variant="outlined">
-            <CardContent>
-                <Typography   variant="h3" gutterBottom>
-                    {job.title}
-                </Typography>
-                <Typography variant="h5">
-                    Pay: ${job.pay}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                   Address:{job.location}
-                </Typography>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h3" gutterBottom>
+            {job.title}
+          </Typography>
+          <Typography variant="h5">
+            Pay: ${job.pay}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            Address:{job.location}
+          </Typography>
 
-                <Typography variant="body2" component="p">
-                    {job.description}
-                </Typography>
-                {/* <button onClick={handleConfirmJob}> Confirm Job </button> */}
-                <button onClick={handleCompletedJob}> Completed This Job </button>
-            </CardContent>
-        </Card>
+          <Typography variant="body2" component="p">
+            {job.description}
+          </Typography>
+          {/* <button onClick={handleConfirmJob}> Confirm Job </button> */}
+          {job.pending === false ?
+            <button onClick={() => handleAcceptJob(job._id)}>Accept This Job</button>
+            :
+            <button onClick={() => handleCompletedJob(job._id)}>Completed This Job</button>
+          }
+        </CardContent>
+      </Card>
     </div>
   );
 

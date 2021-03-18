@@ -35,8 +35,8 @@ export default function SimpleCard({job, handleSeeMore}) {
     <Card>
       <CardContent>
         <Typography variant='h4'>{job.title}</Typography>
-        <Typography variant='subtitle2'>{job.location}</Typography>
-        <div className={classes.pay}>{job.pay}</div>
+        <Typography variant='subtitle2'>Location: {job.location}</Typography>
+        <div className={classes.pay}>Pay: {job.pay}</div>
         <button onClick={() => handleSeeMore(job._id)}>See more</button>
       </CardContent>
     </Card>
