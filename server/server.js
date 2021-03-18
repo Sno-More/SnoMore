@@ -19,6 +19,15 @@ app.use(
 		extended: false
 	})
 )
+
+const path ;
+if (process.env.NODE_ENV === "production") {
+	app.get(express.static("client/build"));
+	app.get("*",function(req, res) {
+		res.sendFile(path.join(__dirname, "../client/build/index.html"));
+	  });
+  }
+
 app.use(express.json())
 
 // Sessions
