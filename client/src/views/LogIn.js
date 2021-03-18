@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import API from "../utils/API";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
@@ -14,27 +12,43 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-
-
 const useStyles = makeStyles((theme) => ({
-
+  signIn: {
+    backgroundColor: theme.palette.transparentWhite.main,
+    border: '5px solid black',
+    width: '100vmin',
+    maxHeight: '65vmin',
+    position: 'absolute',
+    top: '0',
+    bottom: '0',
+    left: '0',
+    right: '0',
+    margin: 'auto'
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    margin: theme.spacing(2) + 'auto',
+    height: '50px',
+    width: '50px',
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, 2),
   },
+  link: {
+    position: 'relative',
+    left: '33%',
+    right: '33%'
+  }
 }));
 
 export default function LogIn({handleChangeView}) {
@@ -73,14 +87,13 @@ export default function LogIn({handleChangeView}) {
   const classes = useStyles();
 
   return (
-    <div style={{ margin: "200px 300px", backgroundColor: "#ffffff", border: "1px solid black" }}>  
+    <div className={classes.signIn}>  
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
      
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h2">
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
@@ -125,7 +138,7 @@ export default function LogIn({handleChangeView}) {
           <Grid container>
 
             <Grid item>
-              <button onClick={handleChangeView}>
+              <button className={classes.link} onClick={handleChangeView}>
                 Don't have an account? <em>Sign up</em>
               </button>
 
