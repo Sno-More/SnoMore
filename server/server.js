@@ -21,17 +21,13 @@ app.use(
 )
 
 const path = require("path")
-// if (process.env.NODE_ENV === "production") {
-// 	app.get(express.static("client/build"));
-// 	app.get("*",function(req, res) {
-// 		res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// 	  });
-//   }
-  const root = require('path').join(__dirname, 'client', 'build')
-app.use(express.static(root));
-app.get("*", (req, res) => {
-    res.sendFile('index.html', { root });
-})
+if (process.env.NODE_ENV === "production") {
+	app.get(express.static("client/build"));
+	app.get("*",function(req, res) {
+		res.sendFile(path.join(__dirname, "../client/build/index.html"));
+	  });
+  }
+  
 
 app.use(express.json())
 
