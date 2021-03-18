@@ -36,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const handleConfirmJob = (event) => {
-//   event.preventDefault()
-//   //change pending value to true
+const handleAcceptJob = (event) => {
+  // event.preventDefault()
+  //change pending value to true
   
  
-// }
+}
 
 
 const handleCompletedJob =(event)=> {
@@ -74,8 +74,13 @@ export default function SimpleModal({job, open, methods}) {
                 <Typography variant="body2" component="p">
                     {job.description}
                 </Typography>
-                {/* <button onClick={handleConfirmJob}> Confirm Job </button> */}
-                <button onClick={handleCompletedJob}> Completed This Job </button>
+                
+          {job.pending === false ?
+          <button onClick={() => handleAcceptJob(job._id)}>Accept Job</button>
+          :
+          <button onClick={() => handleCompletedJob(job._id)}>Completed This Job</button>
+          }
+                
             </CardContent>
         </Card>
     </div>

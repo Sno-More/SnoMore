@@ -40,6 +40,7 @@ const Profile = () => {
         <Header />
        
       
+      
 
         {jsx}
         {/* <Weather/> */}
