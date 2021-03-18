@@ -36,6 +36,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const handleConfirmJob = (event) => {
+//   event.preventDefault()
+//   //change pending value to true
+  
+ 
+// }
+
+
+const handleCompletedJob =(event)=> {
+  //pending value will still be true 
+  //change completed value to true
+  //relocate job to the completed tab
+  //send text notification to both parties that job has been completed
+}
+
 export default function SimpleModal({job, open, methods}) {
   const classes = useStyles();
 
@@ -46,18 +61,21 @@ export default function SimpleModal({job, open, methods}) {
     <div style={modalStyle} className={classes.paper}>
         <Card variant="outlined">
             <CardContent>
-                <Typography color="textSecondary" gutterBottom>
+                <Typography   variant="h3" gutterBottom>
                     {job.title}
                 </Typography>
+                <Typography variant="h5">
+                    Pay: ${job.pay}
+                </Typography>
                 <Typography variant="h5" component="h2">
-                   {job.location}
+                   Address:{job.location}
                 </Typography>
-                <Typography color="textSecondary">
-                    {job.pay}
-                </Typography>
+
                 <Typography variant="body2" component="p">
                     {job.description}
                 </Typography>
+                {/* <button onClick={handleConfirmJob}> Confirm Job </button> */}
+                <button onClick={handleCompletedJob}> Completed This Job </button>
             </CardContent>
         </Card>
     </div>
@@ -76,3 +94,4 @@ export default function SimpleModal({job, open, methods}) {
     </div>
   );
 }
+
