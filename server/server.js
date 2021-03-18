@@ -20,7 +20,7 @@ app.use(
 	})
 )
 
-const path ;
+const path = require("path")
 if (process.env.NODE_ENV === "production") {
 	app.get(express.static("client/build"));
 	app.get("*",function(req, res) {
