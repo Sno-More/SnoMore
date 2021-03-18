@@ -45,111 +45,112 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0, 2),
   },
   link: {
-    position: 'relative',
-    left: '33%',
-    right: '33%'
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto'
   }
 }));
 
-export default function LogIn({handleChangeView}) {
+export default function LogIn({ handleChangeView }) {
 
   const [auth, setAuth] = useState({})
-  const [checkUser, setcheckUser] = useState({loggedIn: false})
+  const [checkUser, setcheckUser] = useState({ loggedIn: false })
 
 
   const handleClick = (e) => {
     e.preventDefault()
     console.log("click")
     console.log(auth)
-    
+
     API.checkUser({
-        username: auth.email,
-        password: auth.password
+      username: auth.email,
+      password: auth.password
     })
-    .then(response => {
+      .then(response => {
         console.log('login response: ')
         console.log(response)
         if (response.status === 200) {
-          setcheckUser({loggedIn: true})
+          setcheckUser({ loggedIn: true })
           window.location.href = window.location.href + "profile"
         }
-    }).catch(error => {
+      }).catch(error => {
         console.log('login error: ')
         console.log(error);
-        
-    })
+
+      })
   }
 
   const handleInput = (event) => {
     const { name, value } = event.target;
-    setAuth({...auth, [name]: value})
-}
+    setAuth({ ...auth, [name]: value })
+  }
   const classes = useStyles();
 
   return (
-    <div className={classes.signIn}>  
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-     
-        </Avatar>
-        <Typography component="h1" variant="h2">
-          Sign in
+    <div className={classes.signIn}>
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+
+          </Avatar>
+          <Typography component="h1" variant="h2">
+            Sign in
         </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name= "email"
-            value={auth.email}
-            onChange={handleInput}
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-          
-            value={auth.password}
-            onChange={handleInput}
-            autoComplete="current-password"
-          />
-          
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-            className={classes.submit}
-          >
-            Sign In
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              value={auth.email}
+              onChange={handleInput}
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+
+              value={auth.password}
+              onChange={handleInput}
+              autoComplete="current-password"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+              className={classes.submit}
+            >
+              Sign In
           </Button>
-          <Grid container>
+            <Grid container>
 
-            <Grid item>
-              <button className={classes.link} onClick={handleChangeView}>
-                Don't have an account? <em>Sign up</em>
-              </button>
+              <Grid item>
+                <button className={classes.link} onClick={handleChangeView}>
+                  Don't have an account? <em>Sign up</em>
+                </button>
 
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-       
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+
+        </Box>
+      </Container>
     </div>
   );
 }
