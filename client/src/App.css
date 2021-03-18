@@ -9,8 +9,6 @@
   width: 100%;
   border-bottom: 4px solid black;
   opacity: 0.9;
-  
-
 }
 
 html {
@@ -18,20 +16,14 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100%;
+  height: 100vh;
+  width: 100%;
+  z-index: -10;
+  background-attachment: fixed;
 }
 
 .floatRight{
   justify-content: right;
 }
 
-.signupForm {
-  background-color: rgba(27, 26, 26, .3) !important;
-  width: 100% !important;
-  /* color: white !important; */
-}
-
-.signUpForm{
-  background-color: rgba(255,255,255, 0.5) !important;
-}
 
