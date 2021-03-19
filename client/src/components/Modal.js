@@ -37,69 +37,84 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleModal({ job, open, methods, jobListings, setJobListings }) {
-  const [posterPhone, setPosterPhone] = useState('')
-  const [shovelerPhone, setShovelerPhone] = useState('')
-  const [sms, setSms] = useState(
-    {
-        messageTo: '',
-        messageBody: '',
-        submitting: false,
-        error: false
-    })
+  // const [posterPhone, setPosterPhone] = useState('')
+  // const [shovelerPhone, setShovelerPhone] = useState('')
+  // const [sms, setSms] = useState(
+  //   {
+  //       messageTo: '',
+  //       messageBody: '',
+  //       submitting: false,
+  //       error: false
+  //   })
+  // console.log('job', job)
+  let posterPhone = job.poster?.phone
+  let posterSMS = {
+    messageTo: posterPhone,
+    messageBody: 'your job has been accepted!',
+    submitting: false,
+    error: false
+  }
+  let shovelerSMS = {
+    messageTo: '',
+    messageBody: "you've accepted the job",
+    submitting: false,
+    error: false
+  }
+
   //shoveler accept job button
-  async function handleAcceptJob (id) {
+  function handleAcceptJob(id) {
     //     console.log('handleacceptjob')
     // console.log('phone', job.poster.phone)
-    setPosterPhone(job.poster.phone)
-    await axios.get('/user/info')
-    .then(
-      response => {
-        setShovelerPhone(response.data[0].phone)
-      }
-    )
-      // console.log(posterPhone)
-    // adds shoveler id to job and job to shoveler job array
-    await axios.put(`/api/user/jobs/add/${id}`)
+    // setPosterPhone(job.poster.phone)
+    axios.get('/user/info')
       .then(
-      //   response => {
-      //     axios.get('/api/jobs/available')
-      //       .then(function (res) {
-      //         setJobListings(res.data)
-      //       })
-      //     console.log('response', response.data)
-      //   })
-      // .catch(e => {
-      //   console.log(e)
-      // }
-      )
-      await setSms({ 
-        messageTo: {posterPhone},
-        messageBody: `Your job has been accepted`,
-        submitting: true });
-      await fetch('/sms/messages', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({sms})
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                setSms({
-                    error: false,
-                    submitting: false,
-                    messageTo: '',
-                    messageBody: ''
-
-                });
-            } else {
-                setSms({
-                    error: true,
-                    submitting: false
-                });
+        response => {
+          let shovelerPhone = response.data[0].phone
+          shovelerSMS = {
+            messageTo: shovelerPhone,
+            messageBody: "you've accepted the job",
+            submitting: false,
+            error: false
+          }
+          axios.post('/sms/messages', posterSMS)
+            .then(data => {
+              if (data.success) {
+                shovelerSMS = {
+                  error: false,
+                  submitting: false,
+                  messageTo: '',
+                  messageBody: ''
+                };
+              } else {
+                shovelerSMS.error = true
+                shovelerSMS.submitting = false
+              };
             }
-        });
+            );
+
+
+          // console.log(posterPhone)
+          // adds shoveler id to job and job to shoveler job array
+          axios.put(`/api/user/jobs/add/${id}`)
+          // .then(
+          //   response => {
+          //     axios.get('/api/jobs/available')
+          //       .then(function (res) {
+          //         setJobListings(res.data)
+          //       })
+          //     console.log('response', response.data)
+          //   })
+          // .catch(e => {
+          //   console.log(e)
+          // }
+          // )
+          // sms = {
+          //   messageTo: { posterPhone },
+          //   messageBody: `Your job has been accepted`,
+          //   submitting: true
+          // }
+
+        })
   }
 
 

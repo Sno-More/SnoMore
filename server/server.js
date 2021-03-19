@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 		res.sendFile(path.join(__dirname, "../client/build/index.html"));
 	  });
   }
-  
+
 
 app.use(express.json())
 
@@ -40,6 +40,10 @@ app.use(
 		saveUninitialized: false //required
 	})
 )
+
+require('dotenv').config({
+	debug: process.env.DEBUG
+});
 
 // Passport
 app.use(passport.initialize())
