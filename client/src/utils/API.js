@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default {
+const API = {
   getUser: function() {
     return axios.get("/user/");
   },
@@ -12,3 +12,5 @@ export default {
     return axios.post("/user/login", userData);
   },
 };
+
+export default API;

@@ -15,7 +15,7 @@ import API from "../utils/API";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input/input';
 import CustomPhoneNumber from '../components/CustomPhoneInput';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ export default function SignUp({ handleChangeView }) {
     const [auth, setAuth] = useState({})
     const [role, setRole] = useState('');
     const [value, setValue] = useState('')
-    let history = useHistory()
+    // let history = useHistory()
     console.log('value', value)
 
     const handleClick = (e) => {

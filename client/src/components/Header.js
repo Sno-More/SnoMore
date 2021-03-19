@@ -1,29 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import "../css/header.css"
-import Weather from "./Weather"
 import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  // purple: {
-  //     color: theme.palette.getContrastText(deepPurple[500]),
-  //     backgroundColor: deepPurple[500],
-  // },
-}));
 
 export default function Header() {
 
@@ -96,7 +79,6 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const classes = useStyles();
   return (
     <div className="header">
       <h1 className="title">SNO MORE</h1>

@@ -6,9 +6,8 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express()
 const PORT = process.env.PORT || 3001
-require('dotenv').config({
-	debug: process.env.DEBUG
-});
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 // Route requires
 const user = require('./routes/user')
 const job = require('./routes/job')
