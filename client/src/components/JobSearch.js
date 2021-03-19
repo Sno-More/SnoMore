@@ -13,30 +13,50 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     h2: {
         textAlign: 'center',
         padding: '2rem'
     },
     container: {
-        background: 'white',
-        height: '60vmin',
+        background: theme.palette.transparentWhite.main,
+        height: '60vh',
+        maxHeight: '100vh',
+        minHeight: '60vh',
         width: '85%',
         padding: '0',
         margin: '4rem auto 2rem auto',
+        border: 'black 5px solid',
+        [theme.breakpoints.down('md')]: {
+            height: 'min-content'
+        }
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+    jobs: {
+        overflowY: 'scroll',
+        '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
+        scrollbarWidth: 'none',  /* Firefox */
+        '&::-webkit-scrollbar': { /* Chrome, Safari */
+            display: 'none'
+        }
     },
-    title: {
-        fontSize: 30,
+    searchForm: {
+        display: 'flex',
+        alignItems: 'top',
+        justifyContent: 'center',
+        padding: theme.spacing(0, 1)
     },
-    pos: {
-        marginBottom: 12,
+    input: {
+        margin: theme.spacing(0, 1, 0, 0),
     },
-});
+    optionDisplay: {
+        whiteSpace: 'nowrap'
+    },
+    search: {
+        margin: theme.spacing(0) + 'auto',
+        width: '100%',
+        color: theme.palette.primary.main
+    }
+}));
 
 const options = [
     'Choose Range In',
@@ -50,7 +70,7 @@ const options = [
 export default function JobSearch({ handleSeeMore }) {
     const classes = useStyles();
     const [zipCode, setZipCode] = useState("")
-    const [range, setRange] = useState("Range In");
+    const [range, setRange] = useState(5);
     const [anchorEl, setAnchorEl] = useState(null);
     const [jobListings, setJobListings] = useState([])
 
@@ -104,13 +124,12 @@ export default function JobSearch({ handleSeeMore }) {
     return (
         <Container className={classes.container}>
             <Typography className={classes.h2} variant='h2'>FIND A JOB</Typography>
-            <Typography style={{ display: 'flex' }}>
-                <TextField style={{ width: '50%' }}
-                    // autoComplete="fname"
+            <form className={classes.searchForm}>
+                <TextField
+                    className={classes.input}
                     name="zipCode"
                     value={zipCode}
                     onChange={handleZipChange}
-                    variant="outlined"
                     required
                     fullWidth
                     id="zipCode"
@@ -126,7 +145,7 @@ export default function JobSearch({ handleSeeMore }) {
                         aria-label="Range"
                         onClick={handleClickListItem}
                     >
-                        <ListItemText primary={`${range} Miles`} />
+                        <ListItemText className={classes.optionDisplay} primary={`${range} Miles`} />
                     </ListItem>
                 </List>
                 <Menu
@@ -147,11 +166,11 @@ export default function JobSearch({ handleSeeMore }) {
                         </MenuItem>
                     ))}
                 </Menu>
-                <CardActions>
-                    <Button size="small" style={{ border: 'solid black', padding: '5px 40px' }} onClick={handleZipSubmit}>Submit</Button>
-                </CardActions>
-            </Typography>
-            {jobCards}
+            </form>
+            <Button className={classes.search} onClick={handleZipSubmit}>Submit</Button>
+            <div className={classes.jobs}>
+                {jobCards}
+            </div>
         </Container>
     );
 }

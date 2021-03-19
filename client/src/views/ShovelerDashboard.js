@@ -30,7 +30,7 @@ export default function ShovelerDashboard({myJobs}) {
     };
 
     return (
-        <Grid container>
+        <Grid style={{minHeight: '85vh'}} alignItems='center' container>
             <Grid item xs={12} md={6}>
                 <JobSearch handleSeeMore={handleSeeMore}/>
             </Grid>
