@@ -1,12 +1,9 @@
 const express = require('express')
 const router = express.Router()
-// const { SMS } = require('../database/models')
-const mongoose = require('mongoose');
 
 const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN,
-  // process.env.TWILIO_PHONE_NUMBER
+  process.env.TWILIO_AUTH_TOKEN
 );
 
 router.post('/messages', (req, res) => {

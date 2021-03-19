@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal({ job, open, methods, jobListings, setJobListings }) {
+export default function SimpleModal({ job, open, methods}) {
   // const [posterPhone, setPosterPhone] = useState('')
   // const [shovelerPhone, setShovelerPhone] = useState('')
   // const [sms, setSms] = useState(
@@ -47,7 +47,15 @@ export default function SimpleModal({ job, open, methods, jobListings, setJobLis
   //       error: false
   //   })
   // console.log('job', job)
-  let posterPhone = job.poster?.phone
+  let currentJob = job;
+  if (!job.poster) {
+    currentJob = {
+      poster: {
+        phone: '+16109557597'
+      }
+    }
+  }
+  let posterPhone = currentJob.poster.phone
   let posterSMS = {
     messageTo: posterPhone,
     messageBody: 'your job has been accepted!',
@@ -69,6 +77,7 @@ export default function SimpleModal({ job, open, methods, jobListings, setJobLis
     axios.get('/user/info')
       .then(
         response => {
+          console.log(response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
@@ -76,9 +85,10 @@ export default function SimpleModal({ job, open, methods, jobListings, setJobLis
             submitting: false,
             error: false
           }
-          axios.post('/sms/messages', posterSMS)
+          axios.post('/sms/messages', shovelerSMS)
             .then(data => {
-              if (data.success) {
+              if (data.data.success) {
+                console.log(data);
                 shovelerSMS = {
                   error: false,
                   submitting: false,
@@ -86,34 +96,36 @@ export default function SimpleModal({ job, open, methods, jobListings, setJobLis
                   messageBody: ''
                 };
               } else {
+                console.log('no');
                 shovelerSMS.error = true
                 shovelerSMS.submitting = false
               };
             }
-            );
-
-
-          // console.log(posterPhone)
-          // adds shoveler id to job and job to shoveler job array
+          );
+          axios.post('/sms/messages', posterSMS)
+            .then(data => {
+              if (data.data.success) {
+                console.log('yes');
+                posterSMS = {
+                  error: false,
+                  submitting: false,
+                  messageTo: '',
+                  messageBody: ''
+                };
+              } else {
+                console.log('no');
+                posterSMS.error = true
+                posterSMS.submitting = false
+              };
+            }
+          );
           axios.put(`/api/user/jobs/add/${id}`)
-          // .then(
-          //   response => {
-          //     axios.get('/api/jobs/available')
-          //       .then(function (res) {
-          //         setJobListings(res.data)
-          //       })
-          //     console.log('response', response.data)
-          //   })
-          // .catch(e => {
-          //   console.log(e)
-          // }
-          // )
-          // sms = {
-          //   messageTo: { posterPhone },
-          //   messageBody: `Your job has been accepted`,
-          //   submitting: true
-          // }
-
+          .then( response => {
+            console.log('response', response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          });
         })
   }
 
