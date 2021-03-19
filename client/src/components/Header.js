@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,7 @@ export default function Header() {
 
   const [user, setUser] = useState("")
   let name = user.charAt(0).toUpperCase()
+  let history = useHistory()
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,9 +46,9 @@ export default function Header() {
       .then(response => {
 
         if (response.status === 200) {
-          console.log(response)
-          window.location.href = "http://localhost:3000/"
-        }
+            console.log(response)
+            history.push('/')
+          }
       }).catch(error => {
         console.log('login error: ')
         console.log(error);
