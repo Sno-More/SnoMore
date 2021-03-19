@@ -32,7 +32,7 @@ export default function ShovelerDashboard({myJobs}) {
     return (
         <Grid container>
             <Grid item xs={12} md={6}>
-                <JobSearch />
+                <JobSearch handleSeeMore={handleSeeMore}/>
             </Grid>
             <Grid item xs={12} md={6}>
                 <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />

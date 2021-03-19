@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react'
+import JobSearch from './JobSearch'
+import Card from './Card'
+import Modal from './Modal'
+import shovelerFeed from './ShovelerFeed'
+import ShovelerDashboard from '../views/ShovelerDashboard'
+import Profile from '../pages/Profile'
 
 export default function SMSForm(props) {
     const [sms, setSms] = useState(
@@ -41,8 +47,13 @@ export default function SMSForm(props) {
 
 
     return (
+        <>
+        {/* <JobSearch/> */}
+        {/* <ShovelerDashboard/> */}
+        <Profile />
         <button type="submit" onClick={handleSubmit}>
             Send message
         </button>
+        </>
     )
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
@@ -14,28 +13,47 @@ import Container from '@material-ui/core/Container';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import API from "../utils/API";
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input/input'
-
+import PhoneInput from 'react-phone-number-input/input';
+import CustomPhoneNumber from '../components/CustomPhoneInput';
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
+    signUp: {
+        backgroundColor: theme.palette.transparentWhite.main,
+        border: '5px solid black',
+        width: '100vmin',
+        height: 'min-content',
+        position: 'absolute',
+        top: '0',
+        bottom: '0',
+        left: '0',
+        right: '0',
+        margin: 'auto'
+    },
     paper: {
-        marginTop: theme.spacing(8),
+        marginBottom: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(2, 0, 2),
     },
+    link: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        margin: 'auto'
+    }
 }));
 
 
@@ -46,6 +64,7 @@ export default function SignUp({ handleChangeView }) {
     const [auth, setAuth] = useState({})
     const [role, setRole] = useState('');
     const [value, setValue] = useState('')
+    let history = useHistory()
     console.log('value', value)
 
     const handleClick = (e) => {
@@ -60,8 +79,13 @@ export default function SignUp({ handleChangeView }) {
             phone: value,
             role: role,
         })
-            .then()
-            .catch(err => console.log(err));
+        .then(res => {
+            if (res.status === 200) {
+                console.log("status")
+                handleChangeView(e)
+            }
+        })
+        .catch(err => console.log(err));
     }
 
     const handleInput = (event) => {
@@ -77,16 +101,15 @@ export default function SignUp({ handleChangeView }) {
     const classes = useStyles();
 
     return (
-        <div style={{ margin: "200px 300px", backgroundColor: "#ffffff", border: "1px solid black" }}>
+        <div className={classes.signUp}>
 
 
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
 
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h2">
                         Sign up
                     </Typography>
                     <form className={classes.form} noValidate>
@@ -132,22 +155,16 @@ export default function SignUp({ handleChangeView }) {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                {/* <TextField> */}
-                                    <PhoneInput style={{height: '50px', fontFamily: 'Roboto', font: 'light gray', border: 'thin solid lightgray', borderRadius: '4px', fontSize: 'larger', font: 'lightgray'}}
-                                        placeholder="Phone Number *"
-                                        country="US"
-                                        value={value}
-                                        maxlength="14"
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        id="phone"
-                                        label="Phone Number"
-                                        name="phone"
-                                        autoComplete="phone number"
-                                        onChange={setValue}
-                                    />
-                                {/* </TextField> */}
+                                <PhoneInput 
+                                    country="US"
+                                    value={value}
+                                    maxlength="14"
+                                    required
+                                    fullWidth
+                                    autoComplete="phone number"
+                                    onChange={setValue}
+                                    inputComponent={CustomPhoneNumber}
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -185,12 +202,7 @@ export default function SignUp({ handleChangeView }) {
                                         onClick={() => setRole('Poster')}
                                     />
                                 </RadioGroup>
-
                             </FormControl>
-
-
-
-
                         </Grid>
                         <Button
                             type="submit"
@@ -205,7 +217,7 @@ export default function SignUp({ handleChangeView }) {
                         <Grid container justify="flex-end">
                             <Grid item>
 
-                                <button onClick={handleChangeView}>
+                                <button className={classes.link} onClick={handleChangeView}>
                                     Already have an account? <em>Log in</em>
                                 </button>
 

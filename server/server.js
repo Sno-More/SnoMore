@@ -9,6 +9,9 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
 const app = express()
 const PORT = process.env.PORT || 3001
+require('dotenv').config({
+	debug: process.env.DEBUG
+});
 // Route requires
 const user = require('./routes/user')
 const job = require('./routes/job')
@@ -22,6 +25,7 @@ app.use(
 		extended: false
 	})
 )
+
 
 
 if (process.env.NODE_ENV === "production") {
@@ -39,6 +43,7 @@ app.get("*", (req, res) => {
 
   
 
+
 app.use(express.json())
 
 // Sessions
@@ -50,6 +55,8 @@ app.use(
 		saveUninitialized: false //required
 	})
 )
+
+
 
 // Passport
 app.use(passport.initialize())

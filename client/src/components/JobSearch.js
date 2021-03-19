@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import Card from './Card';
 import Container from '@material-ui/core/Container';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
@@ -46,7 +47,7 @@ const options = [
     '50'
 ]
 
-export default function JobSearch() {
+export default function JobSearch({ handleSeeMore }) {
     const classes = useStyles();
     const [zipCode, setZipCode] = useState("")
     const [range, setRange] = useState("Range In");
@@ -97,56 +98,61 @@ export default function JobSearch() {
         setAnchorEl(null);
     };
 
+    const jobCards = jobListings.map(job => {
+        return <Card key={job._id} job={job} handleSeeMore={handleSeeMore} />
+    })
+
     return (
         <Container className={classes.container}>
             <Typography className={classes.h2} variant='h2'>FIND A JOB</Typography>
-                <Typography style={{ display: 'flex' }}>
-                    <TextField style={{ width: '70%' }}
-                        // autoComplete="fname"
-                        name="zipCode"
-                        value={zipCode}
-                        onChange={handleZipChange}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="zipCode"
-                        label="Zip Code"
-                        autoFocus
-                        placeholder="Enter a Zip Code"
-                    />
-                    <List component="nav" aria-label="Device settings">
-                        <ListItem
-                            button
-                            aria-haspopup="true"
-                            aria-controls="lock-menu"
-                            aria-label="Range"
-                            onClick={handleClickListItem}
-                        >
-                            <ListItemText primary={`${range} Miles`} />
-                        </ListItem>
-                    </List>
-                    <Menu
-                        id="lock-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
+            <Typography style={{ display: 'flex' }}>
+                <TextField style={{ width: '50%' }}
+                    // autoComplete="fname"
+                    name="zipCode"
+                    value={zipCode}
+                    onChange={handleZipChange}
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="zipCode"
+                    label="Zip Code"
+                    autoFocus
+                    placeholder="Enter a Zip Code"
+                />
+                <List component="nav" aria-label="Device settings">
+                    <ListItem
+                        button
+                        aria-haspopup="true"
+                        aria-controls="lock-menu"
+                        aria-label="Range"
+                        onClick={handleClickListItem}
                     >
-                        {options.map((option, index) => (
-                            <MenuItem
-                                key={option}
-                                disabled={index === 0}
-                                selected={index === selectedIndex}
-                                onClick={(event) => handleMenuItemClick(event, index)}
-                            >
-                                {option} Miles
-                            </MenuItem>
-                        ))}
-                    </Menu>
-                </Typography>
-            <CardActions>
-                <Button size="small" style={{ border: 'solid black', position: 'absolute', left: '18%', marginTop: '50px', padding: '5px 40px' }} onClick={handleZipSubmit}>Submit</Button>
-            </CardActions>
+                        <ListItemText primary={`${range} Miles`} />
+                    </ListItem>
+                </List>
+                <Menu
+                    id="lock-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    {options.map((option, index) => (
+                        <MenuItem
+                            key={option}
+                            disabled={index === 0}
+                            selected={index === selectedIndex}
+                            onClick={(event) => handleMenuItemClick(event, index)}
+                        >
+                            {option} Miles
+                        </MenuItem>
+                    ))}
+                </Menu>
+                <CardActions>
+                    <Button size="small" style={{ border: 'solid black', padding: '5px 40px' }} onClick={handleZipSubmit}>Submit</Button>
+                </CardActions>
+            </Typography>
+            {jobCards}
         </Container>
     );
 }
