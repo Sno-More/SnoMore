@@ -3,8 +3,7 @@ import UserProfile from '../views/UserProfile';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Header from "../components/Header"
-import JobPostForm from '../components/JobPostForm';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 // import Weather from '../components/Weather';
 
 
@@ -30,7 +29,7 @@ const Profile = () => {
             }
         };
         getRole();
-    }, []);
+    }, [history]);
     useEffect(() => {
         const fetchJobs = async () => {
             const jobs = await axios.get('/api/user/jobs');

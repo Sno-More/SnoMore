@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from './Card';
 import Container from '@material-ui/core/Container';
@@ -51,7 +51,6 @@ export default function JobSearch({ handleSeeMore }) {
     const classes = useStyles();
     const [zipCode, setZipCode] = useState("")
     const [range, setRange] = useState("Range In");
-    const [selectedIndex, setSelectedIndex] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
     const [jobListings, setJobListings] = useState([])
 
@@ -141,7 +140,7 @@ export default function JobSearch({ handleSeeMore }) {
                         <MenuItem
                             key={option}
                             disabled={index === 0}
-                            selected={index === selectedIndex}
+                            selected={index === 1}
                             onClick={(event) => handleMenuItemClick(event, index)}
                         >
                             {option} Miles

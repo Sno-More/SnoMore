@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn({ handleChangeView }) {
 
   const [auth, setAuth] = useState({})
-  const [checkUser, setcheckUser] = useState({ loggedIn: false })
+  // const [checkUser, setcheckUser] = useState({ loggedIn: false })
   let history = useHistory()
 
 

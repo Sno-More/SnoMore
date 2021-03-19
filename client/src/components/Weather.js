@@ -57,7 +57,7 @@ export default function Weather() {
                                     {moment().add(index, 'd').format("MM/DD/YYYY")}
                                 </Typography>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    <img src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} />
+                                    <img src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt />
                                 </Typography>
                                 <Typography className={classes.title} variant="h5" component="h2">
                                     <p>High temp: {daily.temp.max}°</p>
