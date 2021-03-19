@@ -1,10 +1,13 @@
 {
   "name": "snomore",
+  "homepage": "https://snow-more.herokuapp.com/SNOMORE/client/build",
   "version": "0.1.0",
   "private": true,
   "description": "",
-  "main": "./server/server.js",
-
+  "engines": {
+    "node":"14.x"
+  },
+  "main": "server/server.js",
 
   "dependencies": {
     "axios": "^0.17.1",
@@ -24,7 +27,6 @@
     "twilio": "^3.58.0",
     "web-vitals": "^1.1.0"
   },
-
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "cd server && node server.js",
@@ -34,7 +36,6 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  
   "devDependencies": {
     "concurrently": "^3.6.1",
     "nodemon": "^1.17.5"
