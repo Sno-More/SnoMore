@@ -1,4 +1,17 @@
-import {createMuiTheme} from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+const overrides = {
+    MuiTab: {
+        // general overrides for your material tab component here
+        root: {
+            backgroundColor: 'rgba(0,0,0,.5)',
+            '&$selected': {
+                backgroundColor: 'rgba(255, 255, 255, .5)',
+            },
+        },
+    },
+};
+
 const options = {
     palette: {
         primary: {
@@ -58,15 +71,24 @@ const options = {
             fontFamily: 'Poppins, sans-serif',
             letterSpacing: '.09rem',
         },
+        h5: {
+            fontSize: '1.2rem',
+            fontWeight: 700,
+            fontFamily: 'Poppins, sans-serif',
+            letterSpacing: '0rem',
+        },
         body1: {
             fontSize: '1rem',
             fontWeight: 400,
             fontFamily: 'Poppins, sans-serif'
         },
         button: {
-            fontSize: '1.25rem',
+            fontSize: '1.2rem',
             fontWeight: 500,
-            fontFamily: 'Poppins, sans-serif'
+            fontFamily: 'Poppins, sans-serif',
+            textTransform: 'capitalize',
+            textDecoration: 'underline',
+            whiteSpace: 'nowrap'
         }
     },
     spacing: (...nums) => {
@@ -75,7 +97,8 @@ const options = {
             returnString += `${num}rem `;
         });
         return returnString;
-    }
+    },
+    overrides
 }
 
 const theme = createMuiTheme(options)
