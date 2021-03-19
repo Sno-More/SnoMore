@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "",
-  "main": "./server/server.js",
-  "homepage": "https://snow-more.herokuapp.com/",
+
 
 
   "dependencies": {
