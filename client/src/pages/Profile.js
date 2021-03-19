@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Header from "../components/Header"
 import JobPostForm from '../components/JobPostForm';
+import { useHistory } from "react-router-dom";
 // import Weather from '../components/Weather';
 
 
@@ -11,17 +12,22 @@ import JobPostForm from '../components/JobPostForm';
 const Profile = () => {
     const [myJobs, setMyJobs] = useState([])
     const [view, setView] = useState('')
+    let history = useHistory()
     useEffect(() => {
         const getRole = async () => {
-            const user = await axios.get('/user/info');
-            console.log(user.data);
-            if (!user.data.length) return;
-
-            if (user.data[0].role === 'Shoveler') {
-                setView('Shoveler')
-            } else {
-                setView('Poster')
-            };
+            try {
+                const user = await axios.get('/user/info');
+    
+                if (user.data[0].role === 'Shoveler') {
+                    setView('Shoveler')
+                } else {
+                    setView('Poster')
+                };
+    
+            } catch (error) {
+                console.log(error)
+                history.push('/')
+            }
         };
         getRole();
     }, []);

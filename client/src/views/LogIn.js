@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import API from "../utils/API";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -56,6 +57,7 @@ export default function LogIn({ handleChangeView }) {
 
   const [auth, setAuth] = useState({})
   const [checkUser, setcheckUser] = useState({ loggedIn: false })
+  let history = useHistory()
 
 
   const handleClick = (e) => {
@@ -67,18 +69,18 @@ export default function LogIn({ handleChangeView }) {
       username: auth.email,
       password: auth.password
     })
-      .then(response => {
-        console.log('login response: ')
-        console.log(response)
-        if (response.status === 200) {
-          setcheckUser({ loggedIn: true })
-          window.location.href = window.location.href + "profile"
-        }
-      }).catch(error => {
-        console.log('login error: ')
-        console.log(error);
-
-      })
+    .then(response => {
+      console.log('login response: ')
+      console.log(response)
+      if (response.status === 200) {
+        history.push('/profile')
+      }
+ 
+  }).catch(error => {
+      console.log(error);
+      alert("Incorrect email or password")
+      
+  })
   }
 
   const handleInput = (event) => {

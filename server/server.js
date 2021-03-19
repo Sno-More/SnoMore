@@ -23,14 +23,14 @@ app.use(
 	})
 )
 
-const path = require("path")
 if (process.env.NODE_ENV === "production") {
-	app.get(express.static("client/build"));
-	app.get("*",function(req, res) {
-		res.sendFile(path.join(__dirname, "../client/build/index.html"));
-	  });
-  }
+	app.use(express.static("client/build"));
 
+	const path = require('path');
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname, "../client/build/index.html"));
+	});
+  }
 
 app.use(express.json())
 
