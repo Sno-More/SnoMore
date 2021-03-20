@@ -1,17 +1,17 @@
 const express = require('express')
 const morgan = require('morgan')
 const session = require('express-session')
-const dbConnection = require('./database')
+const dbConnection = require('./server/database')
 const MongoStore = require('connect-mongo')(session)
-const passport = require('./passport');
+const passport = require('./server/passport');
 const app = express()
 const PORT = process.env.PORT || 3001
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '.env') })
+require('dotenv').config({ path: path.resolve(__dirname, './server/.env') })
 // Route requires
-const user = require('./routes/user')
-const job = require('./routes/job')
-const send_sms = require('./routes/send_sms')
+const user = require('./server/routes/user')
+const job = require('./server/routes/job')
+const send_sms = require('./server/routes/send_sms')
 
 
 // MIDDLEWARE
@@ -21,26 +21,20 @@ app.use(
 		extended: false
 	})
 )
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 
 if (process.env.NODE_ENV === "production") {
-	// app.get(express.static("client/build"));
-	// app.get("*",function(req, res) {
-	// 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
-	//   });
-	  const root = require('path').join(__dirname, 'client', 'build')
-app.use(express.static(root));
-app.get("*", (req, res) => {
-    res.sendFile('index.html', { root });
-})
+	app.use(express.static("client/build"));
   }
 
 
   
 
 
-app.use(express.json())
+
 
 // Sessions
 app.use(

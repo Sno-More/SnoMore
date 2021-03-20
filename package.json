@@ -1,6 +1,5 @@
 {
   "name": "snomore",
-  "homepage": "https://snow-more.herokuapp.com/SNOMORE/client/build",
   "version": "0.1.0",
   "private": true,
   "description": "",
@@ -31,8 +30,8 @@
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "cd server && node server.js",
-    "start:dev": "concurrently \"cd server && nodemon server.js --ignore 'client/*'\" \"npm run client\"",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon server.js --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
