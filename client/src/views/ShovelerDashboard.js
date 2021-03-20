@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import SimpleModal from '../components/Modal';
 import axios from 'axios'
 
-export default function ShovelerDashboard({myJobs}) {
+export default function ShovelerDashboard({myJobs, setMyJobs}) {
     const [currentJob, setCurrentJob] = useState({});
     const [open, setOpen] = useState(false);
 
@@ -39,7 +39,7 @@ export default function ShovelerDashboard({myJobs}) {
             </Grid>
             <SimpleModal job={currentJob} 
             open={open} 
-            methods={{handleClose, handleOpen}}
+            methods={{handleClose, handleOpen, setMyJobs}}
             />
         </Grid>
     )

@@ -123,6 +123,7 @@ export default function SimpleModal({ job, open, methods }) {
 
   //shoveler completes job button
   const handleCompletedJob = (id) => {
+    methods.handleClose()
     axios.get('/user/info')
       .then(
         response => {
@@ -177,9 +178,13 @@ export default function SimpleModal({ job, open, methods }) {
           axios.put(`/api/job/${id}`, {
             complete: true
           })
+
             .then(response => {
               console.log('response', response.data)
-              methods.handleClose()
+              axios.put(`/api/job/${id}`).then((data) => {
+                methods.setMyJobs(data.data.jobs)
+              })
+             
             })
             .catch(e => {
               console.log(e)
