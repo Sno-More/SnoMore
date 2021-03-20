@@ -43,10 +43,6 @@ const Profile = () => {
     return (
         <>
         <Header />
-       
-      
-      
-
         {jsx}
         {/* <Weather/> */}
         </>
