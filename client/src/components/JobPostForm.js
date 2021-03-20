@@ -5,8 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { useState } from 'react';
-import DrivewayPostForm from './DrivewayPostForm';
-import CarPostForm from './CarPostForm'
+import JobPost from "./JobPost"
 
 const useStyles = makeStyles({
     h2: {
@@ -40,8 +39,7 @@ const classes = useStyles();
 
 
 
-let form = (tabValue === 1) ?<CarPostForm />
-: <DrivewayPostForm />
+let type = (tabValue === 1) ? "car" : "driveway"
 
 
 
@@ -61,7 +59,7 @@ return (
                 <Tab label="Driveway" />
                 <Tab label="Car" />
             </Tabs>
-            {form}
+            <JobPost type={type}  />
         </Paper>
       
     </Container>
