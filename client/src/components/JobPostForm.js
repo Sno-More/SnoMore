@@ -27,25 +27,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const JobPostForm = () => {
-const [tabValue, setTabValue] = useState(0);
-const handleChange = (event, newVal) => {
-    setTabValue(newVal);
-    console.log(tabValue)
-}
-const classes = useStyles();
+const JobPostForm = ({ setMyJobs }) => {
+    const [tabValue, setTabValue] = useState(0);
+    const handleChange = (event, newVal) => {
+        setTabValue(newVal);
+        console.log(tabValue)
+    }
+    const classes = useStyles();
 
 
 
 
-let type = (tabValue) ? "car" : "driveway"
+    let type = (tabValue) ? "car" : "driveway"
 
 
 
 
-return (
-    <Container className={classes.container}>
-        <Typography className={classes.h2} variant='h2'>POST A JOB</Typography>
+    return (
+        <Container className={classes.container}>
+            <Typography className={classes.h2} variant='h2'>POST A JOB</Typography>
             <Tabs
                 value={tabValue}
                 indicatorColor="primary"
@@ -57,10 +57,10 @@ return (
                 <Tab label="Driveway" />
                 <Tab label="Car" />
             </Tabs>
-            <JobPost type={type}  />
-      
-    </Container>
-)
+            <JobPost type={type} setMyJobs={setMyJobs} />
+
+        </Container>
+    )
 }
 
 export default JobPostForm
