@@ -15,7 +15,7 @@ import API from "../utils/API";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input/input';
 import CustomPhoneNumber from '../components/CustomPhoneInput';
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 
@@ -67,6 +67,7 @@ export default function SignUp({ handleChangeView }) {
     const [value, setValue] = useState('')
     // let history = useHistory()
     console.log('value', value)
+    let history = useHistory()
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -84,7 +85,7 @@ export default function SignUp({ handleChangeView }) {
             .then(res => {
                 if (res.status === 200) {
                     console.log("status")
-                    handleChangeView(e)
+                    history.push('/profile')
                 }
             })
             .catch(err => console.log(err));
