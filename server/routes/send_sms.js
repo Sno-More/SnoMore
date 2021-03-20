@@ -7,16 +7,15 @@ const client = require('twilio')(
 );
 
 router.post('/messages', (req, res) => {
-  console.log('req body', req.body.messageTo)
+  console.log('req body', req.body)
   res.header('Content-Type', 'application/json');
   client.messages
     .create({
       from: '+14427776991',
       to: req.body.messageTo,
-      body: 'this is it'
+      body: req.body.messageBody
     })
     .then(() => {
-      console.log('thennnnnnnnnnnn')
       res.send({ success: true });
     })
     .catch(err => {
