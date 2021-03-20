@@ -10,6 +10,11 @@ const overrides = {
             },
         },
     },
+    MuiInputLabel: {
+        root: {
+            color: '#666'
+        }
+    }
 };
 
 const options = {

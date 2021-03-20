@@ -121,8 +121,10 @@ export default function SignUp({ handleChangeView }) {
             )
     }
 
-    const handleInput = (event) => {
-
+    const handleInput = (event, limit = undefined) => {
+        if (limit) {
+            if (limit < event.target.value.length) return;
+        };
         const { name, value } = event.target;
         setAuth({ ...auth, [name]: value })
     }
@@ -187,7 +189,7 @@ export default function SignUp({ handleChangeView }) {
                                 <PhoneInput
                                     country="US"
                                     value={value}
-                                    maxlength="14"
+                                    maxLength="14"
                                     required
                                     fullWidth
                                     autoComplete="phone number"

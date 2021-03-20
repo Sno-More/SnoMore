@@ -47,12 +47,6 @@ const JobSchema = new Schema({
     description: {
         type: String,
         required: true,
-        validate: {
-            validator: function (str) {
-                return str.length >= 30
-           },
-           message: 'Job description must be at least 30 characters.'
-        }
     },
     date: {
         type: Date,
