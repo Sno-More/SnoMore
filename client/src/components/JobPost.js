@@ -103,12 +103,13 @@ export default function JobPost({ type }) {
         
         <Grid item xs={12} md={6}>
           <TextField
-            type="text"
+          style={{marginTop: '1rem'}}
+            type="date"
             fullWidth
             value={job.date}
             name="date"
             onChange={handleInput}
-            label='Date must be completed by' />
+            />
         </Grid>
         <Grid item xs={12}>
           <TextField
