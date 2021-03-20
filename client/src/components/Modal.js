@@ -60,6 +60,7 @@ export default function SimpleModal({ job, open, methods }) {
 
   //shoveler accept job button
   function handleAcceptJob(id) {
+    methods.handleClose();
     axios.get('/user/info')
       .then(
         response => {
@@ -114,6 +115,11 @@ export default function SimpleModal({ job, open, methods }) {
           axios.put(`/api/user/jobs/add/${id}`)
             .then(response => {
               console.log('response', response.data)
+              axios.get('/api/user/jobs').then((data) => {
+                console.log(data)
+                methods.setMyJobs(data.data.jobs);
+                methods.setJobListings([]);
+              });
             })
             .catch(e => {
               console.log(e)
@@ -123,6 +129,7 @@ export default function SimpleModal({ job, open, methods }) {
 
   //shoveler completes job button
   const handleCompletedJob = (id) => {
+    methods.handleClose()
     axios.get('/user/info')
       .then(
         response => {
@@ -179,7 +186,7 @@ export default function SimpleModal({ job, open, methods }) {
           })
             .then(response => {
               console.log('response', response.data)
-              methods.handleClose()
+              
             })
             .catch(e => {
               console.log(e)

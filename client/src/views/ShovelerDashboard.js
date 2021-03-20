@@ -5,9 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import SimpleModal from '../components/Modal';
 import axios from 'axios'
 
-export default function ShovelerDashboard({myJobs}) {
+export default function ShovelerDashboard({myJobs, setMyJobs}) {
     const [currentJob, setCurrentJob] = useState({});
     const [open, setOpen] = useState(false);
+    const [jobListings, setJobListings] = useState([])
 
     const handleSeeMore = (job_id) => {
         const fetchJob = async () => {
@@ -32,14 +33,18 @@ export default function ShovelerDashboard({myJobs}) {
     return (
         <Grid style={{minHeight: '85vh'}} alignItems='center' container>
             <Grid item xs={12} md={6}>
-                <JobSearch handleSeeMore={handleSeeMore}/>
+                <JobSearch jobListings={jobListings} 
+                setJobListings={setJobListings} 
+                handleSeeMore={handleSeeMore}
+                />
             </Grid>
             <Grid item xs={12} md={6}>
                 <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />
             </Grid>
             <SimpleModal job={currentJob} 
+            myJobs={myJobs}
             open={open} 
-            methods={{handleClose, handleOpen}}
+            methods={{handleClose, handleOpen, setMyJobs, setJobListings}}
             />
         </Grid>
     )

@@ -38,8 +38,8 @@ const Profile = () => {
         fetchJobs();
     }, []);
     const jsx = (view === '') ? (<div>Fetching profile...</div>)
-         : (view === 'Shoveler') ? (<ShovelerDashboard myJobs={myJobs}/>) 
-         : (<UserProfile myJobs={myJobs}/>)
+         : (view === 'Shoveler') ? (<ShovelerDashboard setMyJobs={setMyJobs} myJobs={myJobs}/>) 
+         : (<UserProfile setMyJobs={setMyJobs} myJobs={myJobs}/>)
     return (
         <>
         <Header />
