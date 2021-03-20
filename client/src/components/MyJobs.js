@@ -56,13 +56,11 @@ const MyJobs = ({ myJobs, handleSeeMore }) => {
 
     const defaultText = (tabValue) ? 'You don\'t have any upcoming jobs. Search for jobs in the "job search" section.'
         : 'You don\'t have any completed jobs. Complete the jobs listed under “incomplete”.'
-    console.log('my jobs', myJobs);
     let filteredJobs = myJobs.filter(job => job.complete === !tabValue).map(job => {
         return <Card key={job._id} job={job} handleSeeMore={handleSeeMore} />
     })
-    console.log(myJobs);
     if (filteredJobs.length === 0) {
-        filteredJobs = [<Typography className={classes.default} variant='subtitle2'>{defaultText}</Typography>]
+        filteredJobs = [<Typography key={'default'} className={classes.default} variant='subtitle2'>{defaultText}</Typography>]
     }
 
     return (
