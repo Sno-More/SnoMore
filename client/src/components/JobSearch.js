@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from './Card';
 import Container from '@material-ui/core/Container';
-import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -67,12 +66,11 @@ const options = [
     '50'
 ]
 
-export default function JobSearch({ handleSeeMore }) {
+export default function JobSearch({ handleSeeMore, jobListings, setJobListings }) {
     const classes = useStyles();
     const [zipCode, setZipCode] = useState("")
     const [range, setRange] = useState(5);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [jobListings, setJobListings] = useState([])
 
     const handleZipChange = event => {
         setZipCode(event.target.value)
@@ -102,6 +100,7 @@ export default function JobSearch({ handleSeeMore }) {
         } catch (err) {
             console.log(err)
         }
+        setZipCode("")
     }
 
     const handleClickListItem = (event) => {

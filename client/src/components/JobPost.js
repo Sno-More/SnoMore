@@ -4,11 +4,12 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography'
 
 
-export default function JobPost({ type }) {
+export default function JobPost({ type, setMyJobs }) {
 
-  const [job, setJob] = useState({ title: "", location: "", zipCode: "", pay: "", description: "", date: "", })
+  const [job, setJob] = useState({ title: "", location: "", zipCode: "", pay: "", description: "", date: "" })
   const [jobType, setJobType] = useState("")
 
 
@@ -35,14 +36,10 @@ export default function JobPost({ type }) {
 
   }
 
-
-
-
   const classes = useStyles();
 
   const handleJobSubmit = (event) => {
     event.preventDefault()
-    console.log('post object', job)
 
     // axios post to database
     axios.post('/api/jobs', {
@@ -55,7 +52,15 @@ export default function JobPost({ type }) {
       type: jobType
 
     })
-
+      .then(() => {
+        axios('/api/user/jobs')
+          .then((data) => {
+            setMyJobs(data.data.jobs)
+          }
+          )
+      }
+      )
+    setJob({ title: "", location: "", zipCode: "", pay: "", description: "", date: "" })
   }
 
   return (
@@ -98,24 +103,28 @@ export default function JobPost({ type }) {
             value={job.pay}
             name="pay"
             onChange={handleInput}
-            label='Rate' />
+            label='$ Flat Rate' />
         </Grid>
-        
-        <Grid item xs={12} md={6}>
+
+        <Grid item xs={12} md={6} style={{ position: 'relative' }}>
+          <Typography style={{ position: 'absolute' }}>
+            Date to be completed by:
+          </Typography>
           <TextField
-          style={{marginTop: '1rem'}}
+            style={{ marginTop: '1rem' }}
+            // label="date"
             type="date"
             fullWidth
             value={job.date}
             name="date"
             onChange={handleInput}
-            />
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField
             type="text"
             multiline
-            maxRows={3}
+            rowsMax={3}
             fullWidth
             value={job.description}
             name="description"
@@ -126,7 +135,6 @@ export default function JobPost({ type }) {
           className={classes.submit}
           type="submit"
           fullWidth
-          className={classes.submit}
           onClick={handleJobSubmit}
         >
           Post Job

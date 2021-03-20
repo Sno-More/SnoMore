@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
 
-function UserProfile({myJobs}) {
+function UserProfile({myJobs, setMyJobs}) {
     const [currentJob, setCurrentJob] = useState({});
     const [open, setOpen] = useState(false);
 
@@ -33,7 +33,9 @@ function UserProfile({myJobs}) {
     return (
         <Grid style={{ minHeight: '85vh' }} alignItems='center' container>
             <Grid item xs={12} md={6}>
-                <JobPostForm />
+                <JobPostForm 
+                setMyJobs={setMyJobs}
+                />
             </Grid>
             <Grid item xs={12} md={6}>
                 <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />
