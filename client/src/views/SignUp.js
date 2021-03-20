@@ -16,6 +16,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input/input';
 import CustomPhoneNumber from '../components/CustomPhoneInput';
 // import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +72,7 @@ export default function SignUp({ handleChangeView }) {
         e.preventDefault()
         console.log("click")
         console.log(auth)
+        console.log(value)
         API.saveUser({
             firstName: auth.firstName,
             lastName: auth.lastName,
@@ -79,13 +81,43 @@ export default function SignUp({ handleChangeView }) {
             phone: value,
             role: role,
         })
-        .then(res => {
-            if (res.status === 200) {
-                console.log("status")
-                handleChangeView(e)
+            .then(res => {
+                if (res.status === 200) {
+                    console.log("status")
+                    handleChangeView(e)
+                }
+            })
+            .catch(err => console.log(err));
+        let SMS = (role === 'Poster') ? {
+            messageTo: value,
+            messageBody: `Welcome to Sno-More ${auth.firstName}, we can't wait to help you make your snow no more!`,
+            submitting: false,
+            error: false
+        } : {
+            messageTo: value,
+            messageBody: `Welcome to Sno-More ${auth.firstName}, thanks for helping your neighbors make their snow no more!`,
+            submitting: false,
+            error: false
+        }
+        console.log(SMS)
+
+        axios.post('/sms/messages', SMS)
+            .then(data => {
+                if (data.data.success) {
+                    console.log(data);
+                    SMS = {
+                        error: false,
+                        submitting: false,
+                        messageTo: '',
+                        messageBody: ''
+                    };
+                } else {
+                    console.log('no');
+                    SMS.error = true
+                    SMS.submitting = false
+                };
             }
-        })
-        .catch(err => console.log(err));
+            )
     }
 
     const handleInput = (event) => {
@@ -93,10 +125,6 @@ export default function SignUp({ handleChangeView }) {
         const { name, value } = event.target;
         setAuth({ ...auth, [name]: value })
     }
-
-
-
-
 
     const classes = useStyles();
 
@@ -155,7 +183,7 @@ export default function SignUp({ handleChangeView }) {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <PhoneInput 
+                                <PhoneInput
                                     country="US"
                                     value={value}
                                     maxlength="14"
