@@ -100,6 +100,7 @@ export default function JobSearch({ handleSeeMore, jobListings, setJobListings }
         } catch (err) {
             console.log(err)
         }
+        setZipCode("")
     }
 
     const handleClickListItem = (event) => {

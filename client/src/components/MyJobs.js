@@ -34,18 +34,21 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.transparentWhite.main,
     },
     jobs: {
+        [theme.breakpoints.up('md')]: {
+            height: '55%'
+        },
         margin: theme.spacing(1, 0),
         overflowY: 'scroll',
-        '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
-        scrollbarWidth: 'none',  /* Firefox */
-        '&::-webkit-scrollbar': { /* Chrome, Safari */
-            display: 'none'
-        }
+        // '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
+        // scrollbarWidth: 'none',  /* Firefox */
+        // '&::-webkit-scrollbar': { /* Chrome, Safari */
+        //     display: 'none'
+        // }
     }
 }));
 
 const MyJobs = ({ myJobs, handleSeeMore }) => {
-    const [tabValue, setTabValue] = useState(0);
+    const [tabValue, setTabValue] = useState(1);
     const handleChange = (event, newVal) => {
         setTabValue(newVal);
     }
