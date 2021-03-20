@@ -35,16 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleModal({ job, open, methods }) {
-  // const [posterPhone, setPosterPhone] = useState('')
-  // const [shovelerPhone, setShovelerPhone] = useState('')
-  // const [sms, setSms] = useState(
-  //   {
-  //       messageTo: '',
-  //       messageBody: '',
-  //       submitting: false,
-  //       error: false
-  //   })
-  // console.log('job', job)
+
   let currentJob = job;
   if (!job.poster) {
     currentJob = {
@@ -130,7 +121,7 @@ export default function SimpleModal({ job, open, methods }) {
         })
   }
 
-
+  //shoveler completes job button
   const handleCompletedJob = (id) => {
     axios.get('/user/info')
       .then(
@@ -218,7 +209,6 @@ export default function SimpleModal({ job, open, methods }) {
           <Typography variant="body2" component="p">
             {job.description}
           </Typography>
-          {/* <button onClick={handleConfirmJob}> Confirm Job </button> */}
           {job.pending === false ?
             <button onClick={() => handleAcceptJob(job._id)}>Accept This Job</button>
             :
