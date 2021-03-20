@@ -115,7 +115,7 @@ export default function JobPost({ type }) {
           <TextField
             type="text"
             multiline
-            maxRows={3}
+            rowsMax={3}
             fullWidth
             value={job.description}
             name="description"
@@ -126,7 +126,6 @@ export default function JobPost({ type }) {
           className={classes.submit}
           type="submit"
           fullWidth
-          className={classes.submit}
           onClick={handleJobSubmit}
         >
           Post Job
