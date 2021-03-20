@@ -56,13 +56,13 @@ export default function SimpleModal({ job, open, methods}) {
   let posterPhone = currentJob.poster.phone
   let posterSMS = {
     messageTo: posterPhone,
-    messageBody: 'your job has been accepted!',
+    messageBody: 'Your job has been accepted!',
     submitting: false,
     error: false
   }
   let shovelerSMS = {
     messageTo: '',
-    messageBody: "you've accepted the job",
+    messageBody: "You've accepted the job",
     submitting: false,
     error: false
   }
@@ -75,11 +75,17 @@ export default function SimpleModal({ job, open, methods}) {
     axios.get('/user/info')
       .then(
         response => {
-          console.log(response);
+          console.log('response', response.data[0].firstName);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
-            messageBody: "you've accepted the job",
+            messageBody: `${response.data[0].firstName}, accepted the job`,
+            submitting: false,
+            error: false
+          }
+          posterSMS = {
+            messageTo: posterPhone,
+            messageBody: `${response.data[0].firstName} has accepted your job`,
             submitting: false,
             error: false
           }
