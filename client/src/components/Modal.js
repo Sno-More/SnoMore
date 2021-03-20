@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal({ job, open, methods}) {
+export default function SimpleModal({ job, open, methods }) {
   // const [posterPhone, setPosterPhone] = useState('')
   // const [shovelerPhone, setShovelerPhone] = useState('')
   // const [sms, setSms] = useState(
@@ -69,17 +69,14 @@ export default function SimpleModal({ job, open, methods}) {
 
   //shoveler accept job button
   function handleAcceptJob(id) {
-    //     console.log('handleacceptjob')
-    // console.log('phone', job.poster.phone)
-    // setPosterPhone(job.poster.phone)
     axios.get('/user/info')
       .then(
         response => {
-          console.log('response', response.data[0].firstName);
+          console.log('response', response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
-            messageBody: `${response.data[0].firstName}, accepted the job`,
+            messageBody: `${response.data[0].firstName}, thanks for accepting this job!`,
             submitting: false,
             error: false
           }
@@ -105,7 +102,7 @@ export default function SimpleModal({ job, open, methods}) {
                 shovelerSMS.submitting = false
               };
             }
-          );
+            );
           axios.post('/sms/messages', posterSMS)
             .then(data => {
               if (data.data.success) {
@@ -122,23 +119,81 @@ export default function SimpleModal({ job, open, methods}) {
                 posterSMS.submitting = false
               };
             }
-          );
+            );
           axios.put(`/api/user/jobs/add/${id}`)
-          .then( response => {
-            console.log('response', response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          });
+            .then(response => {
+              console.log('response', response.data)
+            })
+            .catch(e => {
+              console.log(e)
+            });
         })
   }
 
 
-  const handleCompletedJob = (event) => {
-    //pending value will still be true 
-    //change completed value to true
-    //relocate job to the completed tab
-    //send text notification to both parties that job has been completed
+  const handleCompletedJob = (id) => {
+    axios.get('/user/info')
+      .then(
+        response => {
+          console.log('response', response);
+          let shovelerPhone = response.data[0].phone
+          shovelerSMS = {
+            messageTo: shovelerPhone,
+            messageBody: `${response.data[0].firstName}, thanks for completing the job! Your payment is coming.`,
+            submitting: false,
+            error: false
+          }
+          posterSMS = {
+            messageTo: posterPhone,
+            messageBody: `${response.data[0].firstName} has completed your job! We look forward to helping you again!`,
+            submitting: false,
+            error: false
+          }
+          axios.post('/sms/messages', shovelerSMS)
+            .then(data => {
+              if (data.data.success) {
+                console.log(data);
+                shovelerSMS = {
+                  error: false,
+                  submitting: false,
+                  messageTo: '',
+                  messageBody: ''
+                };
+              } else {
+                console.log('no');
+                shovelerSMS.error = true
+                shovelerSMS.submitting = false
+              };
+            }
+            );
+          axios.post('/sms/messages', posterSMS)
+            .then(data => {
+              if (data.data.success) {
+                console.log('yes');
+                posterSMS = {
+                  error: false,
+                  submitting: false,
+                  messageTo: '',
+                  messageBody: ''
+                };
+              } else {
+                console.log('no');
+                posterSMS.error = true
+                posterSMS.submitting = false
+              };
+            }
+            );
+          axios.put(`/api/job/${id}`, {
+            complete: true
+          })
+            .then(response => {
+              console.log('response', response.data)
+              methods.handleClose()
+            })
+            .catch(e => {
+              console.log(e)
+            });
+        })
   }
 
   const classes = useStyles();
