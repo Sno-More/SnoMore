@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -6,7 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
-
+import toast, { Toaster } from 'react-hot-toast';
+const notify = () => toast('Here is your toast.');
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -125,6 +125,22 @@ export default function SimpleModal({ job, open, methods }) {
               console.log(e)
             });
         })
+        toast.success("Thank you for accepting this snow removal job! Please make sure to complete it by the date posted!",
+        {
+          duration: 5000,
+          // Styling
+          position: 'center',
+          style: {
+            border: '2px solid #713200',
+            padding: '20px',
+            marginTop: '82px',
+            color: 'white',
+            backgroundColor: 'rgb(60, 179, 113, 0.7)'
+          },
+          icon: '🌨️',
+          role: 'status',
+          ariaLive: 'polite',
+        });
   }
 
   //shoveler completes job button
@@ -192,6 +208,22 @@ export default function SimpleModal({ job, open, methods }) {
               console.log(e)
             });
         })
+        toast.success("Thank you for completing this snow removal job! You're payment is on its way!",
+        {
+          duration: 5000,
+          // Styling
+          position: 'center',
+          style: {
+            border: '2px solid #713200',
+            padding: '20px',
+            marginTop: '82px',
+            color: 'white',
+            backgroundColor: 'rgb(60, 179, 113, 0.7)'
+          },
+          icon: '🌨️',
+          role: 'status',
+          ariaLive: 'polite',
+        });
   }
 
   const classes = useStyles();
@@ -228,6 +260,7 @@ export default function SimpleModal({ job, open, methods }) {
 
   return (
     <div>
+      <Toaster/>
       <Modal
         open={open}
         onClose={methods.handleClose}
