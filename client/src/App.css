@@ -1,15 +1,3 @@
-.header{
-  background-color: rgb(161, 160, 160);
-  padding-left: 10px;
-  color: purple;
-  /* font-size: ; */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-style: italic;
-  display: flex;
-  width: 100%;
-  border-bottom: 4px solid black;
-  opacity: 0.9;
-}
 
 html {
   background-image: url('./images/snowRoad.jpg');
@@ -20,10 +8,6 @@ html {
   width: 100%;
   z-index: -10;
   background-attachment: fixed;
-}
-
-.floatRight{
-  justify-content: right;
 }
 
 

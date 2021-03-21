@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '60vh',
         width: '85%',
         padding: '0',
-        margin: '4rem auto 2rem 2rem',
+        margin: '0 auto 2rem 2rem',
         border: 'black 5px solid',
         [theme.breakpoints.down('sm')]: {
             height: 'min-content',
