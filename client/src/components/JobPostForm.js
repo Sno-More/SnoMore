@@ -9,7 +9,9 @@ import JobPost from "./JobPost"
 const useStyles = makeStyles(theme => ({
     h2: {
         textAlign: 'center',
-        padding: '2rem 0'
+        padding: '2rem 0',
+        width: '100%',
+        background: theme.palette.transparentWhite.main
     },
     container: {
         background: theme.palette.transparentWhite.main,

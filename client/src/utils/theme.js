@@ -6,7 +6,7 @@ const overrides = {
         root: {
             backgroundColor: 'rgba(0,0,0,.5)',
             '&$selected': {
-                backgroundColor: 'rgba(255, 255, 255, .5)',
+                backgroundColor: 'rgba(255, 255, 255, .85)',
             },
         },
     },

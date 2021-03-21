@@ -15,7 +15,9 @@ import axios from 'axios'
 const useStyles = makeStyles(theme => ({
     h2: {
         textAlign: 'center',
-        padding: '2rem'
+        padding: '2rem',
+        width: '100%',
+        background: theme.palette.transparentWhite.main
     },
     container: {
         background: theme.palette.transparentWhite.main,
@@ -44,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'top',
         justifyContent: 'center',
-        padding: theme.spacing(0, 1)
+        padding: theme.spacing(.25, 1)
     },
     input: {
         margin: theme.spacing(0, 1, 0, 0),
