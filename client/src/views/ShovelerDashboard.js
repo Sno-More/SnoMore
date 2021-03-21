@@ -44,7 +44,9 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
             <SimpleModal job={currentJob} 
             myJobs={myJobs}
             open={open} 
+
             methods={{handleClose, handleOpen, setMyJobs, setJobListings}}
+
             />
         </Grid>
     )
