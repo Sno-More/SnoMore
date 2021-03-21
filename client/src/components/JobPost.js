@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
-
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function JobPost({ type, setMyJobs }) {
 
@@ -58,9 +58,26 @@ export default function JobPost({ type, setMyJobs }) {
             setMyJobs(data.data.jobs)
           }
           )
+          toast.success("Your job has been posted! We'll notify you when someone accepts your snow removal job!",
+          {
+            duration: 5000,
+            // Styling
+            position: 'center',
+            style: {
+              border: '2px solid #713200',
+              padding: '20px',
+              marginTop: '82px',
+              color: 'white',
+              backgroundColor: 'rgb(60, 179, 113, 0.7)'
+            },
+            icon: '🌨️',
+            role: 'status',
+            ariaLive: 'polite',
+          });
       }
       )
     setJob({ title: "", location: "", zipCode: "", pay: "", description: "", date: "" })
+
   }
 
   return (
