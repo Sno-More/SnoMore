@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "description": "",
-
   "engines": {
-    "node":"14.x"
+    "node": "14.x"
   },
   "main": "server/server.js",
-
-
   "dependencies": {
     "axios": "^0.17.1",
     "bcryptjs": "^2.4.3",

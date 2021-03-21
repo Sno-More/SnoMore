@@ -24,10 +24,12 @@ const useStyles = makeStyles(theme => ({
         minHeight: '60vh',
         width: '85%',
         padding: '0',
-        margin: '4rem auto 2rem auto',
+        margin: '4rem 2rem 2rem auto',
         border: 'black 5px solid',
-        [theme.breakpoints.down('md')]: {
-            height: 'min-content'
+        [theme.breakpoints.down('sm')]: {
+            height: 'min-content',
+            maxHeight: 'none',
+            margin: '2rem auto 1rem auto',
         }
     },
     jobs: {
