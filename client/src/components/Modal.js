@@ -212,7 +212,8 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
             .then(response => {
               console.log('response', response.data)
 
-              axios.put(`/api/job/${id}`).then((data) => {
+              axios.get(`/api/user/jobs`).then((data) => {
+                console.log(data)
                 methods.setMyJobs(data.data.jobs)
               })
 
