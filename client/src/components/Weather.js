@@ -40,8 +40,8 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const lat = '46.01'
-            const lon = '91.4'
+            const lat = '41'
+            const lon = '-87'
             const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
 
             try {
