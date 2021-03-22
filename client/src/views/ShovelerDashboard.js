@@ -3,7 +3,8 @@ import JobSearch from '../components/JobSearch';
 import MyJobs from '../components/MyJobs';
 import Grid from '@material-ui/core/Grid';
 import SimpleModal from '../components/Modal';
-import axios from 'axios'
+import axios from 'axios';
+import Weather from '../components/Weather'
 
 export default function ShovelerDashboard({myJobs, setMyJobs}) {
     const [currentJob, setCurrentJob] = useState({});
@@ -31,6 +32,7 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
     };
 
     return (
+        <>
         <Grid style={{minHeight: '80vh'}} alignItems='center' container>
             <Grid item xs={12} md={6}>
                 <JobSearch jobListings={jobListings} 
@@ -49,5 +51,7 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
 
             />
         </Grid>
+        <Weather/>
+        </>
     )
 }

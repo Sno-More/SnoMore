@@ -4,8 +4,6 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import Header from "../components/Header"
 import {useHistory} from "react-router-dom";
-// import Weather from '../components/Weather';
-
 
 
 const Profile = () => {
@@ -47,7 +45,6 @@ const Profile = () => {
         <>
         <Header />
         {jsx}
-        {/* <Weather/> */}
         </>
     );
 }
