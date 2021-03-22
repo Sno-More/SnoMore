@@ -24,19 +24,18 @@ const useStyles = makeStyles(theme => ({
         minHeight: '60vh',
         width: '85%',
         padding: '0',
-        margin: '4rem auto 2rem auto',
+        margin: '1rem auto 2rem auto',
         border: 'black 5px solid',
         [theme.breakpoints.down('md')]: {
             height: 'min-content'
         }
     },
     jobs: {
+        [theme.breakpoints.up('md')]: {
+            height: '55%'
+        },
+        margin: theme.spacing(1, 0),
         overflowY: 'scroll',
-        '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
-        scrollbarWidth: 'none',  /* Firefox */
-        '&::-webkit-scrollbar': { /* Chrome, Safari */
-            display: 'none'
-        }
     },
     searchForm: {
         display: 'flex',

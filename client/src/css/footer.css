@@ -1,0 +1,17 @@
+.footer{
+  margin-top: 50000px;
+  padding: 0.3rem;
+  background-color: rgb(161, 160, 160, 0.7);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 4px solid black;
+}
+
+.weather{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
