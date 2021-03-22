@@ -7,21 +7,6 @@ import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('Here is your toast.');
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`,
-//   };
-// }
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -72,7 +57,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
     axios.get('/user/info')
       .then(
         response => {
-          console.log('response', response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
@@ -89,7 +73,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           axios.post('/sms/messages', shovelerSMS)
             .then(data => {
               if (data.data.success) {
-                console.log(data);
                 shovelerSMS = {
                   error: false,
                   submitting: false,
@@ -97,7 +80,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 shovelerSMS.error = true
                 shovelerSMS.submitting = false
               };
@@ -106,7 +88,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           axios.post('/sms/messages', posterSMS)
             .then(data => {
               if (data.data.success) {
-                console.log('yes');
                 posterSMS = {
                   error: false,
                   submitting: false,
@@ -114,7 +95,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 posterSMS.error = true
                 posterSMS.submitting = false
               };
@@ -122,21 +102,18 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
             );
           axios.put(`/api/user/jobs/add/${id}`)
             .then(response => {
-              console.log('response', response.data)
               axios.get('/api/user/jobs').then((data) => {
-                console.log(data)
                 methods.setMyJobs(data.data.jobs);
                 methods.setJobListings([]);
               });
             })
             .catch(e => {
-              console.log(e)
+              console.error(e)
             });
         })
         toast.success("Thank you for accepting this snow removal job! Please make sure to complete it by the date posted!",
         {
           duration: 5000,
-          // Styling
           position: 'center',
           style: {
             border: '2px solid #713200',
@@ -157,7 +134,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
     axios.get('/user/info')
       .then(
         response => {
-          console.log('response', response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
@@ -174,7 +150,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           axios.post('/sms/messages', shovelerSMS)
             .then(data => {
               if (data.data.success) {
-                console.log(data);
                 shovelerSMS = {
                   error: false,
                   submitting: false,
@@ -182,7 +157,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 shovelerSMS.error = true
                 shovelerSMS.submitting = false
               };
@@ -191,7 +165,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           axios.post('/sms/messages', posterSMS)
             .then(data => {
               if (data.data.success) {
-                console.log('yes');
                 posterSMS = {
                   error: false,
                   submitting: false,
@@ -199,7 +172,6 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 posterSMS.error = true
                 posterSMS.submitting = false
               };
@@ -210,16 +182,12 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           })
 
             .then(response => {
-              console.log('response', response.data)
-
               axios.get(`/api/user/jobs`).then((data) => {
-                console.log(data)
                 methods.setMyJobs(data.data.jobs)
               })
-
             })
             .catch(e => {
-              console.log(e)
+              console.error(e)
             });
         })
         toast.success("Thank you for completing this snow removal job! You're payment is on its way!",

@@ -12,7 +12,6 @@ const phoneInput = (props, ref) => {
       label='Phone Number'
       variant='outlined'
       name='phone'
-      maxlength="14"
     />
   )
 }

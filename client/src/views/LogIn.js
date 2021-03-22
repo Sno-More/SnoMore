@@ -24,7 +24,15 @@ const useStyles = makeStyles((theme) => ({
     bottom: '0',
     left: '0',
     right: '0',
-    margin: 'auto'
+    margin: 'auto',
+    [theme.breakpoints.down('sm')]: {
+      bottom: 'auto',
+      minHeight: '100vh',
+      width: '100%'
+    }
+  },
+  h2: {
+    marginBottom: theme.spacing(0)
   },
   paper: {
     margin: '0 auto',
@@ -44,12 +52,14 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(2, 0, 2),
+    textDecoration: 'none'
   },
   link: {
     position: 'absolute',
     left: 0,
     right: 0,
-    margin: 'auto'
+    margin: 'auto',
+    textDecoration: 'none'
   }
 }));
 
@@ -62,22 +72,18 @@ export default function LogIn({ handleChangeView }) {
 
   const handleClick = (e) => {
     e.preventDefault()
-    console.log("click")
-    console.log(auth)
 
     API.checkUser({
       username: auth.email,
       password: auth.password
     })
     .then(response => {
-      console.log('login response: ')
-      console.log(response)
       if (response.status === 200) {
         history.push('/profile')
       }
  
   }).catch(error => {
-      console.log(error);
+      console.error(error);
       alert("Incorrect email or password")
       
   })
@@ -96,9 +102,9 @@ export default function LogIn({ handleChangeView }) {
           <Avatar className={classes.avatar}>
 
           </Avatar>
-          <Typography component="h1" variant="h2">
+          <Typography className={classes.h2} variant="h2">
             Sign in
-        </Typography>
+          </Typography>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -108,7 +114,7 @@ export default function LogIn({ handleChangeView }) {
               id="email"
               label="Email Address"
               name="email"
-              value={auth.email}
+              // value={auth.email}
               onChange={handleInput}
               autoComplete="email"
               autoFocus
@@ -123,7 +129,7 @@ export default function LogIn({ handleChangeView }) {
               type="password"
               id="password"
 
-              value={auth.password}
+              // value={auth.password}
               onChange={handleInput}
               autoComplete="current-password"
             />
@@ -141,9 +147,9 @@ export default function LogIn({ handleChangeView }) {
             <Grid container>
 
               <Grid item>
-                <button className={classes.link} onClick={handleChangeView}>
-                  Don't have an account? <em>Sign up</em>
-                </button>
+                <Button className={classes.link} onClick={handleChangeView}>
+                  Don't have an account? <em style={{marginLeft: '1rem', textDecoration: 'underline', color:'#6E61C0'}}>Sign up</em>
+                </Button>
 
               </Grid>
             </Grid>

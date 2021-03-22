@@ -56,24 +56,20 @@ export default function Header() {
   useEffect(() => {
     const getUser = async () => {
       const user = await axios.get('/user/info');
-      console.log(user.data);
       setUser(user.data[0].firstName)
     };
     getUser();
   }, [])
   const logout = (e) => {
     e.preventDefault()
-    console.log("test1")
     axios.post("/user/logout")
       .then(response => {
 
         if (response.status === 200) {
-            console.log(response)
             history.push('/')
           }
       }).catch(error => {
-        console.log('login error: ')
-        console.log(error);
+        console.error(error);
 
       })
   }

@@ -9,7 +9,6 @@ const Welcome = () => {
         setWelcome(!welcome);
     };
     const views = (welcome) ? <LogIn handleChangeView={handleChangeView}/> : <SignUp handleChangeView={handleChangeView}/>;
-    console.log(views)
     return (
         <>
         {views}
