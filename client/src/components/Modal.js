@@ -230,7 +230,7 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           <Typography variant="body1">
           <strong>Details:</strong> {job.description}
           </Typography>
-          {useButton === false 
+          {useButton === false || job.complete === true 
           ? '' 
           : job.pending === false 
           ? <Button onClick={() => handleAcceptJob(job._id)}>Accept Job</Button>
