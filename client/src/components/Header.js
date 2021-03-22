@@ -77,6 +77,7 @@ export default function Header() {
     paper: {
       border: '1px solid #d3d4d5',
       marginTop: theme.spacing(.5),
+      marginRight: theme.spacing(-1),
       width: 'min-content'
     },
   }))((props) => (
@@ -98,6 +99,7 @@ export default function Header() {
 
   const StyledMenuItem = withStyles((theme) => ({
     root: {
+      margin: 0,
       padding: theme.spacing(0, 1),
       '&:focus': {
         backgroundColor: theme.palette.primary.main,
