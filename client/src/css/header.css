@@ -1,4 +1,21 @@
-.button {
+
+.header{
+    background-color: rgb(161, 160, 160, 0.7);
+    /* padding-left: 10px; */
+    /* font-size: ; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* font-style: italic; */
+    display: flex;
+    width: 100%;
+    border-bottom: 4px solid black;
+    align-items: center;
+}
+
+.title {
+    justify-content: center;
+  }
+  
+  .button {
     height: 3vh;
     justify-content: baseline;
     border-radius: 5px;
@@ -8,14 +25,15 @@
   
 }
 
-.title {
-    display: inline-block;
+/* .title { */
+    /* display: inline-block;
     text-decoration: underline;
     vertical-align: bottom ;
     margin-right: 9vw;
-    margin-left: 9vw;
+    margin-left: 9vw; */
+    /* text-align: center !important; */
 
-}
+/* } */
 
 .wrapper-div {
     vertical-align: bottom

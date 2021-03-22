@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         padding: '2rem'
     },
+    
     container: {
         background: theme.palette.transparentWhite.main,
         height: '60vh',

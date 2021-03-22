@@ -9,29 +9,18 @@ import "../css/header.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // minWidth: 50,
         maxHeight: 100,
         marginTop: -10,
-        // borderRadius: '50px',
     },
     weather: {
         backgroundColor: theme.palette.primary.main
-    },
-    bullet: {
-        display: 'inline-block',
-        // margin: '0 2px',
-        transform: 'scale(0.8)',
     },
     date: {
         fontSize: 12
     },
     title: {
         fontSize: 10,
-    },
-    pos: {
-        fontSize: 10,
-        // marginBottom: 8,
-    },
+    }
 }))
 
 export default function Weather() {
@@ -40,8 +29,8 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const lat = '46.01'
-            const lon = '91.4'
+            const lat = '41'
+            const lon = '-87'
             const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
 
             try {
@@ -57,7 +46,7 @@ export default function Weather() {
     }, [])
 
     return (
-        <div className={classes.weather, "weather"} style={{ background: 'white', display: 'flex' }}>
+        <div className={classes.weather} style={{ background: 'rgba(255, 255, 255, 0.4)', display: 'flex', borderRadius:'10px'}}>
 
             {weather.length > 0 ? weather.map((daily, index) => (
                 <>
