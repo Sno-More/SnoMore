@@ -47,9 +47,13 @@ As a shoveler, I want a way to earn money by helping out my community. With this
 # Screenshots
 ![Screen Shot 2021-03-21 at 11 32 18 AM](https://user-images.githubusercontent.com/68556793/111912834-6a880480-8a39-11eb-9fcb-013122f60b59.png)
 ![Screen Shot 2021-03-21 at 11 33 42 AM](https://user-images.githubusercontent.com/68556793/111912835-6cea5e80-8a39-11eb-99d9-5e9fe344b7d3.png)
+![download](https://user-images.githubusercontent.com/68556793/112066618-b370b380-8b34-11eb-87b0-4454e403aecc.png)
 
 # Wire Frame
 https://www.figma.com/file/xM8VuwJ9SAtt6aUe600Ptw/Untitled?node-id=0%3A1
+
+# Trello Board
+https://trello.com/b/neyU0gnU/project-3
 
 # Credits
 Material-UI <br>
