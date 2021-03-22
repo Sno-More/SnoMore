@@ -14,7 +14,7 @@ const overrides = {
         root: {
             color: '#666'
         }
-    }
+    },
 };
 
 const options = {

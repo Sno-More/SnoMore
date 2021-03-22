@@ -41,7 +41,7 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
             <Grid item xs={12} md={6}>
                 <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />
             </Grid>
-            <SimpleModal job={currentJob} 
+            <SimpleModal useButton={true} job={currentJob} 
             myJobs={myJobs}
             open={open} 
 

@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
       },
       [theme.breakpoints.down('xs')]: {
         '& h1': {
-          marginLeft: theme.spacing(1)
+          marginLeft: theme.spacing(1),
+          fontSize: '3rem'
         }
       }
     },
@@ -76,13 +77,15 @@ export default function Header() {
 
       })
   }
-  const StyledMenu = withStyles({
+  const StyledMenu = withStyles(theme => ({
     paper: {
       border: '1px solid #d3d4d5',
-      margin: 0
+      marginTop: theme.spacing(.5),
+      width: 'min-content'
     },
-  })((props) => (
+  }))((props) => (
     <Menu
+      MenuListProps={{style: {padding: 0}}}
       elevation={0}
       getContentAnchorEl={null}
       anchorOrigin={{
@@ -133,7 +136,6 @@ export default function Header() {
         {name}
       </Avatar>
       <StyledMenu
-
         id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
