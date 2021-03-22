@@ -38,6 +38,7 @@ As a shoveler, I want a way to earn money by helping out my community. With this
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hot-toast": "^1.0.2",
     "react-phone-number-input": "^3.1.17",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
