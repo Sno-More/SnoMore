@@ -31,7 +31,7 @@ function UserProfile({myJobs, setMyJobs}) {
     };
 
     return (
-        <Grid style={{ minHeight: '85vh' }} alignItems='center' container>
+        <Grid style={{ minHeight: '80vh', width: '100%' }} direction='row' alignItems='center' justify='center' container>
             <Grid item xs={12} md={6}>
                 <JobPostForm 
                 setMyJobs={setMyJobs}

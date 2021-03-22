@@ -1,40 +1,33 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('Here is your toast.');
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: 'auto',
+    width: 320,
+    height: 'min-content',
+    backgroundColor: theme.palette.white.main,
+    border: '5px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2),
+    '&>*': {
+      margin: theme.spacing(.5)
+    }
   },
 }));
 
-export default function SimpleModal({ job, open, methods }) {
+export default function SimpleModal({ useButton = false, job, open, methods }) {
 
   let currentJob = job;
   if (!job.poster) {
@@ -64,7 +57,6 @@ export default function SimpleModal({ job, open, methods }) {
     axios.get('/user/info')
       .then(
         response => {
-          console.log('response', response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
@@ -81,7 +73,6 @@ export default function SimpleModal({ job, open, methods }) {
           axios.post('/sms/messages', shovelerSMS)
             .then(data => {
               if (data.data.success) {
-                console.log(data);
                 shovelerSMS = {
                   error: false,
                   submitting: false,
@@ -89,7 +80,6 @@ export default function SimpleModal({ job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 shovelerSMS.error = true
                 shovelerSMS.submitting = false
               };
@@ -98,7 +88,6 @@ export default function SimpleModal({ job, open, methods }) {
           axios.post('/sms/messages', posterSMS)
             .then(data => {
               if (data.data.success) {
-                console.log('yes');
                 posterSMS = {
                   error: false,
                   submitting: false,
@@ -106,7 +95,6 @@ export default function SimpleModal({ job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 posterSMS.error = true
                 posterSMS.submitting = false
               };
@@ -114,21 +102,18 @@ export default function SimpleModal({ job, open, methods }) {
             );
           axios.put(`/api/user/jobs/add/${id}`)
             .then(response => {
-              console.log('response', response.data)
               axios.get('/api/user/jobs').then((data) => {
-                console.log(data)
                 methods.setMyJobs(data.data.jobs);
                 methods.setJobListings([]);
               });
             })
             .catch(e => {
-              console.log(e)
+              console.error(e)
             });
         })
         toast.success("Thank you for accepting this snow removal job! Please make sure to complete it by the date posted!",
         {
           duration: 5000,
-          // Styling
           position: 'center',
           style: {
             border: '2px solid #713200',
@@ -149,7 +134,6 @@ export default function SimpleModal({ job, open, methods }) {
     axios.get('/user/info')
       .then(
         response => {
-          console.log('response', response);
           let shovelerPhone = response.data[0].phone
           shovelerSMS = {
             messageTo: shovelerPhone,
@@ -166,7 +150,6 @@ export default function SimpleModal({ job, open, methods }) {
           axios.post('/sms/messages', shovelerSMS)
             .then(data => {
               if (data.data.success) {
-                console.log(data);
                 shovelerSMS = {
                   error: false,
                   submitting: false,
@@ -174,7 +157,6 @@ export default function SimpleModal({ job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 shovelerSMS.error = true
                 shovelerSMS.submitting = false
               };
@@ -183,7 +165,6 @@ export default function SimpleModal({ job, open, methods }) {
           axios.post('/sms/messages', posterSMS)
             .then(data => {
               if (data.data.success) {
-                console.log('yes');
                 posterSMS = {
                   error: false,
                   submitting: false,
@@ -191,7 +172,6 @@ export default function SimpleModal({ job, open, methods }) {
                   messageBody: ''
                 };
               } else {
-                console.log('no');
                 posterSMS.error = true
                 posterSMS.submitting = false
               };
@@ -202,15 +182,12 @@ export default function SimpleModal({ job, open, methods }) {
           })
 
             .then(response => {
-              console.log('response', response.data)
-
-              axios.put(`/api/job/${id}`).then((data) => {
+              axios.get(`/api/user/jobs`).then((data) => {
                 methods.setMyJobs(data.data.jobs)
               })
-
             })
             .catch(e => {
-              console.log(e)
+              console.error(e)
             });
         })
         toast.success("Thank you for completing this snow removal job! You're payment is on its way!",
@@ -233,33 +210,32 @@ export default function SimpleModal({ job, open, methods }) {
 
   const classes = useStyles();
 
-  const [modalStyle] = React.useState(getModalStyle);
+  // const [modalStyle] = React.useState(getModalStyle);
 
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h3" gutterBottom>
+    <div className={classes.paper}>
+          <Typography variant="h3">
             {job.title}
           </Typography>
-          <Typography variant="h5">
-            Pay: ${job.pay}
+          <Typography variant="body1">
+            <strong>Pay:</strong> ${job.pay}
           </Typography>
-          <Typography variant="h5" component="h2">
-            Address:{job.location}
+          <Typography variant="body1">
+          <strong>Address:</strong> {job.location}
           </Typography>
-
-          <Typography variant="body2" component="p">
-            {job.description}
+          <Typography variant="body1">
+          <strong>Complete by:</strong> {job.date?.split('T')[0]}
           </Typography>
-          {job.pending === false ?
-            <button onClick={() => handleAcceptJob(job._id)}>Accept This Job</button>
-            :
-            <button onClick={() => handleCompletedJob(job._id)}>Completed This Job</button>
+          <Typography variant="body1">
+          <strong>Details:</strong> {job.description}
+          </Typography>
+          {useButton === false || job.complete === true 
+          ? '' 
+          : job.pending === false 
+          ? <Button onClick={() => handleAcceptJob(job._id)}>Accept Job</Button>
+          : <Button onClick={() => handleCompletedJob(job._id)}>Mark as Complete</Button>
           }
-        </CardContent>
-      </Card>
     </div>
   );
 

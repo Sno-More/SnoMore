@@ -31,7 +31,7 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
     };
 
     return (
-        <Grid style={{minHeight: '85vh'}} alignItems='center' container>
+        <Grid style={{minHeight: '80vh'}} alignItems='center' container>
             <Grid item xs={12} md={6}>
                 <JobSearch jobListings={jobListings} 
                 setJobListings={setJobListings} 
@@ -41,7 +41,7 @@ export default function ShovelerDashboard({myJobs, setMyJobs}) {
             <Grid item xs={12} md={6}>
                 <MyJobs myJobs={myJobs} handleSeeMore={handleSeeMore} />
             </Grid>
-            <SimpleModal job={currentJob} 
+            <SimpleModal useButton={true} job={currentJob} 
             myJobs={myJobs}
             open={open} 
 

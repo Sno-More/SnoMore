@@ -15,7 +15,9 @@ import axios from 'axios'
 const useStyles = makeStyles(theme => ({
     h2: {
         textAlign: 'center',
-        padding: '2rem'
+        padding: '2rem',
+        width: '100%',
+        background: theme.palette.transparentWhite.main
     },
     container: {
         background: theme.palette.transparentWhite.main,
@@ -24,10 +26,12 @@ const useStyles = makeStyles(theme => ({
         minHeight: '60vh',
         width: '85%',
         padding: '0',
-        margin: '4rem auto 2rem auto',
+        margin: '0 2rem 2rem auto',
         border: 'black 5px solid',
-        [theme.breakpoints.down('md')]: {
-            height: 'min-content'
+        [theme.breakpoints.down('sm')]: {
+            height: 'min-content',
+            maxHeight: 'none',
+            margin: '2rem auto 1rem auto',
         }
     },
     jobs: {
@@ -42,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'top',
         justifyContent: 'center',
-        padding: theme.spacing(0, 1)
+        padding: theme.spacing(.25, 1)
     },
     input: {
         margin: theme.spacing(0, 1, 0, 0),

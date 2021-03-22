@@ -9,7 +9,9 @@ import Card from './Card';
 const useStyles = makeStyles(theme => ({
     h2: {
         textAlign: 'center',
-        padding: '2rem'
+        padding: '2rem',
+        width: '100%',
+        background: theme.palette.transparentWhite.main
     },
     container: {
         background: theme.palette.transparentWhite.main,
@@ -18,10 +20,12 @@ const useStyles = makeStyles(theme => ({
         minHeight: '60vh',
         width: '85%',
         padding: '0',
-        margin: '4rem auto 2rem auto',
+        margin: '0 auto 2rem 2rem',
         border: 'black 5px solid',
-        [theme.breakpoints.down('md')]: {
-            height: 'min-content'
+        [theme.breakpoints.down('sm')]: {
+            height: 'min-content',
+            maxHeight: 'none',
+            margin: '1rem auto 2rem auto',
         }
     },
     default: {
@@ -35,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
     jobs: {
         [theme.breakpoints.up('md')]: {
-            height: '55%'
+            height: '65%'
         },
         margin: theme.spacing(1, 0),
         overflowY: 'scroll',

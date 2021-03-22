@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography'
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function JobPost({ type, setMyJobs }) {
@@ -16,7 +15,7 @@ export default function JobPost({ type, setMyJobs }) {
   const useStyles = makeStyles((theme) => ({
     form: {
       width: '100%', // Fix IE 11 issue.
-      padding: theme.spacing(1, 2),
+      padding: theme.spacing(.5, 2),
       margin: theme.spacing(0)
     },
     submit: {
@@ -123,13 +122,10 @@ export default function JobPost({ type, setMyJobs }) {
             label='$ Flat Rate' />
         </Grid>
 
-        <Grid item xs={12} md={6} style={{ position: 'relative' }}>
-          <Typography style={{ position: 'absolute' }}>
-            Date to be completed by:
-          </Typography>
+        <Grid item xs={12} md={6}>
           <TextField
-            style={{ marginTop: '1rem' }}
-            // label="date"
+            InputLabelProps={{ shrink: true }}
+            label="Complete by:"
             type="date"
             fullWidth
             value={job.date}

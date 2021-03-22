@@ -4,9 +4,10 @@ const overrides = {
     MuiTab: {
         // general overrides for your material tab component here
         root: {
+            textDecoration: 'none',
             backgroundColor: 'rgba(0,0,0,.5)',
             '&$selected': {
-                backgroundColor: 'rgba(255, 255, 255, .5)',
+                backgroundColor: 'rgba(255, 255, 255, .85)',
             },
         },
     },
@@ -14,7 +15,7 @@ const overrides = {
         root: {
             color: '#666'
         }
-    }
+    },
 };
 
 const options = {
@@ -91,9 +92,9 @@ const options = {
             fontSize: '1.2rem',
             fontWeight: 500,
             fontFamily: 'Poppins, sans-serif',
-            textTransform: 'capitalize',
             textDecoration: 'underline',
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
+            textTransform: 'none'
         }
     },
     spacing: (...nums) => {

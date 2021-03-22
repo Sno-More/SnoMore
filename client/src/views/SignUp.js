@@ -30,30 +30,44 @@ const useStyles = makeStyles((theme) => ({
         bottom: '0',
         left: '0',
         right: '0',
-        margin: 'auto'
+        margin: 'auto',
+        [theme.breakpoints.down('sm')]: {
+            bottom: 'auto',
+            minHeight: '100vh',
+            width: '100%'
+        }
     },
+    h2: {
+        marginBottom: theme.spacing(1)
+      },
     paper: {
-        marginBottom: theme.spacing(2),
+        margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2) + 'auto',
+        height: '50px',
+        width: '50px',
         backgroundColor: theme.palette.primary.main,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(1),
     },
     submit: {
         margin: theme.spacing(2, 0, 2),
+        textDecoration: 'none'
     },
     link: {
         position: 'absolute',
         left: 0,
         right: 0,
-        margin: 'auto'
+        padding: '0 3.5rem',
+        margin: 'auto',
+        textDecoration: 'none',
+        whiteSpace: 'normal',
     }
 }));
 
@@ -65,15 +79,10 @@ export default function SignUp({ handleChangeView }) {
     const [auth, setAuth] = useState({})
     const [role, setRole] = useState('');
     const [value, setValue] = useState('')
-    // let history = useHistory()
-    console.log('value', value)
     let history = useHistory()
 
     const handleClick = (e) => {
         e.preventDefault()
-        console.log("click")
-        console.log(auth)
-        console.log(value)
         API.saveUser({
             firstName: auth.firstName,
             lastName: auth.lastName,
@@ -88,7 +97,7 @@ export default function SignUp({ handleChangeView }) {
                     history.push('/profile')
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
         let SMS = (role === 'Poster') ? {
             messageTo: value,
             messageBody: `Welcome to Sno-More ${auth.firstName}, we can't wait to help you make your snow no more!`,
@@ -100,12 +109,10 @@ export default function SignUp({ handleChangeView }) {
             submitting: false,
             error: false
         }
-        console.log(SMS)
 
         axios.post('/sms/messages', SMS)
             .then(data => {
                 if (data.data.success) {
-                    console.log(data);
                     SMS = {
                         error: false,
                         submitting: false,
@@ -113,7 +120,6 @@ export default function SignUp({ handleChangeView }) {
                         messageBody: ''
                     };
                 } else {
-                    console.log('no');
                     SMS.error = true
                     SMS.submitting = false
                 };
@@ -140,7 +146,7 @@ export default function SignUp({ handleChangeView }) {
                     <Avatar className={classes.avatar}>
 
                     </Avatar>
-                    <Typography component="h1" variant="h2">
+                    <Typography className={classes.h2} variant="h2">
                         Sign up
                     </Typography>
                     <form className={classes.form} noValidate>
@@ -189,7 +195,6 @@ export default function SignUp({ handleChangeView }) {
                                 <PhoneInput
                                     country="US"
                                     value={value}
-                                    maxLength="14"
                                     required
                                     fullWidth
                                     autoComplete="phone number"
@@ -248,15 +253,15 @@ export default function SignUp({ handleChangeView }) {
                         <Grid container justify="flex-end">
                             <Grid item>
 
-                                <button className={classes.link} onClick={handleChangeView}>
-                                    Already have an account? <em>Log in</em>
-                                </button>
+                                <Button className={classes.link} onClick={handleChangeView}>
+                                <span style={{margin: '0 .25rem 0 .5rem'}}>Already have an account?</span> <em style={{ margin: '0 .5rem 0 .25rem', textDecoration: 'underline', color:'#6E61C0'}}>Log In</em>
+                                </Button>
 
                             </Grid>
                         </Grid>
                     </form>
                 </div>
-                <Box mt={5}>
+                <Box mt={6}>
 
                 </Box>
             </Container>
