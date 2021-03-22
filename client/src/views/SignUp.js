@@ -64,8 +64,10 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         left: 0,
         right: 0,
+        padding: '0 3.5rem',
         margin: 'auto',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        whiteSpace: 'normal',
     }
 }));
 
@@ -252,14 +254,14 @@ export default function SignUp({ handleChangeView }) {
                             <Grid item>
 
                                 <Button className={classes.link} onClick={handleChangeView}>
-                                    Already have an account? <em style={{ marginLeft: '1rem', textDecoration: 'underline', color: '#6E61C0' }}>Log in</em>
+                                <span style={{margin: '0 .25rem 0 .5rem'}}>Already have an account?</span> <em style={{ margin: '0 .5rem 0 .25rem', textDecoration: 'underline', color:'#6E61C0'}}>Log In</em>
                                 </Button>
 
                             </Grid>
                         </Grid>
                     </form>
                 </div>
-                <Box mt={5}>
+                <Box mt={6}>
 
                 </Box>
             </Container>
