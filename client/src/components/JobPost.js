@@ -65,11 +65,11 @@ export default function JobPost({ type, setMyJobs }) {
             style: {
               border: '2px solid #713200',
               padding: '20px',
-              marginTop: '82px',
+              marginTop: '5px',
               color: 'white',
               backgroundColor: 'rgb(60, 179, 113, 0.7)'
             },
-            icon: '🌨️',
+            icon: '❄️',
             role: 'status',
             ariaLive: 'polite',
           });

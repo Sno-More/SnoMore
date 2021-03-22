@@ -40,12 +40,6 @@ const useStyles = makeStyles(theme => ({
         },
         margin: theme.spacing(1, 0),
         overflowY: 'scroll',
-        // overflowY: 'scroll',
-        // '-ms-overflow-style': 'none', /* Internet Explorer 10+ */
-        // scrollbarWidth: 'none',  /* Firefox */
-        // '&::-webkit-scrollbar': { /* Chrome, Safari */
-        //     display: 'none'
-        // }
     },
     searchForm: {
         display: 'flex',

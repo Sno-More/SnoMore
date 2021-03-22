@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast';
-const notify = () => toast('Here is your toast.');
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -118,11 +117,11 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           style: {
             border: '2px solid #713200',
             padding: '20px',
-            marginTop: '82px',
+            marginTop: '5px',
             color: 'white',
             backgroundColor: 'rgb(60, 179, 113, 0.7)'
           },
-          icon: '🌨️',
+          icon: '❄️',
           role: 'status',
           ariaLive: 'polite',
         });
@@ -198,11 +197,11 @@ export default function SimpleModal({ useButton = false, job, open, methods }) {
           style: {
             border: '2px solid #713200',
             padding: '20px',
-            marginTop: '82px',
+            marginTop: '5px',
             color: 'white',
             backgroundColor: 'rgb(60, 179, 113, 0.7)'
           },
-          icon: '🌨️',
+          icon: '❄️',
           role: 'status',
           ariaLive: 'polite',
         });
