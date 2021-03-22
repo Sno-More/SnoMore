@@ -4,13 +4,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment'
-import "../css/header.css"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 125,
-        maxHeight: 200,
-        
+        width: 225,
+        margin: theme.spacing(1)    
     },
     bullet: {
         display: 'inline-block',
@@ -18,12 +16,21 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 10,
+        textAlign: 'center'
     },
-    pos: {
-        // marginBottom: 8,
+    snow: {
+        border:'solid '+ theme.palette.warning.main, 
+        borderRadius:'10px', 
+        padding: '0px 5px'
     },
-});
+    weather: {
+        textAlign: 'center',
+        width: '100%',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '2rem'
+        }
+    }
+}));
 
 export default function Weather() {
     const classes = useStyles();
@@ -46,35 +53,38 @@ export default function Weather() {
     }, [])
 
     return (
-        <div className="weather" style={{ background: 'white', display: 'flex' }}>
-
+        <div style={{ background: 'rgba(110, 97, 192, .85)', paddingBottom: '1.5rem'}}>
+            <Typography className={classes.weather} style={{textAlign: 'center', width: '100%', paddingTop: '2rem'}} variant='h2'>Weather Forecast</Typography>
+            <div style={{display: 'flex', justifyContent: 'center', padding: '1rem 3rem', flexWrap: 'wrap' }}>
             {weather.length > 0 ? weather.map((daily, index) => (
                 <>
                     {index < 7 ?
                         <Card className={classes.root} variant="outlined" >
                             <CardContent>
-                                <Typography>
+                                <Typography style={{textAlign: 'center'}}>
                                     {moment().add(index, 'd').format("MM/DD/YYYY")}
                                 </Typography>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    <img src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt />
+                                    <img style={{width: '4rem'}} src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt />
                                 </Typography>
-                                <Typography className={classes.title} variant="h5" component="h2">
-                                    <p>High temp: {daily.temp.max}°</p>
+                                <Typography variant="body1">
+                                    <p>High Temp: {daily.temp.max}°</p>
                                     {daily.weather[0].description === 'snow' ?
-                                        <h3 style={{border:'solid red', borderRadius:'10px', padding: '0px 5px'}}>SNOW</h3>
-                                        : <p>{daily.weather[0].description}</p>
+                                        <h3 className={classes.snow}>SNOW</h3>
+                                        : <p style={{textTransform: 'capitalize'}}>{daily.weather[0].description}</p>
                                     }
                                 </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
+                                <Typography color="textSecondary">
                                     Humidity: {daily.humidity}%
                                  </Typography>
                             </CardContent>
                         </Card>
                         : ""}
-                </>
-            )) : ""}
+                    </>
+                )) : ""}
+            </div>
         </div>
+            
     )
 
 }

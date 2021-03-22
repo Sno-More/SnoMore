@@ -15,12 +15,12 @@ const useStyles = makeStyles(theme => ({
     },
     container: {
         background: theme.palette.transparentWhite.main,
-        height: '60vh',
-        maxHeight: '100vh',
-        minHeight: '60vh',
+        height: '35rem',
+        maxHeight: '49rem',
+        minHeight: '35rem',
         width: '85%',
         padding: '0',
-        margin: '0 auto 2rem 2rem',
+        margin: '2rem auto 2rem 2rem',
         border: 'black 5px solid',
         [theme.breakpoints.down('sm')]: {
             height: 'min-content',

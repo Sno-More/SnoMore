@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       height: '4rem',
       width: '4rem',
-      fontSize: '2.5rem',
+      fontSize: '2rem',
       fontFamily: 'Poppins, sans-serif',
       fontWeight: 700,
       marginRight: theme.spacing(2.5),
@@ -49,14 +49,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
 
-  const [user, setUser] = useState("")
-  let name = user.charAt(0).toUpperCase()
+  const [user, setUser] = useState([])
+  let name = user.join('');
   let history = useHistory()
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await axios.get('/user/info');
-      setUser(user.data[0].firstName)
+      const username = await axios.get('/user/info');
+      setUser([username.data[0].firstName.charAt(0).toUpperCase(), username.data[0].lastName.charAt(0).toUpperCase()])
     };
     getUser();
   }, [])
