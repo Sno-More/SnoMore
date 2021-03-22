@@ -4,7 +4,7 @@ import MyJobs from '../components/MyJobs';
 import SimpleModal from '../components/Modal';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-
+import Weather from '../components/Weather'
 
 function UserProfile({myJobs, setMyJobs}) {
     const [currentJob, setCurrentJob] = useState({});
@@ -31,6 +31,7 @@ function UserProfile({myJobs, setMyJobs}) {
     };
 
     return (
+        <>
         <Grid style={{ minHeight: '80vh', width: '100%' }} direction='row' alignItems='center' justify='center' container>
             <Grid item xs={12} md={6}>
                 <JobPostForm 
@@ -45,6 +46,8 @@ function UserProfile({myJobs, setMyJobs}) {
                 methods={{ handleClose, handleOpen }}
             />
         </Grid>
+        <Weather/>
+        </>
     )
 }
 
