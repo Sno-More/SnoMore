@@ -38,8 +38,8 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const lat = '60.59'
-            const lon = '164.73'
+            const lat = '41.8781'
+            const lon = '-87.6298'
             const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
 
             try {
@@ -70,8 +70,8 @@ export default function Weather() {
                                     </Typography>
                                     <Typography variant="body1">
                                         {daily.weather[0].description.includes('snow') ?
-                                            <p style={{ border: 'solid red', borderRadius: '10px', textAlign: 'center', backgroundColor: 'yellow' }}>{daily.weather[0].description}</p>
-                                            : <p>{daily.weather[0].description}</p>
+                                            <p style={{ border: 'solid red', borderRadius: '10px', textAlign: 'center', backgroundColor: 'yellow', textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
+                                            : <p style={{ textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
                                         }
                                         <p>High Temp: {Math.round(daily.temp.max)}°</p>
 
