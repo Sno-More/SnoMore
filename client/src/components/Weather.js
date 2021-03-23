@@ -38,7 +38,9 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const apiCall = "https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf"
+            const lat = '41.8781'
+            const lon = '-87.6298'
+            const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
 
             try {
                 const response = await fetch(apiCall)
@@ -67,11 +69,11 @@ export default function Weather() {
                                         <img style={{ width: '4rem' }} src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt='weather icon' />
                                     </Typography>
                                     <Typography variant="body1">
-                                        {daily.weather[0].description === 'snow' ?
-                                            <h3 className={classes.snow}>SNOW</h3>
+                                        {daily.weather[0].description.includes('snow') ?
+                                            <p style={{ border: 'solid red', borderRadius: '10px', textAlign: 'center', backgroundColor: 'yellow', textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
                                             : <p style={{ textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
                                         }
-                                        <p>High Temp: {daily.temp.max}°</p>
+                                        <p>High Temp: {Math.round(daily.temp.max)}°</p>
 
                                     </Typography>
                                     <Typography color="textSecondary">
