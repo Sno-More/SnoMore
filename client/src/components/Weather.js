@@ -67,9 +67,9 @@ export default function Weather() {
                                         <img style={{ width: '4rem' }} src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt='weather icon' />
                                     </Typography>
                                     <Typography variant="body1">
-                                        {daily.weather[0].description === 'snow' ?
-                                            <h3 className={classes.snow}>SNOW</h3>
-                                            : <p style={{ textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
+                                        {daily.weather[0].description.includes('snow') ?
+                                            <p style={{ border: 'solid red', borderRadius: '10px', textAlign: 'center', backgroundColor: 'yellow' }}>{daily.weather[0].description}</p>
+                                            : <p>{daily.weather[0].description}</p>
                                         }
                                         <p>High Temp: {Math.round(daily.temp.max)}°</p>
 
