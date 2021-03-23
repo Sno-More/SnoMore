@@ -38,7 +38,9 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const apiCall = "https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf"
+            const lat = '60.59'
+            const lon = '164.73'
+            const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
 
             try {
                 const response = await fetch(apiCall)
