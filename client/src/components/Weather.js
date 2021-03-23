@@ -71,7 +71,7 @@ export default function Weather() {
                                             <h3 className={classes.snow}>SNOW</h3>
                                             : <p style={{ textTransform: 'capitalize' }}>{daily.weather[0].description}</p>
                                         }
-                                        <p>High Temp: {daily.temp.max}°</p>
+                                        <p>High Temp: {Math.round(daily.temp.max)}°</p>
 
                                     </Typography>
                                     <Typography color="textSecondary">
