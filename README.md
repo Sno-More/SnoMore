@@ -59,7 +59,8 @@ https://trello.com/b/neyU0gnU/project-3
 Material-UI <br>
 Background- image: unsplash <br>
 OpenWeather API <br>
-ZipCode API https://www.zip-codes.com/zip-code-api.asp 
+ZipCode API https://www.zip-codes.com/zip-code-api.asp <br>
+React Hot Toast
 
 # Installation
 You can easily access our application through the deployed link or you can clone the repo and install dependencies using "npm i" in your terminal. Then, "npm start" to start the app locally.
