@@ -43,7 +43,6 @@ export default function Weather() {
             try {
                 const response = await fetch(apiCall)
                 const results = await response.json()
-                console.log('results', results)
                 setWeather(results.daily)
             } catch (err) {
                 console.log(err)
@@ -65,7 +64,7 @@ export default function Weather() {
                                         {moment().add(index, 'd').format("MM/DD/YYYY")}
                                     </Typography>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        <img style={{ width: '4rem' }} src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt />
+                                        <img style={{ width: '4rem' }} src={`http://openweathermap.org/img/wn/${daily.weather[0].icon}.png`} alt='weather icon' />
                                     </Typography>
                                     <Typography variant="body1">
                                         {daily.weather[0].description === 'snow' ?
