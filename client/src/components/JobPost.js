@@ -37,6 +37,13 @@ export default function JobPost({ type, setMyJobs }) {
 
   const classes = useStyles();
 
+  let mySMS = {
+    messageTo: '',
+    messageBody: "Job successfully posted!",
+    submitting: false,
+    error: false
+  }
+
   const handleJobSubmit = (event) => {
     event.preventDefault()
 
@@ -51,32 +58,57 @@ export default function JobPost({ type, setMyJobs }) {
       type: jobType
 
     })
-      .then(() => {
+      .then(async () => {
         axios('/api/user/jobs')
           .then((data) => {
             setMyJobs(data.data.jobs)
-          }
-          )
-          toast.success("Your job has been posted! We'll notify you when someone accepts your snow removal job!",
-          {
-            duration: 5000,
-            // Styling
-            position: 'center',
-            style: {
-              border: '2px solid #713200',
-              padding: '20px',
-              marginTop: '5px',
-              color: 'white',
-              backgroundColor: 'rgb(60, 179, 113, 0.7)'
-            },
-            icon: '❄️',
-            role: 'status',
-            ariaLive: 'polite',
-          });
+            axios('/user/info')
+              .then(response => {
+                console.log(response.data[0].firstName)
+                toast.success(`Thank you ${response.data[0].firstName}, your job has been posted! We'll notify you when someone accepts your snow removal job!`,
+                  {
+                    duration: 5000,
+                    // Styling
+                    position: 'center',
+                    style: {
+                      border: '2px solid #713200',
+                      padding: '20px',
+                      marginTop: '5px',
+                      color: 'white',
+                      backgroundColor: 'rgb(60, 179, 113, 0.7)'
+                    },
+                    icon: '❄️',
+                    role: 'status',
+                    ariaLive: 'polite',
+                  });
+                let myPhone = response.data[0].phone
+                mySMS = {
+                  messageTo: myPhone,
+                  messageBody: `${response.data[0].firstName}, your job has been posted! We'll notify you when someone accepts it. Stay warm!`,
+                  submitting: false,
+                  error: false
+                }
+                axios.post('/sms/messages', mySMS)
+                  .then(data => {
+                    if (data.data.success) {
+                      mySMS = {
+                        error: false,
+                        submitting: false,
+                        messageTo: '',
+                        messageBody: ''
+                      };
+                    } else {
+                      mySMS.error = true
+                      mySMS.submitting = false
+                    };
+                  }
+                  );
+              })
+          })
+        setJob({ title: "", location: "", zipCode: "", pay: "", description: "", date: "" })
+
       }
       )
-    setJob({ title: "", location: "", zipCode: "", pay: "", description: "", date: "" })
-
   }
 
   return (
