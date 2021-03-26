@@ -84,7 +84,7 @@ export default function JobSearch({ handleSeeMore, jobListings, setJobListings }
 
     const handleZipSubmit = async (event) => {
         event.preventDefault()
-        const apiKey = 'TPLT486VY2UMKXDONYM9'
+        const apiKey = process.env.ZIP_CODE_API_KEY
         const apiCall = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=${zipCode}&minimumradius=0&maximumradius=${range}&country=ALL&key=${apiKey}`
 
         try {
