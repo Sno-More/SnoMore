@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import moment from 'moment'
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('sm')]: {
             fontSize: '2rem'
         }
+    },
+    error: {
+        color: theme.palette.warning.main
     }
 }));
 
@@ -38,26 +41,34 @@ export default function Weather() {
 
     useEffect(() => {
         async function fetchWeather() {
-            const lat = '41.8781'
-            const lon = '-87.6298'
-            const apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=da5a0b2df3ad3a18dae3207cc7ca31bf`
-
             try {
-                const response = await fetch(apiCall)
+                const ipJson = await fetch(`https://api.ipify.org?format=json`);
+                const ip = await ipJson.json();
+
+                const geocodeCall = `http://api.ipstack.com/${ip.ip}?access_key=${process.env.REACT_APP_IP_GEOCODE_API_KEY}1`
+                const latLongJson = await fetch(geocodeCall)
+                const latLong = await latLongJson.json();
+                let lat = latLong.latitude
+                let lon = latLong.longitude
+
+                const weatherApiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+                const response = await fetch(weatherApiCall)
                 const results = await response.json()
+                console.log(results);
                 setWeather(results.daily)
             } catch (err) {
                 console.log(err)
             }
         }
         fetchWeather()
+        console.log(weather)
     }, [])
 
     return (
         <div style={{ background: 'rgba(110, 97, 192, .85)', paddingBottom: '1.5rem' }}>
             <Typography className={classes.weather} style={{ textAlign: 'center', width: '100%', paddingTop: '2rem' }} variant='h2'>Weather Forecast</Typography>
             <div style={{ display: 'flex', justifyContent: 'center', padding: '1rem 3rem', flexWrap: 'wrap' }}>
-                {weather.length > 0 ? weather.map((daily, index) => (
+                {weather?.length > 0 ? weather.map((daily, index) => (
                     <>
                         {index < 7 ?
                             <Card className={classes.root} variant="outlined" >
@@ -83,7 +94,7 @@ export default function Weather() {
                             </Card>
                             : ""}
                     </>
-                )) : ""}
+                )) : <Typography variant='h5' className={classes.error}>An error occured while fetching weather...</Typography>}
             </div>
         </div>
 
