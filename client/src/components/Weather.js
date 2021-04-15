@@ -42,10 +42,7 @@ export default function Weather() {
     useEffect(() => {
         async function fetchWeather() {
             try {
-                const ipJson = await fetch(`https://api.ipify.org?format=json`);
-                const ip = await ipJson.json();
-
-                const geocodeCall = `http://api.ipstack.com/${ip.ip}?access_key=${process.env.REACT_APP_IP_GEOCODE_API_KEY}`
+                const geocodeCall = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IP_GEOCODE_API_KEY}`
                 const latLongJson = await fetch(geocodeCall)
                 const latLong = await latLongJson.json();
                 let lat = latLong.latitude
@@ -54,14 +51,14 @@ export default function Weather() {
                 const weatherApiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
                 const response = await fetch(weatherApiCall)
                 const results = await response.json()
-                console.log(results);
+                // console.log(results);
                 setWeather(results.daily)
             } catch (err) {
                 console.log(err)
             }
         }
         fetchWeather()
-        console.log(weather)
+        // console.log(weather)
     }, [])
 
     return (
@@ -69,7 +66,7 @@ export default function Weather() {
             <Typography className={classes.weather} style={{ textAlign: 'center', width: '100%', paddingTop: '2rem' }} variant='h2'>Weather Forecast</Typography>
             <div style={{ display: 'flex', justifyContent: 'center', padding: '1rem 3rem', flexWrap: 'wrap' }}>
                 {weather?.length > 0 ? weather.map((daily, index) => (
-                    <>
+                    <div key={index}>
                         {index < 7 ?
                             <Card className={classes.root} variant="outlined" >
                                 <CardContent>
@@ -93,7 +90,7 @@ export default function Weather() {
                                 </CardContent>
                             </Card>
                             : ""}
-                    </>
+                    </div>
                 )) : <Typography variant='h5' className={classes.error}>An error occured while fetching weather...</Typography>}
             </div>
         </div>
