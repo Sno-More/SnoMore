@@ -42,7 +42,9 @@ export default function Weather() {
     useEffect(() => {
         async function fetchWeather() {
             try {
-                const geocodeCall = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IP_GEOCODE_API_KEY}`
+                const ipJson = await fetch(`https://api.ipify.org?format=json`);
+                const ip = await ipJson.json();
+                const geocodeCall = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_IP_GEOCODE_API_KEY}&ip=${ip.ip}`
                 const latLongJson = await fetch(geocodeCall)
                 const latLong = await latLongJson.json();
                 let lat = latLong.latitude
@@ -51,7 +53,7 @@ export default function Weather() {
                 const weatherApiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
                 const response = await fetch(weatherApiCall)
                 const results = await response.json()
-                // console.log(results);
+                console.log(results);
                 setWeather(results.daily)
             } catch (err) {
                 console.log(err)
