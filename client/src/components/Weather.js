@@ -45,7 +45,7 @@ export default function Weather() {
                 const ipJson = await fetch(`https://api.ipify.org?format=json`);
                 const ip = await ipJson.json();
 
-                const geocodeCall = `http://api.ipstack.com/${ip.ip}?access_key=${process.env.REACT_APP_IP_GEOCODE_API_KEY}1`
+                const geocodeCall = `http://api.ipstack.com/${ip.ip}?access_key=${process.env.REACT_APP_IP_GEOCODE_API_KEY}`
                 const latLongJson = await fetch(geocodeCall)
                 const latLong = await latLongJson.json();
                 let lat = latLong.latitude
